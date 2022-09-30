@@ -14,6 +14,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "CleanArchitectureKMM"
+
 include(":androidApp")
 include(":shared:viewmodels")
 include(":shared:usecases")

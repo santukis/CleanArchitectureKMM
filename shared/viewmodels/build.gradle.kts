@@ -1,3 +1,5 @@
+import com.santukis.buildsrc.modules.Modules
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -21,7 +23,12 @@ kotlin {
     }
     
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation(project(Modules.UseCases))
+                implementation(project(Modules.Entities))
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
@@ -52,9 +59,9 @@ kotlin {
 
 android {
     namespace = "com.santukis.viewmodels"
-    compileSdk = 32
+    compileSdk = 33
     defaultConfig {
         minSdk = 21
-        targetSdk = 32
+        targetSdk = 33
     }
 }
