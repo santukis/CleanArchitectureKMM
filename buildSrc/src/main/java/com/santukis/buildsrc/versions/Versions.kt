@@ -6,6 +6,7 @@ object Versions {
         const val mockk = "1.12.4"
         const val junit4 = "4.13.2"
         const val junit5 = "5.8.1"
+        const val mockwebserver = "4.9.3"
     }
 
     object AndroidTest {
@@ -26,23 +27,14 @@ object Versions {
 
     object Kotlin {
         const val coroutinesCore = "1.5.2"
+        const val serialization = "1.4.0"
     }
 
     object Kodein {
         const val kodein = "7.5.0"
     }
 
-    object Squareup {
-        const val moshi = "1.13.0"
-        const val retrofit = "2.9.0"
-        const val okhttp = "4.9.3"
-    }
-
-    object Coil {
-        const val coil = "2.1.0"
-    }
-
-    object Snapper {
-        const val snapper = "0.2.2"
+    object Ktor {
+        const val ktor = "2.1.2"
     }
 }
