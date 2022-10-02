@@ -11,4 +11,12 @@ object Android {
         const val mockKAndroid = "io.mockk:mockk-android:${Versions.Test.mockk}"
         const val room = "androidx.room:room-testing:${Versions.Androidx.room}"
     }
+
+    object Kotlin {
+        const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.Kotlin.coroutinesCore}"
+    }
+
+    object Ktor {
+        const val ktorOkhttp = "io.ktor:ktor-client-okhttp:${Versions.Ktor.ktor}"
+    }
 }
