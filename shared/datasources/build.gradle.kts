@@ -1,11 +1,12 @@
 import com.santukis.buildsrc.dependencies.Android
 import com.santukis.buildsrc.dependencies.Shared
 import com.santukis.buildsrc.dependencies.iOS
+import java.util.Properties
 
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    kotlin("plugin.serialization") version "1.7.20"
+    kotlin("plugin.serialization") version "1.7.10"
     id("com.android.library")
 }
 
@@ -34,8 +35,6 @@ kotlin {
                 implementation(Shared.Ktor.ktorAuth)
                 implementation(Shared.Ktor.ktorContentNegotiation)
                 implementation(Shared.Ktor.ktorJson)
-
-                implementation(Shared.Kotlin.serialization)
 
                 implementation(Shared.Kotlin.coroutinesCore)
             }
@@ -83,8 +82,20 @@ kotlin {
 android {
     namespace = "com.santukis.datasources"
     compileSdk = 33
+
     defaultConfig {
         minSdk = 21
         targetSdk = 33
+
+        val movieDatabaseProperties = Properties()
+        file(path = "movie_database.properties").inputStream().use { stream ->
+            movieDatabaseProperties.load(stream)
+        }
+
+        buildConfigField(
+            type = "String",
+            name = "MOVIE_DATABASE_SECRET",
+            value = movieDatabaseProperties.getProperty("MOVIE_DATABASE_SECRET")
+        )
     }
 }

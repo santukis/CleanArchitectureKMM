@@ -16,6 +16,8 @@ import kotlinx.serialization.json.Json
 
 expect fun buildClient(config: HttpClientConfig<*>.() -> Unit = {}): HttpClient
 
+expect fun getMovieDataBaseSecret(): String
+
 class KtorClient(engine: HttpClientEngine) {
     val httpClient = HttpClient(engine = engine) {
         expectSuccess = true
@@ -37,8 +39,8 @@ class KtorClient(engine: HttpClientEngine) {
             bearer {
                 loadTokens {
                     BearerTokens(
-                        accessToken = "",
-                        refreshToken = ""
+                        accessToken = getMovieDataBaseSecret(),
+                        refreshToken = getMovieDataBaseSecret()
                     )
                 }
             }
@@ -50,7 +52,7 @@ class KtorClient(engine: HttpClientEngine) {
         }
 
         HttpResponseValidator {
-            handleResponseExceptionWithRequest { exception, request ->
+            handleResponseExceptionWithRequest { exception, _ ->
                 val clientException = exception as? ClientRequestException ?: return@handleResponseExceptionWithRequest
                 val error: ErrorDto = clientException.response.body()
 

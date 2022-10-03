@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.ViewModels))
+    implementation(project(Modules.DataSources))
 
     implementation("androidx.compose.ui:ui:1.2.1")
     implementation("androidx.compose.ui:ui-tooling:1.2.1")

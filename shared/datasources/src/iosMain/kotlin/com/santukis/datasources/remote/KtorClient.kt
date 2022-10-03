@@ -11,3 +11,7 @@ actual fun buildClient(config: HttpClientConfig<*>.() -> Unit) = HttpClient(Darw
         }
     }
 }
+
+actual fun getMovieDataBaseSecret(): String =
+    platform.Foundation.NSBundle.mainBundle.infoDictionary?.get("MOVIE_DATABASE_SECRET")
+        ?.toString().orEmpty()

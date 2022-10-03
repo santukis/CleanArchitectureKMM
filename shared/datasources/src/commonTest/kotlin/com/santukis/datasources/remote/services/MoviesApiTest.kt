@@ -12,7 +12,7 @@ internal class MoviesApiTest {
     @Test
     fun getMovieDetailShouldThrowsServerExceptionWhenServiceReturnsAndError() {
         runBlocking {
-            val mockEngine = MockEngine { request ->
+            val mockEngine = MockEngine { _ ->
                 respond(
                     content = ByteReadChannel(
                         """
@@ -46,7 +46,7 @@ internal class MoviesApiTest {
     @Test
     fun getMovieDetailShouldBuildUrlAsExpected() {
         runBlocking {
-            val mockEngine = MockEngine { request ->
+            val mockEngine = MockEngine { _ ->
                 respondBadRequest()
             }
 
