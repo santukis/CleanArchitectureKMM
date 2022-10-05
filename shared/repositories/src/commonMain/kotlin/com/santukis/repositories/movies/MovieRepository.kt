@@ -9,18 +9,18 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class MovieRepository(
-    private val remoteGetMovieDetailSource: GetMovieDetailDataSource,
-    private val localSaveMovieDetailSource: SaveMovieDetailDataSource
+    private val getMovieDetailSourceFromRemote: GetMovieDetailDataSource,
+    private val saveMovieDetailSourceToLocal: SaveMovieDetailDataSource
 ): GetMovieDetailGateway {
 
     override suspend fun getMovie(movieId: String): Flow<Movie> =
         flow {
             val response = object: RemoteStrategy<String, Movie>() {
                 override suspend fun loadFromRemote(input: String): Movie =
-                    remoteGetMovieDetailSource.getMovie(input)
+                    getMovieDetailSourceFromRemote.getMovie(input)
 
                 override suspend fun saveIntoLocal(output: Movie): Movie =
-                    localSaveMovieDetailSource.saveMovie(output)
+                    saveMovieDetailSourceToLocal.saveMovie(output)
 
             }.execute(movieId)
 
