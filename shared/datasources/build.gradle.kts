@@ -1,6 +1,7 @@
 import com.santukis.buildsrc.dependencies.Android
 import com.santukis.buildsrc.dependencies.Shared
 import com.santukis.buildsrc.dependencies.iOS
+import com.santukis.buildsrc.modules.Modules
 import java.util.Properties
 
 plugins {
@@ -29,6 +30,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(project(Modules.Repositories))
+                implementation(project(Modules.Entities))
+
                 implementation(Shared.Ktor.ktorCore)
                 implementation(Shared.Ktor.ktorCio)
                 implementation(Shared.Ktor.ktorLogging)

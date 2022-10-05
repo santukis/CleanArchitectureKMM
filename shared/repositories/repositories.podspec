@@ -1,24 +1,24 @@
 Pod::Spec.new do |spec|
-    spec.name                     = 'reposotories'
+    spec.name                     = 'repositories'
     spec.version                  = '1.0'
     spec.homepage                 = 'Link to the Shared Module homepage'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = ''
     spec.summary                  = 'Some description for the Shared Module'
-    spec.vendored_frameworks      = 'build/cocoapods/framework/reposotories.framework'
+    spec.vendored_frameworks      = 'build/cocoapods/framework/repositories.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '14.1'
                 
                 
     spec.pod_target_xcconfig = {
-        'KOTLIN_PROJECT_PATH' => ':shared:reposotories',
-        'PRODUCT_MODULE_NAME' => 'reposotories',
+        'KOTLIN_PROJECT_PATH' => ':shared:repositories',
+        'PRODUCT_MODULE_NAME' => 'repositories',
     }
                 
     spec.script_phases = [
         {
-            :name => 'Build reposotories',
+            :name => 'Build repositories',
             :execution_position => :before_compile,
             :shell_path => '/bin/sh',
             :script => <<-SCRIPT

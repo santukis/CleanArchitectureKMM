@@ -1,3 +1,6 @@
+import com.santukis.buildsrc.dependencies.Shared
+import com.santukis.buildsrc.modules.Modules
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -16,12 +19,18 @@ kotlin {
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "reposotories"
+            baseName = "repositories"
         }
     }
     
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation(Shared.Kotlin.coroutinesCore)
+                implementation(project(Modules.Entities))
+                implementation(project(Modules.UseCases))
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
@@ -51,7 +60,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.santukis.reposotories"
+    namespace = "com.santukis.repositories"
     compileSdk = 33
     defaultConfig {
         minSdk = 21

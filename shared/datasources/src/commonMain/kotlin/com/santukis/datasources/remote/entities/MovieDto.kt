@@ -1,10 +1,15 @@
 package com.santukis.datasources.remote.entities
 
+import com.santukis.entities.movies.Movie
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class MovieDto(
+    @SerialName("id")
+    val id: Int? = null,
+    @SerialName("imdb_id")
+    val imdbId: String? = null,
     @SerialName("adult")
     val adult: Boolean? = null,
     @SerialName("backdrop_path")
@@ -15,10 +20,6 @@ data class MovieDto(
     val genres: List<GenreDto?>? = null,
     @SerialName("homepage")
     val homepage: String? = null,
-    @SerialName("id")
-    val id: Int? = null,
-    @SerialName("imdb_id")
-    val imdbId: String? = null,
     @SerialName("original_language")
     val originalLanguage: String? = null,
     @SerialName("original_title")
@@ -53,4 +54,11 @@ data class MovieDto(
     val voteAverage: Double? = null,
     @SerialName("vote_count")
     val voteCount: Int? = null
-)
+) {
+
+    fun toMovie(): Movie =
+        Movie(
+            id = id ?: 0,
+            imdbId = imdbId.orEmpty()
+        )
+}
