@@ -1,3 +1,4 @@
+import com.santukis.buildsrc.dependencies.Shared
 import com.santukis.buildsrc.modules.Modules
 
 plugins {
@@ -10,7 +11,7 @@ android {
     compileSdk = 33
     defaultConfig {
         applicationId = "com.santukis.cleanarchitecturekmm.android"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -34,7 +35,9 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.DataSources))
+    implementation(project(Modules.Injection))
+    implementation(project(Modules.ViewModels))
+    implementation(project(Modules.Entities))
 
     implementation("androidx.compose.ui:ui:1.2.1")
     implementation("androidx.compose.ui:ui-tooling:1.2.1")
@@ -43,4 +46,6 @@ dependencies {
     implementation("androidx.compose.material:material:1.2.1")
     implementation("androidx.activity:activity-compose:1.6.0")
     implementation("androidx.core:core-ktx:1.9.0")
+
+    implementation(Shared.Kodein.kodein)
 }

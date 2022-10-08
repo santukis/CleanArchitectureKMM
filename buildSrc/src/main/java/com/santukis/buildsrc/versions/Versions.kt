@@ -31,7 +31,7 @@ object Versions {
     }
 
     object Kodein {
-        const val kodein = "7.5.0"
+        const val kodein = "7.15.0"
     }
 
     object Ktor {

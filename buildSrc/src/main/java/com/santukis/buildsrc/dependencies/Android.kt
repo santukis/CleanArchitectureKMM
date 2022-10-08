@@ -19,4 +19,8 @@ object Android {
     object Ktor {
         const val ktorOkhttp = "io.ktor:ktor-client-okhttp:${Versions.Ktor.ktor}"
     }
+
+    object Kodein {
+        const val kodein = "org.kodein.di:kodein-di-framework-android-x:${Versions.Kodein.kodein}"
+    }
 }

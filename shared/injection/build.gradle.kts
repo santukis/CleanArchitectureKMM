@@ -1,5 +1,6 @@
-import com.santukis.buildsrc.modules.Modules
+import com.santukis.buildsrc.dependencies.Android
 import com.santukis.buildsrc.dependencies.Shared
+import com.santukis.buildsrc.modules.Modules
 
 plugins {
     kotlin("multiplatform")
@@ -19,17 +20,22 @@ kotlin {
         version = "1.0"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "viewmodels"
+            baseName = "injection"
         }
     }
     
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(Shared.Kotlin.coroutinesCore)
-
+                implementation(project(Modules.ViewModels))
                 implementation(project(Modules.UseCases))
                 implementation(project(Modules.Entities))
+                implementation(project(Modules.Repositories))
+                implementation(project(Modules.DataSources))
+
+                implementation(Shared.Kodein.kodein)
+                implementation(Shared.Kotlin.coroutinesCore)
+                implementation(Shared.Ktor.ktorCore)
             }
         }
         val commonTest by getting {
@@ -37,7 +43,11 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                implementation(Android.Kodein.kodein)
+            }
+        }
         val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
@@ -61,10 +71,10 @@ kotlin {
 }
 
 android {
-    namespace = "com.santukis.viewmodels"
+    namespace = "com.santukis.injection"
     compileSdk = 33
     defaultConfig {
-        minSdk = 21
+        minSdk = 23
         targetSdk = 33
     }
 }

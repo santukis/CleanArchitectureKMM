@@ -14,7 +14,7 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 
-expect fun buildClient(config: HttpClientConfig<*>.() -> Unit = {}): HttpClient
+expect fun getHttpClientEngine(): HttpClientEngine
 
 expect fun getMovieDataBaseSecret(): String
 

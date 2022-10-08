@@ -25,4 +25,8 @@ object Shared {
         const val ktorContentNegotiation = "io.ktor:ktor-client-content-negotiation:${Versions.Ktor.ktor}"
         const val ktorJson = "io.ktor:ktor-serialization-kotlinx-json:${Versions.Ktor.ktor}"
     }
+
+    object Kodein {
+        const val kodein = "org.kodein.di:kodein-di:${Versions.Kodein.kodein}"
+    }
 }
