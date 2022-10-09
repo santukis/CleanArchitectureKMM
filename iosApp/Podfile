@@ -1,5 +1,12 @@
 target 'iosApp' do
   use_frameworks!
   platform :ios, '14.1'
-  pod 'shared.viewmodels', :path => '../shared'
+
+  pod 'injection', :path => '../shared/injection'
+  pod 'viewmodels', :path => '../shared/viewmodels'
+  pod 'usecases', :path => '../shared/usecases'
+  pod 'entities', :path => '../shared/entities'
+  pod 'repositories', :path => '../shared/repositories'
+  pod 'datasources', :path => '../shared/datasources'
+
 end
