@@ -12,9 +12,8 @@ class MovieViewModel(
     private val getMovieDetail: UseCase<String, Flow<Movie>>
 ) {
 
-    private val movieDetailState: MutableStateFlow<MovieDetailState> = MutableStateFlow(
-        MovieDetailState()
-    )
+    private val movieDetailState: MutableStateFlow<MovieDetailState> =
+        MutableStateFlow(MovieDetailState())
 
     fun observeMovieDetail(): StateFlow<MovieDetailState> = movieDetailState
 

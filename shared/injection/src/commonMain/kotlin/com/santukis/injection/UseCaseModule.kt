@@ -13,13 +13,13 @@ import org.kodein.di.bind
 import org.kodein.di.instance
 import org.kodein.di.provider
 
-object UseCasesConstants {
+internal object UseCasesConstants {
     const val USE_CASES_MODULE_NAME = "useCases"
     const val MOVIES_MODULE_NAME = "moviesUseCasesModuleName"
     const val GET_MOVIE_DETAIL_USE_CASE = "getMovieDetail"
 }
 
-fun useCases() = DI.Module(
+internal fun useCases() = DI.Module(
     name = USE_CASES_MODULE_NAME,
     allowSilentOverride = true
 ) {

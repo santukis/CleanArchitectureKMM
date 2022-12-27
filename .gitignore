@@ -10,3 +10,5 @@ local.properties
 xcuserdata
 *.xcconfig
 /shared/datasources/movie_database.properties
+/iosApp/Podfile.lock
+/iosApp/Pods/

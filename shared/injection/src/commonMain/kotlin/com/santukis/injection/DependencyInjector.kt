@@ -8,13 +8,23 @@ import org.kodein.di.instance
 import kotlin.native.concurrent.ThreadLocal
 
 @ThreadLocal
-object DependencyInjector: DIAware {
+object DependencyInjector {
 
-    var moduleDependencies: Any? = null
+    private var kodeinDI: KodeinDI? = null
+
+    fun initialize(moduleDependencies: Any? = null): DependencyInjector {
+        kodeinDI = KodeinDI(moduleDependencies)
+        return this
+    }
+
+    fun moviesViewModel(): MovieViewModel? = kodeinDI?.getInstance(ViewModelModuleConstants.MOVIES_VIEW_MODEL)
+}
+
+internal class KodeinDI(private var moduleDependencies: Any? = null): DIAware {
 
     override val di: DI by DI.lazy {
         import(applicationModule(moduleDependencies))
     }
-
-    fun moviesViewModel(): MovieViewModel = di.direct.instance(ViewModelModuleConstants.MOVIES_VIEW_MODEL)
 }
+
+internal inline fun<reified Dependency> KodeinDI.getInstance(key: String): Dependency = di.direct.instance(key)

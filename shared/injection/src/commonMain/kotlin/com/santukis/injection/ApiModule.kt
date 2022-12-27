@@ -8,13 +8,13 @@ import com.santukis.injection.ApiModuleConstants.HTTP_CLIENT_MODULE_NAME
 import com.santukis.injection.ApiModuleConstants.REMOTE_MODULE_NAME
 import org.kodein.di.*
 
-object ApiModuleConstants {
+internal object ApiModuleConstants {
     const val REMOTE_MODULE_NAME = "remoteModule"
     const val HTTP_CLIENT_MODULE_NAME = "httpClientModule"
     const val API_MODULE_NAME = "apiModule"
 }
 
-fun remote() = DI.Module(
+internal fun remote() = DI.Module(
     name = REMOTE_MODULE_NAME,
     allowSilentOverride = true
 ) {

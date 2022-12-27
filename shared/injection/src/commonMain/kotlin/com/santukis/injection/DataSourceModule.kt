@@ -10,7 +10,7 @@ import com.santukis.repositories.sources.GetMovieDetailDataSource
 import com.santukis.repositories.sources.SaveMovieDetailDataSource
 import org.kodein.di.*
 
-object DataSourceConstants {
+internal object DataSourceConstants {
     const val DATA_SOURCES_MODULE_NAME = "dataSources"
     const val MOVIES_MODULE_NAME = "moviesDataSourcesModuleName"
     const val GET_MOVIE_DETAIL_DATA_SOURCE_FROM_REMOTE = "getMovieDetailDataSourceFromRemote"

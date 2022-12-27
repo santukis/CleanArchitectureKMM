@@ -12,17 +12,17 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewModel = DependencyInjector.moviesViewModel()
+        val viewModel = DependencyInjector.initialize().moviesViewModel()
 
         setContent {
-            val movieState = viewModel.observeMovieDetail().collectAsState()
+            val movieState = viewModel?.observeMovieDetail()?.collectAsState()
 
             Text(
-                text = movieState.value.movie?.id?.toString().orEmpty(),
+                text = movieState?.value?.movie?.id?.toString().orEmpty(),
                 color = Color.White
             )
         }
 
-        viewModel.loadMovie("500")
+        viewModel?.loadMovie("500")
     }
 }

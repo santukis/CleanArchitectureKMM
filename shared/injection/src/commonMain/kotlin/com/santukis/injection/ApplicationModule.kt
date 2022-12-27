@@ -3,9 +3,9 @@ package com.santukis.injection
 import org.kodein.di.DI
 import repositories
 
-const val APPLICATION_MODULE_NAME = "applicationModule"
+internal const val APPLICATION_MODULE_NAME = "applicationModule"
 
-fun applicationModule(platformDependencies: Any?) = DI.Module(
+internal fun applicationModule(platformDependencies: Any?) = DI.Module(
     name = APPLICATION_MODULE_NAME,
     allowSilentOverride = true
 ) {

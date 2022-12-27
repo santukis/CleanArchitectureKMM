@@ -11,14 +11,14 @@ import org.kodein.di.bind
 import org.kodein.di.instance
 import org.kodein.di.singleton
 
-object RepositoriesConstants {
+internal object RepositoriesConstants {
     const val REPOSITORIES_MODULE_NAME = "repositories"
     const val MOVIES_MODULE_NAME = "moviesRepositoriesModuleName"
     const val MOVIES_REPOSITORY = "moviesRepository"
     const val GET_MOVIE_DETAIL_GATEWAY = "getMovieDetailGateway"
 }
 
-fun repositories() = DI.Module(
+internal fun repositories() = DI.Module(
     name = REPOSITORIES_MODULE_NAME,
     allowSilentOverride = true
 ) {

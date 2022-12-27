@@ -23,6 +23,12 @@ kotlin {
 
         framework {
             baseName = "injection"
+            isStatic = true
+            export(project(Modules.Entities))
+            export(project(Modules.ViewModels))
+            export(project(Modules.UseCases))
+            export(project(Modules.Repositories))
+            export(project(Modules.DataSources))
         }
     }
     
