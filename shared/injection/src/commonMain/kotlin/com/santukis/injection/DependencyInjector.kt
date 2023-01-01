@@ -7,6 +7,8 @@ import org.kodein.di.direct
 import org.kodein.di.instance
 import kotlin.native.concurrent.ThreadLocal
 
+fun getDependencyInjector(moduleDependencies: Any? = null): DependencyInjector = DependencyInjector.initialize(moduleDependencies)
+
 @ThreadLocal
 object DependencyInjector {
 
@@ -17,7 +19,7 @@ object DependencyInjector {
         return this
     }
 
-    fun moviesViewModel(): MovieViewModel? = kodeinDI?.getInstance(ViewModelModuleConstants.MOVIES_VIEW_MODEL)
+    fun moviesViewModel(): MovieViewModel = kodeinDI?.getInstance(ViewModelModuleConstants.MOVIES_VIEW_MODEL) ?: throw Exception("Unable to load MovieViewModel")
 }
 
 internal class KodeinDI(private var moduleDependencies: Any? = null): DIAware {

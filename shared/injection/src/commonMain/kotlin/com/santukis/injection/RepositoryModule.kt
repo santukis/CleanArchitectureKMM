@@ -37,6 +37,6 @@ private fun movies() = DI.Module(
     }
 
     bind<GetMovieDetailGateway>(tag = GET_MOVIE_DETAIL_GATEWAY) with singleton {
-        instance(tag = MOVIES_REPOSITORY)
+        instance<MovieRepository>(tag = MOVIES_REPOSITORY)
     }
 }

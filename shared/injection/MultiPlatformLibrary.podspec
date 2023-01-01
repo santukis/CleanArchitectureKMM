@@ -1,24 +1,24 @@
 Pod::Spec.new do |spec|
-    spec.name                     = 'entities'
+    spec.name                     = 'MultiPlatformLibrary'
     spec.version                  = '1.0'
-    spec.homepage                 = 'Link to the Shared Module homepage'
+    spec.homepage                 = 'https://github.com/santukis/CleanArchitectureKMM'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = ''
-    spec.summary                  = 'Some description for the Shared Module'
-    spec.vendored_frameworks      = 'build/cocoapods/framework/entities.framework'
+    spec.summary                  = 'MovieDatabase'
+    spec.vendored_frameworks      = 'build/cocoapods/framework/MultiPlatformLibrary.framework'
     spec.libraries                = 'c++'
-    spec.ios.deployment_target = '14.1'
+    spec.ios.deployment_target = '15.0'
                 
                 
     spec.pod_target_xcconfig = {
-        'KOTLIN_PROJECT_PATH' => ':shared:entities',
-        'PRODUCT_MODULE_NAME' => 'entities',
+        'KOTLIN_PROJECT_PATH' => ':shared:injection',
+        'PRODUCT_MODULE_NAME' => 'MultiPlatformLibrary',
     }
                 
     spec.script_phases = [
         {
-            :name => 'Build entities',
+            :name => 'Build MultiPlatformLibrary',
             :execution_position => :before_compile,
             :shell_path => '/bin/sh',
             :script => <<-SCRIPT

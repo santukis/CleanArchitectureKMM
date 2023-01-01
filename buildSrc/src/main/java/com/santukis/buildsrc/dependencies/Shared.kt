@@ -29,4 +29,9 @@ object Shared {
     object Kodein {
         const val kodein = "org.kodein.di:kodein-di:${Versions.Kodein.kodein}"
     }
+
+    object Moko {
+        const val mvvmCore = "dev.icerock.moko:mvvm-core:${Versions.Moko.moko}"
+        const val mvvmFlow = "dev.icerock.moko:mvvm-flow:${Versions.Moko.moko}"
+    }
 }

@@ -6,6 +6,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+    id("dev.icerock.moko.kswift")
 }
 
 kotlin {
@@ -15,35 +16,39 @@ kotlin {
     iosSimulatorArm64()
 
     cocoapods {
-        summary = "Some description for the Shared Module"
-        homepage = "Link to the Shared Module homepage"
+        name = "MultiPlatformLibrary"
+        summary = "MovieDatabase"
+        homepage = "https://github.com/santukis/CleanArchitectureKMM"
         version = "1.0"
-        ios.deploymentTarget = "14.1"
+        ios.deploymentTarget = "15.0"
         podfile = project.file("../../iosApp/Podfile")
 
         framework {
-            baseName = "injection"
-            isStatic = true
-            export(project(Modules.Entities))
+            baseName = "MultiPlatformLibrary"
+            isStatic = false
+
             export(project(Modules.ViewModels))
-            export(project(Modules.UseCases))
-            export(project(Modules.Repositories))
-            export(project(Modules.DataSources))
+            export(project(Modules.Entities))
+            export(Shared.Moko.mvvmCore)
+            export(Shared.Moko.mvvmFlow)
         }
     }
     
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(Modules.ViewModels))
+                api(project(Modules.ViewModels))
                 implementation(project(Modules.UseCases))
-                implementation(project(Modules.Entities))
+                api(project(Modules.Entities))
                 implementation(project(Modules.Repositories))
                 implementation(project(Modules.DataSources))
 
                 implementation(Shared.Kodein.kodein)
                 implementation(Shared.Kotlin.coroutinesCore)
                 implementation(Shared.Ktor.ktorCore)
+
+                api(Shared.Moko.mvvmCore)
+                api(Shared.Moko.mvvmFlow)
             }
         }
         val commonTest by getting {
@@ -85,4 +90,8 @@ android {
         minSdk = 23
         targetSdk = 33
     }
+}
+
+kswift {
+    install(dev.icerock.moko.kswift.plugin.feature.SealedToSwiftEnumFeature)
 }

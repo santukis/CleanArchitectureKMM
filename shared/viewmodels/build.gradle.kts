@@ -1,4 +1,5 @@
 import com.santukis.buildsrc.modules.Modules
+import com.santukis.buildsrc.dependencies.Android
 import com.santukis.buildsrc.dependencies.Shared
 
 plugins {
@@ -16,9 +17,11 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(Shared.Kotlin.coroutinesCore)
+                api(Shared.Moko.mvvmCore)
+                api(Shared.Moko.mvvmFlow)
 
                 implementation(project(Modules.UseCases))
-                implementation(project(Modules.Entities))
+                api(project(Modules.Entities))
             }
         }
         val commonTest by getting {
@@ -26,7 +29,14 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                api(Android.Moko.mvvmCompose)
+                implementation(Android.Androidx.core)
+                implementation(Android.Androidx.lifecycleViewModel)
+                implementation(Android.Androidx.lifecycleViewModelCompose)
+            }
+        }
         val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting

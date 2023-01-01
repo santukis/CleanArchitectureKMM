@@ -16,7 +16,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(Shared.Kotlin.coroutinesCore)
-                implementation(project(Modules.Entities))
+                api(project(Modules.Entities))
                 implementation(project(Modules.UseCases))
             }
         }

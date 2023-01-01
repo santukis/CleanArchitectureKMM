@@ -37,4 +37,8 @@ object Versions {
     object Ktor {
         const val ktor = "2.1.2"
     }
+
+    object Moko {
+        const val moko = "0.15.0"
+    }
 }

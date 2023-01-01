@@ -6,23 +6,23 @@ import androidx.activity.compose.setContent
 import androidx.compose.material.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.Color
-import com.santukis.injection.DependencyInjector
+import com.santukis.injection.getDependencyInjector
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewModel = DependencyInjector.initialize().moviesViewModel()
+        val viewModel = getDependencyInjector().moviesViewModel()
 
         setContent {
-            val movieState = viewModel?.observeMovieDetail()?.collectAsState()
+            val movieState = viewModel.movieDetailState.collectAsState()
 
             Text(
-                text = movieState?.value?.movie?.id?.toString().orEmpty(),
+                text = movieState.value.movie?.id?.toString().orEmpty(),
                 color = Color.White
             )
         }
 
-        viewModel?.loadMovie("500")
+        viewModel.loadMovie("500")
     }
 }
