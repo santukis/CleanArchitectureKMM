@@ -85,6 +85,23 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		5E0A434629620D1C005E2E7E /* moviedetail */ = {
+			isa = PBXGroup;
+			children = (
+				5E4464142960BCE1002F8450 /* MovieDetail.swift */,
+			);
+			path = moviedetail;
+			sourceTree = "<group>";
+		};
+		5E0A434729620D5C005E2E7E /* src */ = {
+			isa = PBXGroup;
+			children = (
+				5E0A434629620D1C005E2E7E /* moviedetail */,
+				2152FB032600AC8F00CF470E /* iOSApp.swift */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
@@ -106,12 +123,11 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				5E0A434729620D5C005E2E7E /* src */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF8C242A565B00829871 /* Info.plist */,
-				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 				5E3CD6B5295B79B0009BF9FC /* Config.xcconfig */,
-				5E4464142960BCE1002F8450 /* MovieDetail.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
