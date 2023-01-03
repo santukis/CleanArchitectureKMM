@@ -41,4 +41,12 @@ object Versions {
     object Moko {
         const val moko = "0.15.0"
     }
+
+    object Coil {
+        const val coil = "2.1.0"
+    }
+
+    object Snapper {
+        const val snapper = "0.2.2"
+    }
 }

@@ -45,4 +45,12 @@ object Android {
     object Moko {
         const val mvvmCompose = "dev.icerock.moko:mvvm-flow-compose:${Versions.Moko.moko}"
     }
+
+    object Coil {
+        const val coil = "io.coil-kt:coil-compose:${Versions.Coil.coil}"
+    }
+
+    object Snapper {
+        const val snapper = "dev.chrisbanes.snapper:snapper:${Versions.Snapper.snapper}"
+    }
 }

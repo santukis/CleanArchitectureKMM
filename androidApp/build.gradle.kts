@@ -1,3 +1,4 @@
+import com.santukis.buildsrc.dependencies.Android
 import com.santukis.buildsrc.dependencies.Shared
 import com.santukis.buildsrc.modules.Modules
 
@@ -39,13 +40,21 @@ dependencies {
     implementation(project(Modules.ViewModels))
     implementation(project(Modules.Entities))
 
-    implementation("androidx.compose.ui:ui:1.2.1")
-    implementation("androidx.compose.ui:ui-tooling:1.2.1")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.2.1")
-    implementation("androidx.compose.foundation:foundation:1.2.1")
-    implementation("androidx.compose.material:material:1.2.1")
-    implementation("androidx.activity:activity-compose:1.6.0")
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation(Android.Androidx.appcompat)
+    implementation(Android.Androidx.core)
+    implementation(Android.Androidx.activityCompose)
+    implementation(Android.Androidx.composeRuntime)
+    implementation(Android.Androidx.composeUi)
+    implementation(Android.Androidx.composeUiTooling)
+    implementation(Android.Androidx.composeFoundation)
+    implementation(Android.Androidx.composeMaterial)
+    implementation(Android.Androidx.composeMaterialIcons)
+    implementation(Android.Androidx.composeMaterialIconsExtended)
+    implementation(Android.Androidx.composeConstraintLayout)
+    implementation(Android.Androidx.composeUtil)
+    implementation(Android.Androidx.lifecycleViewModelCompose)
+    implementation(Android.Coil.coil)
+    implementation(Android.Snapper.snapper)
 
     implementation(Shared.Kodein.kodein)
 }

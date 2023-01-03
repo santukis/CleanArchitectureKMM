@@ -2,6 +2,7 @@ package com.santukis.viewmodels.movies
 
 import com.santukis.entities.movies.Movie
 import com.santukis.usecases.UseCase
+import com.santukis.viewmodels.movies.entities.HighlightMovieState
 import com.santukis.viewmodels.movies.entities.MovieDetailState
 import dev.icerock.moko.mvvm.flow.CMutableStateFlow
 import dev.icerock.moko.mvvm.flow.CStateFlow
@@ -20,7 +21,11 @@ class MovieViewModel(
     private val _movieDetailState: CMutableStateFlow<MovieDetailState> =
         MutableStateFlow(MovieDetailState()).cMutableStateFlow()
 
+    private val _highlightMovieState: CMutableStateFlow<HighlightMovieState> =
+        MutableStateFlow(HighlightMovieState()).cMutableStateFlow()
+
     val movieDetailState: CStateFlow<MovieDetailState> = _movieDetailState.cStateFlow()
+    val highlightMoviesState: CStateFlow<HighlightMovieState> = _highlightMovieState.cStateFlow()
 
     fun loadMovie(movieId: String) {
         CoroutineScope(Dispatchers.Main).launch {
