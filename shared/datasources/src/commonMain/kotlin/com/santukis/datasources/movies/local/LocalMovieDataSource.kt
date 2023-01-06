@@ -1,7 +1,7 @@
-package com.santukis.datasources.movies
+package com.santukis.datasources.movies.local
 
 import com.santukis.entities.movies.Movie
-import com.santukis.repositories.sources.SaveMovieDetailDataSource
+import com.santukis.repositories.movies.sources.SaveMovieDetailDataSource
 
 class LocalMovieDataSource(
 

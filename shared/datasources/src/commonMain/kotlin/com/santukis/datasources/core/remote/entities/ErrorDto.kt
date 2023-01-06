@@ -1,4 +1,4 @@
-package com.santukis.datasources.remote.entities
+package com.santukis.datasources.core.remote.entities
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -1,13 +1,13 @@
 package com.santukis.injection
 
-import com.santukis.datasources.movies.LocalMovieDataSource
-import com.santukis.datasources.movies.RemoteMovieDataSource
+import com.santukis.datasources.movies.local.LocalMovieDataSource
+import com.santukis.datasources.movies.remote.RemoteMovieDataSource
 import com.santukis.injection.DataSourceConstants.DATA_SOURCES_MODULE_NAME
 import com.santukis.injection.DataSourceConstants.GET_MOVIE_DETAIL_DATA_SOURCE_FROM_REMOTE
 import com.santukis.injection.DataSourceConstants.MOVIES_MODULE_NAME
 import com.santukis.injection.DataSourceConstants.SAVE_MOVIE_DETAIL_DATA_SOURCE_INTO_LOCAL
-import com.santukis.repositories.sources.GetMovieDetailDataSource
-import com.santukis.repositories.sources.SaveMovieDetailDataSource
+import com.santukis.repositories.movies.sources.GetMovieDetailDataSource
+import com.santukis.repositories.movies.sources.SaveMovieDetailDataSource
 import org.kodein.di.*
 
 internal object DataSourceConstants {

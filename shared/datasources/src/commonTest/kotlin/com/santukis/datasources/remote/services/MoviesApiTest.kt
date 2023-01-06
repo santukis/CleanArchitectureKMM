@@ -1,6 +1,6 @@
-import com.santukis.datasources.remote.KtorClient
-import com.santukis.datasources.remote.entities.ServerException
-import com.santukis.datasources.remote.services.MoviesApi
+import com.santukis.datasources.core.remote.KtorClient
+import com.santukis.datasources.core.remote.entities.ServerException
+import com.santukis.datasources.movies.remote.services.MoviesApi
 import io.ktor.client.engine.mock.*
 import io.ktor.http.*
 import io.ktor.utils.io.*

@@ -1,4 +1,4 @@
-package com.santukis.datasources.remote
+package com.santukis.datasources.core.remote
 
 import io.ktor.client.engine.*
 import io.ktor.client.engine.darwin.*

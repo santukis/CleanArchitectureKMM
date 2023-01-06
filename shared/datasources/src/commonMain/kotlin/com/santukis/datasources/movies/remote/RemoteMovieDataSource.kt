@@ -1,8 +1,8 @@
-package com.santukis.datasources.movies
+package com.santukis.datasources.movies.remote
 
-import com.santukis.datasources.remote.services.MoviesApi
+import com.santukis.datasources.movies.remote.services.MoviesApi
 import com.santukis.entities.movies.Movie
-import com.santukis.repositories.sources.GetMovieDetailDataSource
+import com.santukis.repositories.movies.sources.GetMovieDetailDataSource
 
 class RemoteMovieDataSource(
     private val moviesApi: MoviesApi

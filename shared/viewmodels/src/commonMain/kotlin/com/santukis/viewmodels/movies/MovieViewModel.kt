@@ -9,7 +9,6 @@ import dev.icerock.moko.mvvm.flow.CStateFlow
 import dev.icerock.moko.mvvm.flow.cMutableStateFlow
 import dev.icerock.moko.mvvm.flow.cStateFlow
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -28,7 +27,7 @@ class MovieViewModel(
     val highlightMoviesState: CStateFlow<HighlightMovieState> = _highlightMovieState.cStateFlow()
 
     fun loadMovie(movieId: String) {
-        CoroutineScope(Dispatchers.Main).launch {
+        viewModelScope.launch {
             getMovieDetail(movieId)
                 .flowOn(Dispatchers.Default)
                 .catch { error ->

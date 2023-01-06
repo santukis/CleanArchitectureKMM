@@ -1,7 +1,7 @@
-package com.santukis.datasources.remote
+package com.santukis.datasources.core.remote
 
-import com.santukis.datasources.remote.entities.ErrorDto
-import com.santukis.datasources.remote.entities.ServerException
+import com.santukis.datasources.core.remote.entities.ErrorDto
+import com.santukis.datasources.core.remote.entities.ServerException
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.*

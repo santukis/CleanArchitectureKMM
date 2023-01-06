@@ -1,4 +1,4 @@
-package com.santukis.datasources.remote.entities
+package com.santukis.datasources.movies.remote.entities
 
 import com.santukis.entities.movies.Movie
 import kotlinx.serialization.SerialName

@@ -1,7 +1,7 @@
-package com.santukis.datasources.remote.services
+package com.santukis.datasources.movies.remote.services
 
-import com.santukis.datasources.remote.KtorClient
-import com.santukis.datasources.remote.entities.MovieDto
+import com.santukis.datasources.core.remote.KtorClient
+import com.santukis.datasources.movies.remote.entities.MovieDto
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.utils.io.core.*

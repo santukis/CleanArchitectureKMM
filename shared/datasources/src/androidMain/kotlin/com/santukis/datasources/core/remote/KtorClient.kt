@@ -1,4 +1,4 @@
-package com.santukis.datasources.remote
+package com.santukis.datasources.core.remote
 
 import com.santukis.datasources.BuildConfig
 import io.ktor.client.engine.*

@@ -1,8 +1,8 @@
 package com.santukis.repositories.movies
 
 import com.santukis.entities.movies.Movie
-import com.santukis.repositories.sources.GetMovieDetailDataSource
-import com.santukis.repositories.sources.SaveMovieDetailDataSource
+import com.santukis.repositories.movies.sources.GetMovieDetailDataSource
+import com.santukis.repositories.movies.sources.SaveMovieDetailDataSource
 import com.santukis.repositories.strategies.RemoteStrategy
 import com.santukis.usecases.movies.GetMovieDetailGateway
 import kotlinx.coroutines.flow.Flow
