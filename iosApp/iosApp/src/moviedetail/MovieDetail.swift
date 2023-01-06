@@ -19,13 +19,10 @@ struct MovieDetailView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            let movieDetailState = movieViewModel.state(\.movieDetailState,
-                equals: { (state1: MovieDetailState?, state2: MovieDetailState?) -> Bool in
-                    state1 == state2
-                 },
-                mapper: { (movieDetailState: MovieDetailState) -> MovieDetailState in
-                    movieDetailState
-                }
+            let movieDetailState = movieViewModel.state(
+                \.movieDetailState,
+                equals: { state1, state2 in return state1 == state2 },
+                mapper: { movieDetailState in return movieDetailState }
             )
             
             Text(movieDetailState.movie?.imdbId
