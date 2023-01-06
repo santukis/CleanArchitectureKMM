@@ -1,5 +1,6 @@
 package com.santukis.injection
 
+import com.santukis.datasources.configuration.remote.services.ConfigurationApi
 import com.santukis.datasources.core.remote.KtorClient
 import com.santukis.datasources.core.remote.getHttpClientEngine
 import com.santukis.datasources.movies.remote.services.MoviesApi
@@ -18,7 +19,6 @@ internal fun remote() = DI.Module(
     name = REMOTE_MODULE_NAME,
     allowSilentOverride = true
 ) {
-
     import(httpClient())
     import(api())
 }
@@ -34,6 +34,7 @@ private fun api() = DI.Module(
     name = API_MODULE_NAME,
     allowSilentOverride = true
 ) {
-
     bind<MoviesApi>() with provider { MoviesApi(client = instance()) }
+
+    bind<ConfigurationApi>() with provider { ConfigurationApi(client = instance()) }
 }

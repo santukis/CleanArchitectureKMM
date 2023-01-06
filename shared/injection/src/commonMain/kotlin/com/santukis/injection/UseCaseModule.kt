@@ -1,11 +1,20 @@
 package com.santukis.injection
 
+import RepositoriesConstants.GET_COUNTRIES_GATEWAY
+import RepositoriesConstants.GET_LANGUAGES_GATEWAY
 import RepositoriesConstants.GET_MOVIE_DETAIL_GATEWAY
+import com.santukis.entities.configuration.Country
+import com.santukis.entities.configuration.Language
 import com.santukis.entities.movies.Movie
+import com.santukis.injection.UseCasesConstants.CONFIGURATION_MODULE_NAME
+import com.santukis.injection.UseCasesConstants.GET_COUNTRIES_USE_CASE
+import com.santukis.injection.UseCasesConstants.GET_LANGUAGES_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_MOVIE_DETAIL_USE_CASE
 import com.santukis.injection.UseCasesConstants.MOVIES_MODULE_NAME
 import com.santukis.injection.UseCasesConstants.USE_CASES_MODULE_NAME
 import com.santukis.usecases.UseCase
+import com.santukis.usecases.configuration.GetCountries
+import com.santukis.usecases.configuration.GetLanguages
 import com.santukis.usecases.movies.GetMovieDetail
 import kotlinx.coroutines.flow.Flow
 import org.kodein.di.DI
@@ -17,6 +26,9 @@ internal object UseCasesConstants {
     const val USE_CASES_MODULE_NAME = "useCases"
     const val MOVIES_MODULE_NAME = "moviesUseCasesModuleName"
     const val GET_MOVIE_DETAIL_USE_CASE = "getMovieDetail"
+    const val CONFIGURATION_MODULE_NAME = "configurationUseCasesModuleName"
+    const val GET_COUNTRIES_USE_CASE = "getCountriesDetail"
+    const val GET_LANGUAGES_USE_CASE = "getLanguagesDetail"
 }
 
 internal fun useCases() = DI.Module(
@@ -24,6 +36,7 @@ internal fun useCases() = DI.Module(
     allowSilentOverride = true
 ) {
     import(movies())
+    import(configuration())
 }
 
 private fun movies() = DI.Module(
@@ -32,5 +45,18 @@ private fun movies() = DI.Module(
 ) {
     bind<UseCase<String, Flow<Movie>>>(tag = GET_MOVIE_DETAIL_USE_CASE) with provider {
         GetMovieDetail(instance(GET_MOVIE_DETAIL_GATEWAY))
+    }
+}
+
+private fun configuration() = DI.Module(
+    name = CONFIGURATION_MODULE_NAME,
+    allowSilentOverride = true
+) {
+    bind<UseCase<Unit, List<Country>>>(tag = GET_COUNTRIES_USE_CASE) with provider {
+        GetCountries(instance(GET_COUNTRIES_GATEWAY))
+    }
+
+    bind<UseCase<Unit, List<Language>>>(tag = GET_LANGUAGES_USE_CASE) with provider {
+        GetLanguages(instance(GET_LANGUAGES_GATEWAY))
     }
 }
