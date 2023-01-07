@@ -47,6 +47,8 @@ kotlin {
                 implementation(Shared.Kotlin.coroutinesCore)
                 implementation(Shared.Ktor.ktorCore)
 
+                implementation(Shared.Datastore.core)
+
                 api(Shared.Moko.mvvmCore)
                 api(Shared.Moko.mvvmFlow)
             }

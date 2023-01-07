@@ -29,6 +29,8 @@ kotlin {
                 implementation(Shared.Ktor.ktorContentNegotiation)
                 implementation(Shared.Ktor.ktorJson)
 
+                implementation(Shared.Datastore.core)
+
                 implementation(Shared.Kotlin.coroutinesCore)
             }
         }

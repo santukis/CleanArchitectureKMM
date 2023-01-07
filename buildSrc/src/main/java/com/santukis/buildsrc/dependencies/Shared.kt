@@ -34,4 +34,8 @@ object Shared {
         const val mvvmCore = "dev.icerock.moko:mvvm-core:${Versions.Moko.moko}"
         const val mvvmFlow = "dev.icerock.moko:mvvm-flow:${Versions.Moko.moko}"
     }
+
+    object Datastore {
+        const val core = "androidx.datastore:datastore-preferences-core:${Versions.Datastore.datastore}"
+    }
 }

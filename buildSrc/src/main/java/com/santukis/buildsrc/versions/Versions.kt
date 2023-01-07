@@ -49,4 +49,8 @@ object Versions {
     object Snapper {
         const val snapper = "0.2.2"
     }
+
+    object Datastore {
+        const val datastore = "1.1.0-dev01"
+    }
 }
