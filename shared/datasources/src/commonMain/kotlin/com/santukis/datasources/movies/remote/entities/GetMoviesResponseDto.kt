@@ -1,11 +1,12 @@
 package com.santukis.datasources.movies.remote.entities
 
 
+import com.santukis.entities.movies.Movie
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class NowPlayingResponseDto(
+data class GetMoviesResponseDto(
     @SerialName("dates")
     val dates: DatesDto? = null,
     @SerialName("page")
@@ -16,4 +17,8 @@ data class NowPlayingResponseDto(
     val totalPages: Int? = null,
     @SerialName("total_results")
     val totalResults: Int? = null
-)
+) {
+
+    fun toMovies(): List<Movie> =
+        results?.mapNotNull { it?.toMovie() }.orEmpty()
+}

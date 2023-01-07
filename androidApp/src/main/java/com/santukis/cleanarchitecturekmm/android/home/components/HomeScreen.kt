@@ -13,7 +13,7 @@ import coil.compose.AsyncImage
 import com.santukis.cleanarchitecturekmm.android.theme.MovieTheme
 import com.santukis.entities.movies.Movie
 import com.santukis.viewmodels.movies.MovieViewModel
-import com.santukis.viewmodels.movies.entities.HighlightMovieState
+import com.santukis.viewmodels.movies.entities.MoviesState
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import dev.chrisbanes.snapper.rememberSnapperFlingBehavior
 
@@ -21,7 +21,7 @@ import dev.chrisbanes.snapper.rememberSnapperFlingBehavior
 fun HomeScreen(
     movieViewModel: MovieViewModel
 ) {
-    val highlightsMovieState = movieViewModel.highlightMoviesState.collectAsState()
+    val highlightsMovieState = movieViewModel.nowPlayingMoviesState.collectAsState()
 
     HomeContent(
         modifier = Modifier,
@@ -32,7 +32,7 @@ fun HomeScreen(
 @Composable
 fun HomeContent(
     modifier: Modifier,
-    highlightMoviesState: HighlightMovieState
+    highlightMoviesState: MoviesState
 ) {
     Column {
         HighlightContent(
@@ -46,7 +46,7 @@ fun HomeContent(
 @OptIn(ExperimentalSnapperApi::class)
 private fun HighlightContent(
     modifier: Modifier,
-    highlightMoviesState: HighlightMovieState
+    highlightMoviesState: MoviesState
 ) {
     val listState = rememberLazyListState()
 
@@ -81,7 +81,7 @@ fun HomeContentPreview() {
     MovieTheme {
         HomeContent(
             modifier = Modifier,
-            highlightMoviesState = HighlightMovieState(
+            highlightMoviesState = MoviesState(
                 movies = listOf(
                     Movie(
                         id = 11,

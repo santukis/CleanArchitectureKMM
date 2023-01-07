@@ -27,7 +27,7 @@ actual fun platformModules(platformDependencies: Any?): DI.Module =
             PreferenceDataStoreFactory.createWithPath(produceFile = {
                 instance<Context>()
                     .filesDir
-                    .resolve("configuration_preferences")
+                    .resolve("configuration_preferences.preferences_pb")
                     .absolutePath
                     .toPath()
             })

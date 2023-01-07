@@ -29,7 +29,7 @@ actual fun platformModules(platformDependencies: Any?): DI.Module =
                     create = false,
                     error = null,
                 )
-                val path: String = requireNotNull(documentDirectory).path + "/configuration_preferences"
+                val path: String = requireNotNull(documentDirectory).path + "/configuration_preferences.preferences_pb"
 
                 path.toPath()
             })

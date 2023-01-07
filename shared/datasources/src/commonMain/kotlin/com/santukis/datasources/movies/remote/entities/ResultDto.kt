@@ -1,6 +1,7 @@
 package com.santukis.datasources.movies.remote.entities
 
 
+import com.santukis.entities.movies.Movie
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -34,4 +35,11 @@ data class ResultDto(
     val voteAverage: Double? = null,
     @SerialName("vote_count")
     val voteCount: Int? = null
-)
+) {
+
+    fun toMovie(): Movie =
+        Movie(
+            id = id ?: 0,
+            imdbId = ""
+        )
+}

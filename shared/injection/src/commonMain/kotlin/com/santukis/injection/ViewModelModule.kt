@@ -3,6 +3,7 @@ package com.santukis.injection
 import com.santukis.injection.UseCasesConstants.GET_COUNTRIES_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_LANGUAGES_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_MOVIE_DETAIL_USE_CASE
+import com.santukis.injection.UseCasesConstants.GET_NOW_PLAYING_MOVIES_USE_CASE
 import com.santukis.injection.ViewModelModuleConstants.CONFIGURATION_MODULE_NAME
 import com.santukis.injection.ViewModelModuleConstants.CONFIGURATION_VIEW_MODEL
 import com.santukis.injection.ViewModelModuleConstants.MOVIES_MODULE_NAME
@@ -37,7 +38,8 @@ private fun movies() = DI.Module(
 ) {
     bind<MovieViewModel>(tag = MOVIES_VIEW_MODEL) with provider {
         MovieViewModel(
-            getMovieDetail = instance(GET_MOVIE_DETAIL_USE_CASE)
+            getMovieDetail = instance(GET_MOVIE_DETAIL_USE_CASE),
+            getNowPlayingMovies = instance(GET_NOW_PLAYING_MOVIES_USE_CASE)
         )
     }
 }

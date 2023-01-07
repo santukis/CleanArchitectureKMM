@@ -9,7 +9,7 @@ import com.santukis.entities.configuration.Region
 import com.santukis.repositories.configuration.sources.GetRegionDataSource
 import com.santukis.repositories.configuration.sources.SaveRegionDataSource
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.singleOrNull
+import kotlinx.coroutines.flow.single
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
@@ -22,16 +22,17 @@ class LocalConfigurationDataSource(
 
     private val regionKey = stringPreferencesKey("region")
 
-    override suspend fun getRegion(): Region =
-        dataStore.data.map {
-            val dto = Json.decodeFromString<RegionDto>(it[regionKey].orEmpty())
-            dto.toRegion()
-
-        }.singleOrNull() ?: defaultRegion()
+    override suspend fun getRegion(): Region = defaultRegion()
+//        dataStore.data.map {
+//            it[regionKey]?.takeIf { value -> value.isNotEmpty() }?.let { json ->
+//                Json.decodeFromString<RegionDto>(json).toRegion()
+//            } ?: defaultRegion()
+//
+//        }.single()
 
     override suspend fun saveRegion(region: Region) {
         dataStore.edit {
-            val json = Json.encodeToString(serializer(),  region.toRegionDto())
+            val json = Json.encodeToString(serializer(), region.toRegionDto())
             it[regionKey] = json
         }
     }

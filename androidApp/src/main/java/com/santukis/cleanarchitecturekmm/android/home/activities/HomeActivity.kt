@@ -10,7 +10,9 @@ import com.santukis.viewmodels.movies.MovieViewModel
 
 class HomeActivity : ComponentActivity() {
 
-    private val viewModel: MovieViewModel = getDependencyInjector().moviesViewModel()
+    private val viewModel: MovieViewModel by lazy {
+        getDependencyInjector(application).moviesViewModel()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +22,7 @@ class HomeActivity : ComponentActivity() {
             }
         }
 
-        viewModel.loadMovie("500")
+        viewModel.loadNowPlayingMovies()
     }
 }
+
