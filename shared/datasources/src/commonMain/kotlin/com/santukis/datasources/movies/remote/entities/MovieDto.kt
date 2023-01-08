@@ -1,9 +1,7 @@
 package com.santukis.datasources.movies.remote.entities
 
-import com.santukis.entities.movies.BackdropImage
-import com.santukis.entities.movies.Images
-import com.santukis.entities.movies.Movie
-import com.santukis.entities.movies.PosterImage
+import com.santukis.entities.configuration.Language
+import com.santukis.entities.movies.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -66,6 +64,15 @@ data class MovieDto(
             images = Images(
                 backdropImage = BackdropImage(path = backdropPath.orEmpty()),
                 posterImage = PosterImage(path = posterPath.orEmpty()),
+            ),
+            titles = Titles(
+                title = title.orEmpty(),
+                original = originalTitle.orEmpty(),
+                originalLanguage = Language(iso = originalLanguage.orEmpty())
+            ),
+            rating = Rating(
+                average = voteAverage ?: 0.0,
+                count = voteCount ?: 0
             )
         )
 }

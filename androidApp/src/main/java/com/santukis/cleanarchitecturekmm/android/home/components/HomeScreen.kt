@@ -1,14 +1,11 @@
 package com.santukis.cleanarchitecturekmm.android.home.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Circle
-import androidx.compose.material.icons.outlined.Circle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -24,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.santukis.cleanarchitecturekmm.android.theme.MovieTheme
 import com.santukis.cleanarchitecturekmm.android.theme.WhiteTransparent
+import com.santukis.entities.configuration.Language
 import com.santukis.entities.movies.*
 import com.santukis.viewmodels.movies.MovieViewModel
 import com.santukis.viewmodels.movies.entities.MoviesState
@@ -83,7 +81,7 @@ private fun NowPlayingContent(
                             .fillParentMaxWidth()
                             .drawWithCache {
                                 val gradient = Brush.verticalGradient(
-                                    colors = listOf(Color.Transparent, Color.Black),
+                                    colors = listOf(Color.Transparent, Color.Transparent, Color.Black),
                                     startY = 0f,
                                     endY = size.height
                                 )
@@ -141,6 +139,15 @@ fun HomeContentPreview() {
                         images = Images(
                             backdropImage = BackdropImage(path = "/evaFLqtswezLosllRZtJNMiO1UR.jpg"),
                             posterImage = PosterImage(path = "/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg")
+                        ),
+                        titles = Titles(
+                            title = "anyTitle",
+                            original = "anyOriginalTitle",
+                            originalLanguage = Language(iso = "es")
+                        ),
+                        rating = Rating(
+                            average = 3.3,
+                            count = 122
                         )
                     )
                 ),
