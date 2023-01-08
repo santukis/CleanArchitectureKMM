@@ -1,6 +1,9 @@
 package com.santukis.datasources.movies.remote.entities
 
+import com.santukis.entities.movies.BackdropImage
+import com.santukis.entities.movies.Images
 import com.santukis.entities.movies.Movie
+import com.santukis.entities.movies.PosterImage
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -59,6 +62,10 @@ data class MovieDto(
     fun toMovie(): Movie =
         Movie(
             id = id ?: 0,
-            imdbId = imdbId.orEmpty()
+            imdbId = imdbId.orEmpty(),
+            images = Images(
+                backdropImage = BackdropImage(path = backdropPath.orEmpty()),
+                posterImage = PosterImage(path = posterPath.orEmpty()),
+            )
         )
 }

@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import com.santukis.cleanarchitecturekmm.android.theme.MovieTheme
-import com.santukis.entities.movies.Movie
+import com.santukis.entities.movies.*
 import com.santukis.viewmodels.movies.MovieViewModel
 import com.santukis.viewmodels.movies.entities.MoviesState
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
@@ -21,32 +21,32 @@ import dev.chrisbanes.snapper.rememberSnapperFlingBehavior
 fun HomeScreen(
     movieViewModel: MovieViewModel
 ) {
-    val highlightsMovieState = movieViewModel.nowPlayingMoviesState.collectAsState()
+    val nowPlayingMoviesState = movieViewModel.nowPlayingMoviesState.collectAsState()
 
     HomeContent(
         modifier = Modifier,
-        highlightMoviesState = highlightsMovieState.value
+        nowPlayingMoviesState = nowPlayingMoviesState.value
     )
 }
 
 @Composable
 fun HomeContent(
     modifier: Modifier,
-    highlightMoviesState: MoviesState
+    nowPlayingMoviesState: MoviesState
 ) {
     Column {
-        HighlightContent(
+        NowPlayingContent(
             modifier,
-            highlightMoviesState
+            nowPlayingMoviesState
         )
     }
 }
 
 @Composable
 @OptIn(ExperimentalSnapperApi::class)
-private fun HighlightContent(
+private fun NowPlayingContent(
     modifier: Modifier,
-    highlightMoviesState: MoviesState
+    nowPlayingMoviesState: MoviesState
 ) {
     val listState = rememberLazyListState()
 
@@ -55,15 +55,15 @@ private fun HighlightContent(
         flingBehavior = rememberSnapperFlingBehavior(lazyListState = listState),
         modifier = modifier.fillMaxWidth()
     ) {
-        items(highlightMoviesState.movies.size) { index ->
-            val movie = highlightMoviesState.movies[index]
+        items(nowPlayingMoviesState.movies.size) { index ->
+            val movie = nowPlayingMoviesState.movies[index]
 
             Box() {
                 AsyncImage(
-                    model = "",
+                    model = movie.images.posterImage?.getUrl(PosterSize.W_342),
                     contentDescription = "",
                     modifier = Modifier
-                        .fillParentMaxSize(),
+                        .fillParentMaxWidth(),
                 )
 
 
@@ -81,11 +81,15 @@ fun HomeContentPreview() {
     MovieTheme {
         HomeContent(
             modifier = Modifier,
-            highlightMoviesState = MoviesState(
+            nowPlayingMoviesState = MoviesState(
                 movies = listOf(
                     Movie(
                         id = 11,
-                        imdbId = "anyImdbID"
+                        imdbId = "anyImdbID",
+                        images = Images(
+                            backdropImage = BackdropImage(path = "/evaFLqtswezLosllRZtJNMiO1UR.jpg"),
+                            posterImage = PosterImage(path = "/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg")
+                        )
                     )
                 ),
                 errorMessage = "No Error MEssage"
