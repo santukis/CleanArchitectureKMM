@@ -10,7 +10,7 @@ struct iOSApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MovieDetailView(movieId: "500")
+            HomeScreen()
                 .environmentObject(movieViewModel)
         }
     }

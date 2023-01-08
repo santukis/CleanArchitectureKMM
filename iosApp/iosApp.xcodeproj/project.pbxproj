@@ -11,6 +11,7 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		5E4464152960BCE1002F8450 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4464142960BCE1002F8450 /* MovieDetail.swift */; };
+		5E92953C296AA4B60065F95A /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E92953B296AA4B60065F95A /* HomeScreen.swift */; };
 		5ECFDACA2961E77000CF54F6 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0678436001CF06973F85F90 /* Pods_iosApp.framework */; };
 		5ECFDACB2961E77000CF54F6 /* Pods_iosApp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E0678436001CF06973F85F90 /* Pods_iosApp.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5ECFDACE2961E86C00CF54F6 /* mokoMvvmFlowSwiftUI.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECFDACD2961E86C00CF54F6 /* mokoMvvmFlowSwiftUI.xcframework */; };
@@ -38,6 +39,7 @@
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		5E3CD6B5295B79B0009BF9FC /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		5E4464142960BCE1002F8450 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
+		5E92953B296AA4B60065F95A /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		5ECFDACD2961E86C00CF54F6 /* mokoMvvmFlowSwiftUI.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = mokoMvvmFlowSwiftUI.xcframework; path = Pods/mokoMvvmFlowSwiftUI/mokoMvvmFlowSwiftUI.xcframework; sourceTree = "<group>"; };
 		6A433C0FC09F50A84CB69FF2 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,10 +98,19 @@
 		5E0A434729620D5C005E2E7E /* src */ = {
 			isa = PBXGroup;
 			children = (
+				5E92953A296AA48E0065F95A /* home */,
 				5E0A434629620D1C005E2E7E /* moviedetail */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		5E92953A296AA48E0065F95A /* home */ = {
+			isa = PBXGroup;
+			children = (
+				5E92953B296AA4B60065F95A /* HomeScreen.swift */,
+			);
+			path = home;
 			sourceTree = "<group>";
 		};
 		7555FF72242A565900829871 = {
@@ -249,6 +260,7 @@
 			files = (
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				5E4464152960BCE1002F8450 /* MovieDetail.swift in Sources */,
+				5E92953C296AA4B60065F95A /* HomeScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
