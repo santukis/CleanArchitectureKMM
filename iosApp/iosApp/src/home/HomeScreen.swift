@@ -13,108 +13,46 @@ import Combine
 
 struct HomeScreen: View {
     @EnvironmentObject
-    private var movieViewModel: MovieViewModel
+    private var homeViewModel: HomeViewModel
     
     var body: some View {
-        let nowPlayingMovies = movieViewModel.state(
-            \.nowPlayingMoviesState,
+        let homeState = homeViewModel.state(
+            \.homeState,
             equals: { state1, state2 in return state1 == state2 },
-            mapper: { nowPlayingMoviesState in return nowPlayingMoviesState }
+            mapper: { homeState in return homeState }
         )
+        
         GeometryReader { geometry in
             HomeContent(
-                nowPlayingMoviesState: nowPlayingMovies,
+                homeState: homeState,
                 geometry: geometry
                 
             ).onAppear {
-                movieViewModel.loadNowPlayingMovies()
+                homeViewModel.loadHomeData()
             }
-        }.edgesIgnoringSafeArea(.all)
+        }
+        .edgesIgnoringSafeArea(.all)
+        .background(Color.black)
     }
 }
 
 struct HomeContent: View {
-    var nowPlayingMoviesState: MoviesState
+    var homeState: HomeState
     var geometry: GeometryProxy
     
     var body: some View {
         ScrollView(.vertical) {
             VStack {
                 NowPlayingContent(
-                    movies: nowPlayingMoviesState.movies,
+                    movies: homeState.nowPlayingMovies,
+                    geometry: geometry
+                )
+                
+                UpcomingContent(
+                    movies: homeState.upcomingMovies,
                     geometry: geometry
                 )
             }
         }
-    }
-}
-
-struct NowPlayingContent: View {
-    var movies: [Movie]
-    var geometry: GeometryProxy
-    
-    @State private var selectedMovie: Int32 = 0
-    
-    var body: some View {
-            TabView(selection: $selectedMovie) {
-                ForEach(movies, id: \.self.id) { movie in
-                    ZStack(alignment: .bottomLeading) {
-                        AsyncImage(
-                            url: URL(string: movie.images.posterImage?.getUrl(size: .W_342()) ?? ""),
-                            content: { image in
-                                image.resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .overlay(
-                                        Rectangle()
-                                            .fill(
-                                                LinearGradient(
-                                                    gradient: Gradient(colors: [.clear, .black]),
-                                                    startPoint: .top,
-                                                    endPoint: .bottom
-                                                )
-                                            )
-                                        ,
-                                        alignment: .top
-                                    )
-                            },
-                            placeholder: {
-                                ProgressView()
-                                
-                            }
-                        )
-                        .onTapGesture {
-                            selectedMovie = movie.id
-                        }
-                        
-                        
-                        VStack(alignment: .leading) {
-                            Text(movie.titles.title)
-                                .font(.system(size: 22.0, weight: .bold))
-                                .foregroundColor(Color.white)
-                            
-                            HStack(alignment: .center) {
-                                Image(systemName: "star.fill")
-                                    .font(.system(size: 10.0, weight: .bold))
-                                    .foregroundColor(Color("MDB_Green"))
-                                
-                                Text(movie.rating.getText())
-                                    .font(.system(size: 16.0, weight: .bold))
-                                    .foregroundColor(Color.white)
-                            }
-                        }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 40)
-                    }
-                    .frame(
-                        height: geometry.size.height * 0.6,
-                        alignment: .bottom
-                    )
-                }
-            }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-            .frame(
-                width: geometry.size.width,
-                height: geometry.size.height * 0.6
-            )
     }
 }

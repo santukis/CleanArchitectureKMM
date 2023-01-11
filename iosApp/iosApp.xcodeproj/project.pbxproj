@@ -12,6 +12,9 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		5E4464152960BCE1002F8450 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4464142960BCE1002F8450 /* MovieDetail.swift */; };
 		5E92953C296AA4B60065F95A /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E92953B296AA4B60065F95A /* HomeScreen.swift */; };
+		5EAC390E296EAE220046EE2E /* NowPlayingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC390D296EAE220046EE2E /* NowPlayingContent.swift */; };
+		5EAC3910296EB0980046EE2E /* UpcomingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC390F296EB0980046EE2E /* UpcomingContent.swift */; };
+		5EAC3913296EBA6D0046EE2E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EAC3915296EBA6D0046EE2E /* Localizable.strings */; };
 		5ECFDACA2961E77000CF54F6 /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0678436001CF06973F85F90 /* Pods_iosApp.framework */; };
 		5ECFDACB2961E77000CF54F6 /* Pods_iosApp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E0678436001CF06973F85F90 /* Pods_iosApp.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5ECFDACE2961E86C00CF54F6 /* mokoMvvmFlowSwiftUI.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECFDACD2961E86C00CF54F6 /* mokoMvvmFlowSwiftUI.xcframework */; };
@@ -40,6 +43,9 @@
 		5E3CD6B5295B79B0009BF9FC /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		5E4464142960BCE1002F8450 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 		5E92953B296AA4B60065F95A /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		5EAC390D296EAE220046EE2E /* NowPlayingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingContent.swift; sourceTree = "<group>"; };
+		5EAC390F296EB0980046EE2E /* UpcomingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingContent.swift; sourceTree = "<group>"; };
+		5EAC3914296EBA6D0046EE2E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5ECFDACD2961E86C00CF54F6 /* mokoMvvmFlowSwiftUI.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = mokoMvvmFlowSwiftUI.xcframework; path = Pods/mokoMvvmFlowSwiftUI/mokoMvvmFlowSwiftUI.xcframework; sourceTree = "<group>"; };
 		6A433C0FC09F50A84CB69FF2 /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +115,8 @@
 			isa = PBXGroup;
 			children = (
 				5E92953B296AA4B60065F95A /* HomeScreen.swift */,
+				5EAC390D296EAE220046EE2E /* NowPlayingContent.swift */,
+				5EAC390F296EB0980046EE2E /* UpcomingContent.swift */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -136,6 +144,7 @@
 			children = (
 				5E0A434729620D5C005E2E7E /* src */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
+				5EAC3915296EBA6D0046EE2E /* Localizable.strings */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 				5E3CD6B5295B79B0009BF9FC /* Config.xcconfig */,
@@ -205,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */,
+				5EAC3913296EBA6D0046EE2E /* Localizable.strings in Resources */,
 				058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,12 +269,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				5EAC390E296EAE220046EE2E /* NowPlayingContent.swift in Sources */,
 				5E4464152960BCE1002F8450 /* MovieDetail.swift in Sources */,
 				5E92953C296AA4B60065F95A /* HomeScreen.swift in Sources */,
+				5EAC3910296EB0980046EE2E /* UpcomingContent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5EAC3915296EBA6D0046EE2E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5EAC3914296EBA6D0046EE2E /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		7555FFA3242A565B00829871 /* Debug */ = {

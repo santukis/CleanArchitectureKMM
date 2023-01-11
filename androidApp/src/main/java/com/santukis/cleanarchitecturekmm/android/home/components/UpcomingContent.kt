@@ -51,7 +51,7 @@ fun UpcomingContent(
             )
 
             Icon(
-                imageVector = Icons.Filled.ReadMore,
+                imageVector = Icons.Filled.Add,
                 contentDescription = "",
                 tint = Color.White
             )
