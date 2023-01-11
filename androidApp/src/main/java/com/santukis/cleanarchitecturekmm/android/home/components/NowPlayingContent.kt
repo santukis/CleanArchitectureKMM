@@ -34,23 +34,26 @@ fun NowPlayingContent(
 ) {
     val listState = rememberLazyListState()
 
-    Box {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(height = (LocalConfiguration.current.screenHeightDp * 0.7).dp),
+    ) {
         LazyRow(
             state = listState,
             flingBehavior = rememberSnapperFlingBehavior(lazyListState = listState),
-            modifier = modifier
-                .fillMaxWidth()
-                .height(height = (LocalConfiguration.current.screenHeightDp * 0.7).dp),
         ) {
             items(nowPlayingMovies.size) { index ->
                 val movie = nowPlayingMovies[index]
 
-                Box {
+                Box(
+                    modifier = Modifier
+                        .fillParentMaxWidth()
+                ) {
                     AsyncImage(
                         model = movie.images.posterImage?.getUrl(PosterSize.W_342),
                         contentDescription = "",
-                        modifier = Modifier
-                            .fillParentMaxWidth()
+                        modifier = modifier
                             .drawWithCache {
                                 val gradient = Brush.verticalGradient(
                                     colors = listOf(Color.Transparent, Color.Black),
@@ -69,8 +72,7 @@ fun NowPlayingContent(
                     )
 
                     Column(
-                        modifier = modifier
-                            .fillParentMaxWidth()
+                        modifier = Modifier
                             .align(Alignment.BottomStart)
                             .padding(vertical = 32.dp, horizontal = 8.dp),
                         horizontalAlignment = Alignment.Start
