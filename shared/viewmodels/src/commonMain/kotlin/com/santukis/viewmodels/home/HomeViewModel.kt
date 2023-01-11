@@ -1,8 +1,8 @@
-package com.santukis.viewmodels.movies
+package com.santukis.viewmodels.home
 
 import com.santukis.entities.movies.Movie
 import com.santukis.usecases.UseCase
-import com.santukis.viewmodels.movies.entities.HomeState
+import com.santukis.viewmodels.home.entities.HomeState
 import dev.icerock.moko.mvvm.flow.CMutableStateFlow
 import dev.icerock.moko.mvvm.flow.CStateFlow
 import dev.icerock.moko.mvvm.flow.cMutableStateFlow
@@ -14,7 +14,8 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val getNowPlayingMovies: UseCase<Unit, Flow<List<Movie>>>,
-    private val getUpcomingMovies: UseCase<Unit, Flow<List<Movie>>>
+    private val getUpcomingMovies: UseCase<Unit, Flow<List<Movie>>>,
+    private val getPopularMovies: UseCase<Unit, Flow<List<Movie>>>
 ): ViewModel() {
 
     private val _homeState: CMutableStateFlow<HomeState> =
@@ -26,6 +27,7 @@ class HomeViewModel(
         viewModelScope.launch(Dispatchers.Main) {
             loadNowPlayingMovies()
             loadUpcoming()
+            loadPopularMovies()
         }
     }
 
@@ -48,6 +50,17 @@ class HomeViewModel(
             }
             .collect { movies ->
                 _homeState.value = _homeState.value.copy(upcomingMovies = movies)
+            }
+    }
+
+    private suspend fun loadPopularMovies() {
+        getPopularMovies(Unit)
+            .flowOn(Dispatchers.Default)
+            .catch { error ->
+                _homeState.value = _homeState.value.copy(errorMessage = error.message)
+            }
+            .collect { movies ->
+                _homeState.value = _homeState.value.copy(popularMovies = movies)
             }
     }
 }

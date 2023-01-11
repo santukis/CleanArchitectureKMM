@@ -4,6 +4,7 @@ import RepositoriesConstants.GET_COUNTRIES_GATEWAY
 import RepositoriesConstants.GET_LANGUAGES_GATEWAY
 import RepositoriesConstants.GET_MOVIE_DETAIL_GATEWAY
 import RepositoriesConstants.GET_NOW_PLAYING_MOVIES_GATEWAY
+import RepositoriesConstants.GET_POPULAR_MOVIES_GATEWAY
 import RepositoriesConstants.GET_UPCOMING_MOVIES_GATEWAY
 import com.santukis.entities.configuration.Country
 import com.santukis.entities.configuration.Language
@@ -13,6 +14,7 @@ import com.santukis.injection.UseCasesConstants.GET_COUNTRIES_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_LANGUAGES_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_MOVIE_DETAIL_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_NOW_PLAYING_MOVIES_USE_CASE
+import com.santukis.injection.UseCasesConstants.GET_POPULAR_MOVIES_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_UPCOMING_MOVIES_USE_CASE
 import com.santukis.injection.UseCasesConstants.MOVIES_MODULE_NAME
 import com.santukis.injection.UseCasesConstants.USE_CASES_MODULE_NAME
@@ -21,6 +23,7 @@ import com.santukis.usecases.configuration.GetCountries
 import com.santukis.usecases.configuration.GetLanguages
 import com.santukis.usecases.movies.GetMovieDetail
 import com.santukis.usecases.movies.GetNowPlayingMovies
+import com.santukis.usecases.movies.GetPopularMovies
 import com.santukis.usecases.movies.GetUpcomingMovies
 import kotlinx.coroutines.flow.Flow
 import org.kodein.di.DI
@@ -34,6 +37,7 @@ internal object UseCasesConstants {
     const val GET_MOVIE_DETAIL_USE_CASE = "getMovieDetail"
     const val GET_NOW_PLAYING_MOVIES_USE_CASE = "getNowPlayingMoviesDetail"
     const val GET_UPCOMING_MOVIES_USE_CASE = "getUpcomingMoviesDetail"
+    const val GET_POPULAR_MOVIES_USE_CASE = "getPopularMoviesDetail"
 
     const val CONFIGURATION_MODULE_NAME = "configurationUseCasesModuleName"
     const val GET_COUNTRIES_USE_CASE = "getCountriesDetail"
@@ -62,6 +66,10 @@ private fun movies() = DI.Module(
 
     bind<UseCase<Unit, Flow<List<Movie>>>>(tag = GET_UPCOMING_MOVIES_USE_CASE) with provider {
         GetUpcomingMovies(instance(GET_UPCOMING_MOVIES_GATEWAY))
+    }
+
+    bind<UseCase<Unit, Flow<List<Movie>>>>(tag = GET_POPULAR_MOVIES_USE_CASE) with provider {
+        GetPopularMovies(instance(GET_POPULAR_MOVIES_GATEWAY))
     }
 }
 

@@ -10,8 +10,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.santukis.viewmodels.movies.HomeViewModel
-import com.santukis.viewmodels.movies.entities.HomeState
+import com.santukis.viewmodels.home.HomeViewModel
+import com.santukis.viewmodels.home.entities.HomeState
 
 @Composable
 fun HomeScreen(
@@ -51,6 +51,13 @@ fun HomeContent(
             UpcomingContent(
                 modifier = modifier,
                 upcomingMovies = homeState.upcomingMovies
+            )
+        }
+
+        item {
+            PopularContent(
+                modifier = modifier,
+                popularMovies = homeState.popularMovies
             )
         }
     }
