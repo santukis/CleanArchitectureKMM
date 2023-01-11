@@ -14,12 +14,12 @@ import Combine
 
 struct MovieDetailView: View {
     @EnvironmentObject
-    private var movieViewModel: MovieViewModel
+    private var movieDetailViewModel: MovieDetailViewModel
     var movieId: String
 
     var body: some View {
         VStack(alignment: .leading) {
-            let movieDetailState = movieViewModel.state(
+            let movieDetailState = movieDetailViewModel.state(
                 \.movieDetailState,
                 equals: { state1, state2 in return state1 == state2 },
                 mapper: { movieDetailState in return movieDetailState }
@@ -31,7 +31,7 @@ struct MovieDetailView: View {
             )
             
         }.onAppear {
-            movieViewModel.loadMovie(movieId: movieId)
+            movieDetailViewModel.loadMovie(movieId: movieId)
         }
     }
 }
