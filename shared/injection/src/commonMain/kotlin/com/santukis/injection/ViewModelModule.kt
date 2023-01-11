@@ -4,6 +4,7 @@ import com.santukis.injection.UseCasesConstants.GET_COUNTRIES_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_LANGUAGES_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_MOVIE_DETAIL_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_NOW_PLAYING_MOVIES_USE_CASE
+import com.santukis.injection.UseCasesConstants.GET_POPULAR_MOVIES_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_UPCOMING_MOVIES_USE_CASE
 import com.santukis.injection.ViewModelModuleConstants.CONFIGURATION_MODULE_NAME
 import com.santukis.injection.ViewModelModuleConstants.CONFIGURATION_VIEW_MODEL
@@ -12,7 +13,7 @@ import com.santukis.injection.ViewModelModuleConstants.HOME_VIEW_MODEL
 import com.santukis.injection.ViewModelModuleConstants.MOVIE_DETAIL_VIEW_MODEL
 import com.santukis.injection.ViewModelModuleConstants.VIEW_MODELS_MODULE_NAME
 import com.santukis.viewmodels.configuration.ConfigurationViewModel
-import com.santukis.viewmodels.movies.HomeViewModel
+import com.santukis.viewmodels.home.HomeViewModel
 import com.santukis.viewmodels.movies.MovieDetailViewModel
 import org.kodein.di.DI
 import org.kodein.di.bind
@@ -44,7 +45,8 @@ private fun movies() = DI.Module(
     bind<HomeViewModel>(tag = HOME_VIEW_MODEL) with provider {
         HomeViewModel(
             getNowPlayingMovies = instance(GET_NOW_PLAYING_MOVIES_USE_CASE),
-            getUpcomingMovies = instance(GET_UPCOMING_MOVIES_USE_CASE)
+            getUpcomingMovies = instance(GET_UPCOMING_MOVIES_USE_CASE),
+            getPopularMovies = instance(GET_POPULAR_MOVIES_USE_CASE)
         )
     }
 

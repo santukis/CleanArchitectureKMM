@@ -7,13 +7,13 @@ import com.santukis.cleanarchitecturekmm.android.R
 import com.santukis.entities.movies.Movie
 
 @Composable
-fun UpcomingContent(
+fun PopularContent(
     modifier: Modifier,
-    upcomingMovies: List<Movie>
+    popularMovies: List<Movie>
 ) {
     HomeSectionContent(
         modifier = modifier,
-        movies = upcomingMovies,
-        sectionTitle = stringResource(id = R.string.upcoming)
+        movies = popularMovies,
+        sectionTitle = stringResource(id = R.string.popular)
     )
 }

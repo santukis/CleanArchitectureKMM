@@ -6,6 +6,7 @@ import com.santukis.entities.movies.Movie
 import com.santukis.repositories.configuration.sources.GetRegionDataSource
 import com.santukis.repositories.movies.sources.GetMovieDetailDataSource
 import com.santukis.repositories.movies.sources.GetNowPlayingMoviesDataSource
+import com.santukis.repositories.movies.sources.GetPopularMoviesDataSource
 import com.santukis.repositories.movies.sources.GetUpcomingMoviesDataSource
 
 class RemoteMovieDataSource(
@@ -14,7 +15,8 @@ class RemoteMovieDataSource(
 ) :
     GetMovieDetailDataSource,
     GetNowPlayingMoviesDataSource,
-    GetUpcomingMoviesDataSource {
+    GetUpcomingMoviesDataSource,
+    GetPopularMoviesDataSource {
 
     override suspend fun getMovie(movieId: String): Movie {
         return moviesApi.getMovieDetail(movieId).toMovie()
@@ -26,6 +28,10 @@ class RemoteMovieDataSource(
 
     override suspend fun getUpcomingMovies(): List<Movie> {
         return moviesApi.getUpcoming(buildMoviesRequestDto()).toMovies()
+    }
+
+    override suspend fun getPopularMovies(): List<Movie> {
+        return moviesApi.getPopular(buildMoviesRequestDto()).toMovies()
     }
 
     private suspend fun buildMoviesRequestDto(): GetMoviesRequestDto {

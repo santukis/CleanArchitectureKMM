@@ -7,7 +7,7 @@ import androidx.core.view.WindowCompat
 import com.santukis.cleanarchitecturekmm.android.home.components.HomeScreen
 import com.santukis.cleanarchitecturekmm.android.theme.MovieTheme
 import com.santukis.injection.getDependencyInjector
-import com.santukis.viewmodels.movies.HomeViewModel
+import com.santukis.viewmodels.home.HomeViewModel
 
 class HomeActivity : ComponentActivity() {
 

@@ -1,6 +1,6 @@
 package com.santukis.injection
 
-import com.santukis.viewmodels.movies.HomeViewModel
+import com.santukis.viewmodels.home.HomeViewModel
 import org.kodein.di.DI
 import org.kodein.di.DIAware
 import org.kodein.di.direct

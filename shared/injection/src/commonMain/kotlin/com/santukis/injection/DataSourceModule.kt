@@ -10,6 +10,7 @@ import com.santukis.injection.DataSourceConstants.GET_COUNTRIES_DATA_SOURCE_FROM
 import com.santukis.injection.DataSourceConstants.GET_LANGUAGES_DATA_SOURCE_FROM_REMOTE
 import com.santukis.injection.DataSourceConstants.GET_MOVIE_DETAIL_DATA_SOURCE_FROM_REMOTE
 import com.santukis.injection.DataSourceConstants.GET_NOW_PLAYING_MOVIES_DATA_SOURCE_FROM_REMOTE
+import com.santukis.injection.DataSourceConstants.GET_POPULAR_MOVIES_DATA_SOURCE_FROM_REMOTE
 import com.santukis.injection.DataSourceConstants.GET_REGION_DATA_SOURCE_FROM_LOCAL
 import com.santukis.injection.DataSourceConstants.GET_UPCOMING_MOVIES_DATA_SOURCE_FROM_REMOTE
 import com.santukis.injection.DataSourceConstants.MOVIES_MODULE_NAME
@@ -19,10 +20,7 @@ import com.santukis.repositories.configuration.sources.GetCountriesDataSource
 import com.santukis.repositories.configuration.sources.GetLanguagesDataSource
 import com.santukis.repositories.configuration.sources.GetRegionDataSource
 import com.santukis.repositories.configuration.sources.SaveRegionDataSource
-import com.santukis.repositories.movies.sources.GetMovieDetailDataSource
-import com.santukis.repositories.movies.sources.GetNowPlayingMoviesDataSource
-import com.santukis.repositories.movies.sources.GetUpcomingMoviesDataSource
-import com.santukis.repositories.movies.sources.SaveMovieDetailDataSource
+import com.santukis.repositories.movies.sources.*
 import org.kodein.di.*
 
 internal object DataSourceConstants {
@@ -32,6 +30,7 @@ internal object DataSourceConstants {
     const val SAVE_MOVIE_DETAIL_DATA_SOURCE_INTO_LOCAL = "saveMovieDetailDataSourceIntoLocal"
     const val GET_NOW_PLAYING_MOVIES_DATA_SOURCE_FROM_REMOTE = "getNowPlayingMoviesDataSourceFromRemote"
     const val GET_UPCOMING_MOVIES_DATA_SOURCE_FROM_REMOTE = "getUpcomingMoviesDataSourceFromRemote"
+    const val GET_POPULAR_MOVIES_DATA_SOURCE_FROM_REMOTE = "getPopularMoviesDataSourceFromRemote"
 
     const val CONFIGURATION_MODULE_NAME = "configurationDataSourcesModuleName"
     const val GET_COUNTRIES_DATA_SOURCE_FROM_REMOTE = "getCountriesDataSourceFromRemote"
@@ -72,6 +71,10 @@ private fun movies() = DI.Module(
     }
 
     bind<GetUpcomingMoviesDataSource>(tag = GET_UPCOMING_MOVIES_DATA_SOURCE_FROM_REMOTE) with provider {
+        instance<RemoteMovieDataSource>()
+    }
+
+    bind<GetPopularMoviesDataSource>(tag = GET_POPULAR_MOVIES_DATA_SOURCE_FROM_REMOTE) with provider {
         instance<RemoteMovieDataSource>()
     }
 }

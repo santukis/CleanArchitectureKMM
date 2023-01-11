@@ -23,6 +23,10 @@ class MoviesApi(client: KtorClient): MovieDatabaseApi(client) {
         addQueryParameters(request)
     }.body()
 
+    suspend fun getPopular(request: GetMoviesRequestDto): GetMoviesResponseDto = client.httpClient.get("$moviePath/popular") {
+        addQueryParameters(request)
+    }.body()
+
     private fun HttpRequestBuilder.addQueryParameters(request: GetMoviesRequestDto): HttpRequestBuilder {
         url {
             parameters.append(language, request.language)
