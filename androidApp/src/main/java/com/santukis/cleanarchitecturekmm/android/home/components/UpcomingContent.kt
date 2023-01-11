@@ -70,6 +70,7 @@ fun UpcomingContent(
                 AsyncImage(
                     modifier = Modifier
                         .fillParentMaxWidth(0.4f)
+                        .aspectRatio(0.7f)
                         .clip(RoundedCornerShape(4.dp))
                     ,
                     model = movie.images.posterImage?.getUrl(PosterSize.W_342),
