@@ -2,6 +2,7 @@ package com.santukis.cleanarchitecturekmm.android.home.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,7 +24,8 @@ fun HomeScreen(
     }
 
     HomeContent(
-        modifier = Modifier,
+        modifier = Modifier
+            .fillMaxSize(),
         homeState = homeState.value
     )
 }
