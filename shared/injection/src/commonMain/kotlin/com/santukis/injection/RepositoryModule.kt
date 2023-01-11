@@ -4,6 +4,7 @@ import RepositoriesConstants.GET_COUNTRIES_GATEWAY
 import RepositoriesConstants.GET_LANGUAGES_GATEWAY
 import RepositoriesConstants.GET_MOVIE_DETAIL_GATEWAY
 import RepositoriesConstants.GET_NOW_PLAYING_MOVIES_GATEWAY
+import RepositoriesConstants.GET_UPCOMING_MOVIES_GATEWAY
 import RepositoriesConstants.MOVIES_MODULE_NAME
 import RepositoriesConstants.MOVIES_REPOSITORY
 import RepositoriesConstants.REPOSITORIES_MODULE_NAME
@@ -11,6 +12,7 @@ import com.santukis.injection.DataSourceConstants.GET_COUNTRIES_DATA_SOURCE_FROM
 import com.santukis.injection.DataSourceConstants.GET_LANGUAGES_DATA_SOURCE_FROM_REMOTE
 import com.santukis.injection.DataSourceConstants.GET_MOVIE_DETAIL_DATA_SOURCE_FROM_REMOTE
 import com.santukis.injection.DataSourceConstants.GET_NOW_PLAYING_MOVIES_DATA_SOURCE_FROM_REMOTE
+import com.santukis.injection.DataSourceConstants.GET_UPCOMING_MOVIES_DATA_SOURCE_FROM_REMOTE
 import com.santukis.injection.DataSourceConstants.SAVE_MOVIE_DETAIL_DATA_SOURCE_INTO_LOCAL
 import com.santukis.repositories.configuration.ConfigurationRepository
 import com.santukis.repositories.movies.MovieRepository
@@ -18,6 +20,7 @@ import com.santukis.usecases.configuration.GetCountriesGateway
 import com.santukis.usecases.configuration.GetLanguagesGateway
 import com.santukis.usecases.movies.GetMovieDetailGateway
 import com.santukis.usecases.movies.GetNowPlayingMoviesGateway
+import com.santukis.usecases.movies.GetUpcomingMoviesGateway
 import org.kodein.di.DI
 import org.kodein.di.bind
 import org.kodein.di.instance
@@ -29,6 +32,8 @@ internal object RepositoriesConstants {
     const val MOVIES_REPOSITORY = "moviesRepository"
     const val GET_MOVIE_DETAIL_GATEWAY = "getMovieDetailGateway"
     const val GET_NOW_PLAYING_MOVIES_GATEWAY = "getNowPlayingMoviesDetailGateway"
+    const val GET_UPCOMING_MOVIES_GATEWAY = "getUpcomingMoviesDetailGateway"
+
     const val CONFIGURATION_MODULE_NAME = "configurationRepositoriesModuleName"
     const val CONFIGURATION_REPOSITORY = "configurationRepository"
     const val GET_COUNTRIES_GATEWAY = "getCountriesGateway"
@@ -52,7 +57,8 @@ private fun movies() = DI.Module(
         MovieRepository(
             getMovieDetailFromRemote = instance(GET_MOVIE_DETAIL_DATA_SOURCE_FROM_REMOTE),
             saveMovieDetailToLocal = instance(SAVE_MOVIE_DETAIL_DATA_SOURCE_INTO_LOCAL),
-            getNowPlayingMoviesDataSource = instance(GET_NOW_PLAYING_MOVIES_DATA_SOURCE_FROM_REMOTE)
+            getNowPlayingMoviesDataSource = instance(GET_NOW_PLAYING_MOVIES_DATA_SOURCE_FROM_REMOTE),
+            getUpcomingMoviesDataSource = instance(GET_UPCOMING_MOVIES_DATA_SOURCE_FROM_REMOTE)
         )
     }
 
@@ -61,6 +67,10 @@ private fun movies() = DI.Module(
     }
 
     bind<GetNowPlayingMoviesGateway>(tag = GET_NOW_PLAYING_MOVIES_GATEWAY) with singleton {
+        instance<MovieRepository>(tag = MOVIES_REPOSITORY)
+    }
+
+    bind<GetUpcomingMoviesGateway>(tag = GET_UPCOMING_MOVIES_GATEWAY) with singleton {
         instance<MovieRepository>(tag = MOVIES_REPOSITORY)
     }
 }

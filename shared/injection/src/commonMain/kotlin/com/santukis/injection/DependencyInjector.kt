@@ -1,6 +1,6 @@
 package com.santukis.injection
 
-import com.santukis.viewmodels.movies.MovieViewModel
+import com.santukis.viewmodels.movies.HomeViewModel
 import org.kodein.di.DI
 import org.kodein.di.DIAware
 import org.kodein.di.direct
@@ -19,7 +19,9 @@ object DependencyInjector {
         return this
     }
 
-    fun moviesViewModel(): MovieViewModel = kodeinDI?.getInstance(ViewModelModuleConstants.MOVIES_VIEW_MODEL) ?: throw Exception("Unable to load MovieViewModel")
+    fun homeViewModel(): HomeViewModel = kodeinDI?.getInstance(ViewModelModuleConstants.HOME_VIEW_MODEL) ?: throw Exception("Unable to load HomeViewModel")
+
+    fun movieDetailViewModel(): HomeViewModel = kodeinDI?.getInstance(ViewModelModuleConstants.MOVIE_DETAIL_VIEW_MODEL) ?: throw Exception("Unable to load MovieDetailViewModel")
 }
 
 internal class KodeinDI(private var moduleDependencies: Any? = null): DIAware {

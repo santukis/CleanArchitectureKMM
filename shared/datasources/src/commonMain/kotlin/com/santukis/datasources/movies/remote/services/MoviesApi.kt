@@ -13,17 +13,24 @@ class MoviesApi(client: KtorClient): MovieDatabaseApi(client) {
 
     private val moviePath = "${endPoint}3/movie"
 
-    suspend fun getMovieDetail(movieId: String): MovieDto = client.httpClient.use {
-        it.get("$moviePath/$movieId").body()
+    suspend fun getMovieDetail(movieId: String): MovieDto = client.httpClient.get("$moviePath/$movieId").body()
+
+    suspend fun getNowPlaying(request: GetMoviesRequestDto): GetMoviesResponseDto = client.httpClient.get("$moviePath/now_playing") {
+        addQueryParameters(request)
+    }.body()
+
+    suspend fun getUpcoming(request: GetMoviesRequestDto): GetMoviesResponseDto = client.httpClient.get("$moviePath/upcoming") {
+        addQueryParameters(request)
+    }.body()
+
+    private fun HttpRequestBuilder.addQueryParameters(request: GetMoviesRequestDto): HttpRequestBuilder {
+        url {
+            parameters.append(language, request.language)
+            parameters.append(region, request.region)
+            parameters.append(page, request.page)
+        }
+
+        return this
     }
 
-    suspend fun getNowPlaying(request: GetMoviesRequestDto): GetMoviesResponseDto = client.httpClient.use {
-        it.get("$moviePath/now_playing") {
-            url {
-                parameters.append(language, request.language)
-                parameters.append(region, request.region)
-                parameters.append(page, request.page)
-            }
-        }.body()
-    }
 }
