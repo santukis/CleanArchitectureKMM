@@ -26,8 +26,8 @@ object Versions {
     }
 
     object Kotlin {
-        const val coroutinesCore = "1.5.2"
-        const val serialization = "1.4.0"
+        const val coroutinesCore = "1.6.4"
+        const val serialization = "1.8.0"
     }
 
     object Kodein {
@@ -35,7 +35,7 @@ object Versions {
     }
 
     object Ktor {
-        const val ktor = "2.1.2"
+        const val ktor = "2.2.1"
     }
 
     object Moko {
@@ -52,5 +52,9 @@ object Versions {
 
     object Datastore {
         const val datastore = "1.1.0-dev01"
+    }
+
+    object SQLDelight {
+        const val sqlDelight = "1.5.4"
     }
 }

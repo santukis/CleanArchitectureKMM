@@ -8,6 +8,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization") version "1.7.10"
     id("com.android.library")
+    id("com.squareup.sqldelight")
 }
 
 kotlin {
@@ -30,6 +31,7 @@ kotlin {
                 implementation(Shared.Ktor.ktorJson)
 
                 implementation(Shared.Datastore.core)
+                implementation(Shared.SQLDelight.runtime)
 
                 implementation(Shared.Kotlin.coroutinesCore)
             }
@@ -37,14 +39,13 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
-
                 implementation(Shared.Test.ktorMock)
             }
         }
         val androidMain by getting {
             dependencies {
                 implementation(Android.Ktor.ktorOkhttp)
-
+                implementation(Android.SQLDelight.androidDriver)
                 implementation(Android.Kotlin.coroutinesAndroid)
             }
         }
@@ -60,6 +61,7 @@ kotlin {
 
             dependencies {
                 implementation(iOS.Ktor.ktorDarwin)
+                implementation(iOS.SQLDelight.iosDriver)
             }
         }
         val iosX64Test by getting
@@ -92,5 +94,11 @@ android {
             name = "MOVIE_DATABASE_SECRET",
             value = movieDatabaseProperties.getProperty("MOVIE_DATABASE_SECRET")
         )
+    }
+}
+
+sqldelight {
+    database("MovieDatabase") {
+        packageName = "com.santukis.datasources.core.local"
     }
 }

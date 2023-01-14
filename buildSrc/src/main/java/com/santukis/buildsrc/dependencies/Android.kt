@@ -53,4 +53,8 @@ object Android {
     object Snapper {
         const val snapper = "dev.chrisbanes.snapper:snapper:${Versions.Snapper.snapper}"
     }
+
+    object SQLDelight {
+        const val androidDriver = "com.squareup.sqldelight:android-driver:${Versions.SQLDelight.sqlDelight}"
+    }
 }

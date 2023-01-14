@@ -1,0 +1,20 @@
+CREATE TABLE Keywords (
+    id      TEXT    NOT NULL    PRIMARY KEY,
+    name    TEXT    NOT NULL,
+    count   INTEGER AS Int NOT NULL DEFAULT 0
+);
+
+insertKeyword:
+INSERT INTO Keywords(id, name, count)
+VALUES(?, ?, ?);
+
+selectKeywordById:
+SELECT * FROM Keywords
+WHERE id = ?;
+
+selectFrequentlyUsedKeywords:
+SELECT * FROM Keywords
+ORDER BY count DESC LIMIT 5;
+
+removeAllKeywords:
+DELETE FROM Keywords;

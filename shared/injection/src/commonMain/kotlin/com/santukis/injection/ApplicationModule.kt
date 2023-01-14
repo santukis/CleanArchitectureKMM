@@ -15,4 +15,5 @@ internal fun applicationModule(platformDependencies: Any?) = DI.Module(
     import(repositories())
     import(dataSources())
     import(remote())
+    import(local())
 }
