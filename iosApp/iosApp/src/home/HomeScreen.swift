@@ -42,15 +42,20 @@ struct HomeContent: View {
     
     var body: some View {
         ScrollView(.vertical) {
-            VStack {
+            VStack(spacing: 20) {
                 NowPlayingContent(
                     movies: homeState.nowPlayingMovies,
                     geometry: geometry
                 )
                 
-                UpcomingContent(
+                HomeSectionContent(
                     movies: homeState.upcomingMovies,
-                    geometry: geometry
+                    sectionTitle: String(localized: "upcoming")
+                )
+                
+                HomeSectionContent(
+                    movies: homeState.popularMovies,
+                    sectionTitle: String(localized: "popular_movies")
                 )
             }
         }

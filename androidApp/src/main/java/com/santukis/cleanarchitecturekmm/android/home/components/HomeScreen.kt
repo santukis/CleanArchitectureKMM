@@ -9,7 +9,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.santukis.cleanarchitecturekmm.android.R
 import com.santukis.viewmodels.home.HomeViewModel
 import com.santukis.viewmodels.home.entities.HomeState
 
@@ -48,16 +50,18 @@ fun HomeContent(
         }
 
         item {
-            UpcomingContent(
+            HomeSectionContent(
                 modifier = modifier,
-                upcomingMovies = homeState.upcomingMovies
+                movies = homeState.upcomingMovies,
+                sectionTitle = stringResource(id = R.string.upcoming)
             )
         }
 
         item {
-            PopularContent(
+            HomeSectionContent(
                 modifier = modifier,
-                popularMovies = homeState.popularMovies
+                movies = homeState.popularMovies,
+                sectionTitle = stringResource(id = R.string.popular)
             )
         }
     }
