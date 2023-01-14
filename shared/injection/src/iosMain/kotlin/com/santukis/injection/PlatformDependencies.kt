@@ -3,6 +3,7 @@ package com.santukis.injection
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
+import com.santukis.datasources.core.local.DatabaseDriverFactory
 import okio.Path.Companion.toPath
 import org.kodein.di.DI
 import org.kodein.di.bind
@@ -33,5 +34,9 @@ actual fun platformModules(platformDependencies: Any?): DI.Module =
 
                 path.toPath()
             })
+        }
+
+        bind<DatabaseDriverFactory>() with singleton {
+            DatabaseDriverFactory()
         }
     }

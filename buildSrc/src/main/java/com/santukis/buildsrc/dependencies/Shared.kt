@@ -38,4 +38,8 @@ object Shared {
     object Datastore {
         const val core = "androidx.datastore:datastore-preferences-core:${Versions.Datastore.datastore}"
     }
+
+    object SQLDelight {
+        const val runtime = "com.squareup.sqldelight:runtime:${Versions.SQLDelight.sqlDelight}"
+    }
 }

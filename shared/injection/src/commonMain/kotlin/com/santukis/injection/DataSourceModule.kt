@@ -63,7 +63,7 @@ private fun movies() = DI.Module(
     }
 
     bind<SaveMovieDetailDataSource>(tag = SAVE_MOVIE_DETAIL_DATA_SOURCE_INTO_LOCAL) with provider {
-        LocalMovieDataSource()
+        LocalMovieDataSource(instance())
     }
 
     bind<GetNowPlayingMoviesDataSource>(tag = GET_NOW_PLAYING_MOVIES_DATA_SOURCE_FROM_REMOTE) with provider {

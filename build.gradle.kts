@@ -5,6 +5,7 @@ plugins {
     kotlin("multiplatform").version("1.7.10").apply(false)
     kotlin("jvm").version("1.7.10").apply(false)
     id("dev.icerock.moko.kswift").version("0.6.1").apply(false)
+    id("com.squareup.sqldelight").version("1.5.4").apply(false)
 }
 
 tasks.register("clean", Delete::class) {
