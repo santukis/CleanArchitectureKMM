@@ -12,11 +12,9 @@ class ConfigurationApi(client: KtorClient): MovieDatabaseApi(client) {
 
     private val configurationPath = "${endPoint}3/configuration"
 
-    suspend fun getCountries(): List<CountryDto> = client.httpClient.use {
-        it.get("$configurationPath/countries").body()
-    }
+    suspend fun getCountries(): List<CountryDto> =
+        client.httpClient.get("$configurationPath/countries").body()
 
-    suspend fun getLanguages(): List<LanguageDto> = client.httpClient.use {
-        it.get("$configurationPath/languages").body()
-    }
+    suspend fun getLanguages(): List<LanguageDto> =
+        client.httpClient.get("$configurationPath/languages").body()
 }

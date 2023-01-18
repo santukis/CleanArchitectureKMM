@@ -52,6 +52,7 @@ dependencies {
     implementation(Android.Androidx.composeMaterialIconsExtended)
     implementation(Android.Androidx.composeConstraintLayout)
     implementation(Android.Androidx.composeUtil)
+    implementation(Android.Androidx.composeNavigation)
     implementation(Android.Androidx.lifecycleViewModelCompose)
     implementation(Android.Coil.coil)
     implementation(Android.Snapper.snapper)

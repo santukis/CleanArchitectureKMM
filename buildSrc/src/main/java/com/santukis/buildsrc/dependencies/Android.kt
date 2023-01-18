@@ -39,6 +39,7 @@ object Android {
         const val composeMaterialIconsExtended = "androidx.compose.material:material-icons-extended:${Versions.Androidx.compose}"
         const val composeConstraintLayout = "androidx.constraintlayout:constraintlayout-compose:${Versions.Androidx.composeConstraintLayout}"
         const val composeUtil = "androidx.compose.ui:ui-util:${Versions.Androidx.compose}"
+        const val composeNavigation = "androidx.navigation:navigation-compose:${Versions.Androidx.composeNavigation}"
         const val encryptedPreferences = "androidx.security:security-crypto:${Versions.Androidx.encryptedPreferences}"
     }
 

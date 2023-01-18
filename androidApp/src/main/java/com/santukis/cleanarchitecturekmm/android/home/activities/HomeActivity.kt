@@ -4,16 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.core.view.WindowCompat
-import com.santukis.cleanarchitecturekmm.android.home.components.HomeScreen
+import com.santukis.cleanarchitecturekmm.android.core.components.MovieNavHost
 import com.santukis.cleanarchitecturekmm.android.theme.MovieTheme
 import com.santukis.injection.getDependencyInjector
-import com.santukis.viewmodels.home.HomeViewModel
 
 class HomeActivity : ComponentActivity() {
-
-    private val viewModel: HomeViewModel by lazy {
-        getDependencyInjector(application).homeViewModel()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +16,9 @@ class HomeActivity : ComponentActivity() {
 
         setContent {
             MovieTheme {
-                HomeScreen(homeViewModel = viewModel)
+                MovieNavHost(
+                    dependencyInjector = getDependencyInjector(application)
+                )
             }
         }
     }

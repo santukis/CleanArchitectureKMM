@@ -12,12 +12,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.santukis.cleanarchitecturekmm.android.R
+import com.santukis.cleanarchitecturekmm.android.core.entities.destinations.Destination
+import com.santukis.cleanarchitecturekmm.android.core.entities.destinations.MovieDetailDestination
 import com.santukis.viewmodels.home.HomeViewModel
 import com.santukis.viewmodels.home.entities.HomeState
 
 @Composable
 fun HomeScreen(
-    homeViewModel: HomeViewModel
+    homeViewModel: HomeViewModel,
+    onNavigateTo: (Destination<*>) -> Unit
 ) {
     val homeState = homeViewModel.homeState.collectAsState()
 
@@ -28,14 +31,16 @@ fun HomeScreen(
     HomeContent(
         modifier = Modifier
             .fillMaxSize(),
-        homeState = homeState.value
+        homeState = homeState.value,
+        onNavigateTo = onNavigateTo
     )
 }
 
 @Composable
 fun HomeContent(
     modifier: Modifier,
-    homeState: HomeState
+    homeState: HomeState,
+    onNavigateTo: (Destination<*>) -> Unit
 ) {
     LazyColumn(
         modifier = modifier
@@ -45,7 +50,8 @@ fun HomeContent(
         item {
             NowPlayingContent(
                 modifier = modifier,
-                nowPlayingMovies = homeState.nowPlayingMovies
+                nowPlayingMovies = homeState.nowPlayingMovies,
+                onNavigateTo = onNavigateTo
             )
         }
 
@@ -54,7 +60,9 @@ fun HomeContent(
                 modifier = modifier,
                 movies = homeState.upcomingMovies,
                 sectionTitle = stringResource(id = R.string.upcoming)
-            )
+            ) { movie ->
+                onNavigateTo(MovieDetailDestination(movie.id))
+            }
         }
 
         item {
@@ -62,7 +70,9 @@ fun HomeContent(
                 modifier = modifier,
                 movies = homeState.popularMovies,
                 sectionTitle = stringResource(id = R.string.popular)
-            )
+            ) { movie ->
+                onNavigateTo(MovieDetailDestination(movie.id))
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.santukis.cleanarchitecturekmm.android.home.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -21,6 +22,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.santukis.cleanarchitecturekmm.android.core.entities.destinations.Destination
+import com.santukis.cleanarchitecturekmm.android.core.entities.destinations.MovieDetailDestination
 import com.santukis.cleanarchitecturekmm.android.theme.WhiteTransparent
 import com.santukis.entities.movies.*
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
@@ -30,7 +33,8 @@ import dev.chrisbanes.snapper.rememberSnapperFlingBehavior
 @OptIn(ExperimentalSnapperApi::class)
 fun NowPlayingContent(
     modifier: Modifier,
-    nowPlayingMovies: List<Movie>
+    nowPlayingMovies: List<Movie>,
+    onNavigateTo: (Destination<*>) -> Unit
 ) {
     val listState = rememberLazyListState()
 
@@ -49,6 +53,7 @@ fun NowPlayingContent(
                 Box(
                     modifier = Modifier
                         .fillParentMaxWidth()
+                        .clickable { onNavigateTo(MovieDetailDestination(movieId = movie.id)) }
                 ) {
                     AsyncImage(
                         model = movie.images.posterImage?.getUrl(PosterSize.W_342),
