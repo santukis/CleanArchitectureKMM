@@ -34,7 +34,7 @@ import dev.chrisbanes.snapper.rememberSnapperFlingBehavior
 fun NowPlayingContent(
     modifier: Modifier,
     nowPlayingMovies: List<Movie>,
-    onNavigateTo: (Destination<*>) -> Unit
+    onNavigateTo: (Destination) -> Unit
 ) {
     val listState = rememberLazyListState()
 

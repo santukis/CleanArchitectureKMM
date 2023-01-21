@@ -4,9 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.navigation
 import com.santukis.cleanarchitecturekmm.android.core.entities.navigation.destinations.MoviesDestination
-import com.santukis.cleanarchitecturekmm.android.core.entities.navigation.destinations.MoviesScreenDependencies
 import com.santukis.cleanarchitecturekmm.android.core.entities.navigation.destinations.ShowsDestination
-import com.santukis.cleanarchitecturekmm.android.core.entities.navigation.destinations.ShowsScreenDependencies
 
 fun NavGraphBuilder.homeNavigationGraph(
     navController: NavController
@@ -17,14 +15,12 @@ fun NavGraphBuilder.homeNavigationGraph(
     ) {
         navigate(
             navController = navController,
-            destination = MoviesDestination(),
-            screenDependencies = MoviesScreenDependencies()
+            destination = MoviesDestination()
         )
 
         navigate(
             navController = navController,
-            destination = ShowsDestination(),
-            screenDependencies = ShowsScreenDependencies()
+            destination = ShowsDestination()
         )
     }
 }
