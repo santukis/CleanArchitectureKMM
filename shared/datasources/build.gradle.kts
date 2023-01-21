@@ -49,7 +49,6 @@ kotlin {
                 implementation(Android.Kotlin.coroutinesAndroid)
             }
         }
-        val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting

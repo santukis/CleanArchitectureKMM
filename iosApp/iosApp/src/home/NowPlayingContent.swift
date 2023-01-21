@@ -1,11 +1,3 @@
-//
-//  NowPlayingContent.swift
-//  iosApp
-//
-//  Created by David Santamaría Álvarez on 11/1/23.
-//  Copyright © 2023 orgName. All rights reserved.
-//
-
 import SwiftUI
 import MultiPlatformLibrary
 import mokoMvvmFlowSwiftUI

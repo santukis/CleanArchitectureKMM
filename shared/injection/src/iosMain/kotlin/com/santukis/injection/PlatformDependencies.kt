@@ -4,6 +4,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import com.santukis.datasources.core.local.DatabaseDriverFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import okio.Path.Companion.toPath
 import org.kodein.di.DI
 import org.kodein.di.bind
@@ -22,18 +24,23 @@ actual fun platformModules(platformDependencies: Any?): DI.Module =
     ) {
 
         bind<DataStore<Preferences>>() with singleton {
-            PreferenceDataStoreFactory.createWithPath(produceFile = {
-                val documentDirectory: NSURL? = NSFileManager.defaultManager.URLForDirectory(
-                    directory = NSDocumentDirectory,
-                    inDomain = NSUserDomainMask,
-                    appropriateForURL = null,
-                    create = false,
-                    error = null,
-                )
-                val path: String = requireNotNull(documentDirectory).path + "/configuration_preferences.preferences_pb"
+            PreferenceDataStoreFactory.createWithPath(
+                corruptionHandler = null,
+                migrations = listOf(),
+                scope = CoroutineScope(Dispatchers.Default),
+                produceFile = {
+                    val documentDirectory: NSURL? = NSFileManager.defaultManager.URLForDirectory(
+                        directory = NSDocumentDirectory,
+                        inDomain = NSUserDomainMask,
+                        appropriateForURL = null,
+                        create = false,
+                        error = null,
+                    )
+                    val path: String =
+                        requireNotNull(documentDirectory).path + "/configuration_preferences.preferences_pb"
 
-                path.toPath()
-            })
+                    path.toPath()
+                })
         }
 
         bind<DatabaseDriverFactory>() with singleton {

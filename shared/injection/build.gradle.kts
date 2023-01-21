@@ -26,6 +26,7 @@ kotlin {
         framework {
             baseName = "MultiPlatformLibrary"
             isStatic = false
+            linkerOpts.add("-lsqlite3")
 
             export(project(Modules.ViewModels))
             export(project(Modules.Entities))
@@ -41,7 +42,7 @@ kotlin {
                 implementation(project(Modules.UseCases))
                 api(project(Modules.Entities))
                 implementation(project(Modules.Repositories))
-                implementation(project(Modules.DataSources))
+                api(project(Modules.DataSources))
 
                 implementation(Shared.Kodein.kodein)
                 implementation(Shared.Kotlin.coroutinesCore)
@@ -63,7 +64,6 @@ kotlin {
                 implementation(Android.Kodein.kodein)
             }
         }
-        val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting

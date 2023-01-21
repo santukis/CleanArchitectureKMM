@@ -25,12 +25,13 @@ actual fun platformModules(platformDependencies: Any?): DI.Module =
         }
 
         bind<DataStore<Preferences>>() with singleton {
-            PreferenceDataStoreFactory.createWithPath(produceFile = {
-                instance<Context>()
-                    .filesDir
-                    .resolve("configuration_preferences.preferences_pb")
-                    .absolutePath
-                    .toPath()
+            PreferenceDataStoreFactory.createWithPath(
+                produceFile = {
+                    instance<Context>()
+                        .filesDir
+                        .resolve("configuration_preferences.preferences_pb")
+                        .absolutePath
+                        .toPath()
             })
         }
 
