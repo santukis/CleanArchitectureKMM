@@ -1,11 +1,3 @@
-//
-//  HomeSectionContent.swift
-//  iosApp
-//
-//  Created by David Santamaría Álvarez on 14/1/23.
-//  Copyright © 2023 orgName. All rights reserved.
-//
-
 import SwiftUI
 import MultiPlatformLibrary
 import mokoMvvmFlowSwiftUI

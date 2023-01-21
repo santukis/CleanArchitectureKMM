@@ -1,11 +1,3 @@
-//
-//  MovieDetail.swift
-//  iosApp
-//
-//  Created by David Santamaría Álvarez on 31/12/22.
-//  Copyright © 2022 orgName. All rights reserved.
-//
-
 import SwiftUI
 import MultiPlatformLibrary
 import mokoMvvmFlowSwiftUI

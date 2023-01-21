@@ -1,11 +1,3 @@
-//
-//  HomeScreen.swift
-//  iosApp
-//
-//  Created by David Santamaría Álvarez on 8/1/23.
-//  Copyright © 2023 orgName. All rights reserved.
-//
-
 import SwiftUI
 import MultiPlatformLibrary
 import mokoMvvmFlowSwiftUI
@@ -13,22 +5,22 @@ import Combine
 
 struct HomeScreen: View {
     @EnvironmentObject
-    private var homeViewModel: HomeViewModel
+    private var moviesViewModel: MoviesViewModel
     
     var body: some View {
-        let homeState = homeViewModel.state(
-            \.homeState,
+        let moviesState = moviesViewModel.state(
+            \.moviesState,
             equals: { state1, state2 in return state1 == state2 },
-            mapper: { homeState in return homeState }
+            mapper: { moviesState in return moviesState }
         )
         
         GeometryReader { geometry in
             HomeContent(
-                homeState: homeState,
+                moviesState: moviesState,
                 geometry: geometry
                 
             ).onAppear {
-                homeViewModel.loadHomeData()
+                moviesViewModel.loadHomeData()
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -37,24 +29,24 @@ struct HomeScreen: View {
 }
 
 struct HomeContent: View {
-    var homeState: HomeState
+    var moviesState: MoviesState
     var geometry: GeometryProxy
     
     var body: some View {
         ScrollView(.vertical) {
             VStack(spacing: 20) {
                 NowPlayingContent(
-                    movies: homeState.nowPlayingMovies,
+                    movies: moviesState.nowPlayingMovies,
                     geometry: geometry
                 )
                 
                 HomeSectionContent(
-                    movies: homeState.upcomingMovies,
+                    movies: moviesState.upcomingMovies,
                     sectionTitle: String(localized: "upcoming")
                 )
                 
                 HomeSectionContent(
-                    movies: homeState.popularMovies,
+                    movies: moviesState.popularMovies,
                     sectionTitle: String(localized: "popular_movies")
                 )
             }

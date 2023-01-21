@@ -57,6 +57,6 @@ object Versions {
     }
 
     object SQLDelight {
-        const val sqlDelight = "1.5.4"
+        const val sqlDelight = "1.5.5"
     }
 }
