@@ -58,7 +58,7 @@ fun MoviesContent(
         }
 
         item {
-            SectionContent(
+            MovieSectionContent(
                 modifier = modifier,
                 movies = moviesState.upcomingMovies,
                 sectionTitle = stringResource(id = R.string.upcoming)
@@ -68,7 +68,7 @@ fun MoviesContent(
         }
 
         item {
-            SectionContent(
+            MovieSectionContent(
                 modifier = modifier,
                 movies = moviesState.popularMovies,
                 sectionTitle = stringResource(id = R.string.popular)
