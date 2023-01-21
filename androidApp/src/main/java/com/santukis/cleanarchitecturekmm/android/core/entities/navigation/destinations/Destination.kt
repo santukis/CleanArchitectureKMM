@@ -13,7 +13,7 @@ import androidx.navigation.*
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 
-interface Destination<ScreenDependencies> {
+interface Destination {
 
     val template: String
     val route: String
@@ -24,7 +24,6 @@ interface Destination<ScreenDependencies> {
 
     @Composable
     fun DestinationScreen(
-        screenDependencies: ScreenDependencies,
         navController: NavController,
         backStackEntry: NavBackStackEntry
     )

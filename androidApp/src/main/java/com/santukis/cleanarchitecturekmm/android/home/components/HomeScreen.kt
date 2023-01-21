@@ -57,8 +57,8 @@ fun BottomNavigationAnimatedVisibility(
 
     AnimatedVisibility(
         visible = shouldShowBottomBar,
-        enter = slideInVertically(initialOffsetY = { it }),
-        exit = slideOutVertically(targetOffsetY = { it })
+        enter = slideInVertically(initialOffsetY = { contentHeight -> contentHeight }),
+        exit = slideOutVertically(targetOffsetY = { contentHeight -> contentHeight })
     ) {
         BottomNavigation(
             backgroundColor = Color.Transparent

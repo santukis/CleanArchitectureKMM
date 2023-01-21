@@ -6,13 +6,12 @@ import androidx.navigation.compose.composable
 import com.santukis.cleanarchitecturekmm.android.core.entities.navigation.destinations.Destination
 
 enum class NavigationGraph {
-    HOME
+    HOME, USER
 }
 
-fun <ScreenDependencies> NavGraphBuilder.navigate(
+fun NavGraphBuilder.navigate(
     navController: NavController,
-    destination: Destination<ScreenDependencies>,
-    screenDependencies: ScreenDependencies
+    destination: Destination
 ) {
     composable(
         route = destination.template,
@@ -21,7 +20,6 @@ fun <ScreenDependencies> NavGraphBuilder.navigate(
     ) { backStackEntry ->
 
         destination.DestinationScreen(
-            screenDependencies = screenDependencies,
             navController = navController,
             backStackEntry = backStackEntry
         )

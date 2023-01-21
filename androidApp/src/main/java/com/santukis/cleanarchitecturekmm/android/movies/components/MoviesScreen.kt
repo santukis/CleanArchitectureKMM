@@ -22,7 +22,7 @@ import com.santukis.viewmodels.movies.entities.MoviesState
 @Composable
 fun MoviesScreen(
     moviesViewModel: MoviesViewModel,
-    onNavigateTo: (Destination<*>) -> Unit
+    onNavigateTo: (Destination) -> Unit
 ) {
     val homeState = moviesViewModel.moviesState.collectAsState()
 
@@ -42,7 +42,7 @@ fun MoviesScreen(
 fun MoviesContent(
     modifier: Modifier,
     moviesState: MoviesState,
-    onNavigateTo: (Destination<*>) -> Unit
+    onNavigateTo: (Destination) -> Unit
 ) {
     LazyColumn(
         modifier = modifier
