@@ -15,7 +15,7 @@ fun MovieDetailScreen(
 
     val movieDetailState = movieDetailViewModel.movieDetailState.collectAsState()
 
-    LaunchedEffect(true) {
+    LaunchedEffect(movieDetailViewModel) {
         movieDetailViewModel.loadMovie(movieId)
     }
 

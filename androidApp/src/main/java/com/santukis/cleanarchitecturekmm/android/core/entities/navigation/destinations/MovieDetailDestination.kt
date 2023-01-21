@@ -1,9 +1,10 @@
-package com.santukis.cleanarchitecturekmm.android.core.entities.destinations
+package com.santukis.cleanarchitecturekmm.android.core.entities.navigation.destinations
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.*
 import com.santukis.cleanarchitecturekmm.android.movies.components.MovieDetailScreen
-import com.santukis.viewmodels.movies.MovieDetailViewModel
+import com.santukis.injection.getDependencyInjector
 
 class MovieDetailDestination(movieId: Int = -1): Destination<MovieDetailScreenDependencies> {
 
@@ -22,12 +23,10 @@ class MovieDetailDestination(movieId: Int = -1): Destination<MovieDetailScreenDe
         backStackEntry: NavBackStackEntry
     ) {
         MovieDetailScreen(
-            movieDetailViewModel = screenDependencies.viewModel,
+            movieDetailViewModel = getDependencyInjector().movieDetailViewModel(LocalViewModelStoreOwner.current),
             movieId = backStackEntry.arguments?.getString("movieId").orEmpty()
         )
     }
 }
 
-class MovieDetailScreenDependencies(
-    val viewModel: MovieDetailViewModel
-)
+class MovieDetailScreenDependencies

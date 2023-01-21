@@ -2,5 +2,7 @@
 <resources>
     <string name="popular">Popular movies</string>
     <string name="upcoming">Upcoming</string>
+    <string name="movies">Movies</string>
+    <string name="tv_shows">TV</string>
 
 </resources>

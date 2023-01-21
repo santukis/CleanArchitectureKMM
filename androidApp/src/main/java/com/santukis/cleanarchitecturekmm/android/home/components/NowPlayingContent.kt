@@ -22,8 +22,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.santukis.cleanarchitecturekmm.android.core.entities.destinations.Destination
-import com.santukis.cleanarchitecturekmm.android.core.entities.destinations.MovieDetailDestination
+import com.santukis.cleanarchitecturekmm.android.core.entities.navigation.destinations.Destination
+import com.santukis.cleanarchitecturekmm.android.core.entities.navigation.destinations.MovieDetailDestination
 import com.santukis.cleanarchitecturekmm.android.theme.WhiteTransparent
 import com.santukis.entities.movies.*
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
