@@ -1,8 +1,8 @@
-package com.santukis.viewmodels.home
+package com.santukis.viewmodels.movies
 
 import com.santukis.entities.movies.Movie
 import com.santukis.usecases.UseCase
-import com.santukis.viewmodels.home.entities.HomeState
+import com.santukis.viewmodels.movies.entities.MoviesState
 import dev.icerock.moko.mvvm.flow.CMutableStateFlow
 import dev.icerock.moko.mvvm.flow.CStateFlow
 import dev.icerock.moko.mvvm.flow.cMutableStateFlow
@@ -12,16 +12,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class HomeViewModel(
+class MoviesViewModel(
     private val getNowPlayingMovies: UseCase<Unit, Flow<List<Movie>>>,
     private val getUpcomingMovies: UseCase<Unit, Flow<List<Movie>>>,
     private val getPopularMovies: UseCase<Unit, Flow<List<Movie>>>
 ): ViewModel() {
 
-    private val _homeState: CMutableStateFlow<HomeState> =
-        MutableStateFlow(HomeState()).cMutableStateFlow()
+    private val _moviesState: CMutableStateFlow<MoviesState> =
+        MutableStateFlow(MoviesState()).cMutableStateFlow()
 
-    val homeState: CStateFlow<HomeState> = _homeState.cStateFlow()
+    val moviesState: CStateFlow<MoviesState> = _moviesState.cStateFlow()
 
     fun loadHomeData() {
         viewModelScope.launch(Dispatchers.Main) {
@@ -35,10 +35,10 @@ class HomeViewModel(
         getNowPlayingMovies(Unit)
             .flowOn(Dispatchers.Default)
             .catch { error ->
-                _homeState.value = _homeState.value.copy(errorMessage = error.message)
+                _moviesState.value = _moviesState.value.copy(errorMessage = error.message)
             }
             .collect { movies ->
-                _homeState.value = _homeState.value.copy(nowPlayingMovies = movies)
+                _moviesState.value = _moviesState.value.copy(nowPlayingMovies = movies)
             }
     }
 
@@ -46,10 +46,10 @@ class HomeViewModel(
         getUpcomingMovies(Unit)
             .flowOn(Dispatchers.Default)
             .catch { error ->
-                _homeState.value = _homeState.value.copy(errorMessage = error.message)
+                _moviesState.value = _moviesState.value.copy(errorMessage = error.message)
             }
             .collect { movies ->
-                _homeState.value = _homeState.value.copy(upcomingMovies = movies)
+                _moviesState.value = _moviesState.value.copy(upcomingMovies = movies)
             }
     }
 
@@ -57,10 +57,10 @@ class HomeViewModel(
         getPopularMovies(Unit)
             .flowOn(Dispatchers.Default)
             .catch { error ->
-                _homeState.value = _homeState.value.copy(errorMessage = error.message)
+                _moviesState.value = _moviesState.value.copy(errorMessage = error.message)
             }
             .collect { movies ->
-                _homeState.value = _homeState.value.copy(popularMovies = movies)
+                _moviesState.value = _moviesState.value.copy(popularMovies = movies)
             }
     }
 }

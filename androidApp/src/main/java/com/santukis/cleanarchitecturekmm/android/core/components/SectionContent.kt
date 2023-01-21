@@ -1,4 +1,4 @@
-package com.santukis.cleanarchitecturekmm.android.home.components
+package com.santukis.cleanarchitecturekmm.android.core.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -19,7 +19,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.santukis.cleanarchitecturekmm.android.core.entities.destinations.Destination
 import com.santukis.entities.movies.Movie
 import com.santukis.entities.movies.PosterSize
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
@@ -27,7 +26,7 @@ import dev.chrisbanes.snapper.rememberSnapperFlingBehavior
 
 @OptIn(ExperimentalSnapperApi::class)
 @Composable
-fun HomeSectionContent(
+fun SectionContent(
     modifier: Modifier,
     movies: List<Movie>,
     sectionTitle: String,
@@ -75,8 +74,7 @@ fun HomeSectionContent(
                         .fillParentMaxWidth(0.4f)
                         .aspectRatio(0.7f)
                         .clip(RoundedCornerShape(4.dp))
-                        .clickable { onMovieClick(movie) }
-                    ,
+                        .clickable { onMovieClick(movie) },
                     model = movie.images.posterImage?.getUrl(PosterSize.W_342),
                     contentDescription = "",
                     contentScale = ContentScale.Crop,

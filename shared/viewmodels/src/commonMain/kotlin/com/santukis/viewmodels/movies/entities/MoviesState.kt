@@ -1,8 +1,8 @@
-package com.santukis.viewmodels.home.entities
+package com.santukis.viewmodels.movies.entities
 
 import com.santukis.entities.movies.Movie
 
-data class HomeState(
+data class MoviesState(
     val nowPlayingMovies: List<Movie> = emptyList(),
     val upcomingMovies: List<Movie> = emptyList(),
     val popularMovies: List<Movie> = emptyList(),
