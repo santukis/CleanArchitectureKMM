@@ -20,10 +20,7 @@ import com.santukis.repositories.configuration.ConfigurationRepository
 import com.santukis.repositories.movies.MovieRepository
 import com.santukis.usecases.configuration.GetCountriesGateway
 import com.santukis.usecases.configuration.GetLanguagesGateway
-import com.santukis.usecases.movies.GetMovieDetailGateway
-import com.santukis.usecases.movies.GetNowPlayingMoviesGateway
-import com.santukis.usecases.movies.GetPopularMoviesGateway
-import com.santukis.usecases.movies.GetUpcomingMoviesGateway
+import com.santukis.usecases.movies.*
 import org.kodein.di.DI
 import org.kodein.di.bind
 import org.kodein.di.instance
@@ -63,9 +60,11 @@ private fun movies() = DI.Module(
             saveMovieDetailToLocal = instance(SAVE_MOVIE_DETAIL_DATA_SOURCE_INTO_LOCAL),
             getKeywordsForMovieFromRemote = instance(),
             saveMovieKeywordsToLocal = instance(),
-            getNowPlayingMoviesDataSource = instance(GET_NOW_PLAYING_MOVIES_DATA_SOURCE_FROM_REMOTE),
-            getUpcomingMoviesDataSource = instance(GET_UPCOMING_MOVIES_DATA_SOURCE_FROM_REMOTE),
-            getPopularMoviesDataSource = instance(GET_POPULAR_MOVIES_DATA_SOURCE_FROM_REMOTE)
+            getNowPlayingMoviesFromRemote = instance(GET_NOW_PLAYING_MOVIES_DATA_SOURCE_FROM_REMOTE),
+            getUpcomingMoviesFromRemote = instance(GET_UPCOMING_MOVIES_DATA_SOURCE_FROM_REMOTE),
+            getPopularMoviesFromRemote = instance(GET_POPULAR_MOVIES_DATA_SOURCE_FROM_REMOTE),
+            getMostFrequentlyKeywordsFromLocal = instance(),
+            getMoviesByKeywordFromRemote = instance()
         )
     }
 
@@ -82,6 +81,10 @@ private fun movies() = DI.Module(
     }
 
     bind<GetPopularMoviesGateway>(tag = GET_POPULAR_MOVIES_GATEWAY) with singleton {
+        instance<MovieRepository>(tag = MOVIES_REPOSITORY)
+    }
+
+    bind<GetMoviesByKeywordGateway>() with singleton {
         instance<MovieRepository>(tag = MOVIES_REPOSITORY)
     }
 }

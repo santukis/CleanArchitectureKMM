@@ -2,6 +2,7 @@ package com.santukis.injection
 
 import com.santukis.injection.UseCasesConstants.GET_COUNTRIES_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_LANGUAGES_USE_CASE
+import com.santukis.injection.UseCasesConstants.GET_MOVIES_BY_KEYWORD_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_MOVIE_DETAIL_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_NOW_PLAYING_MOVIES_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_POPULAR_MOVIES_USE_CASE
@@ -46,7 +47,8 @@ private fun movies() = DI.Module(
         MoviesViewModel(
             getNowPlayingMovies = instance(GET_NOW_PLAYING_MOVIES_USE_CASE),
             getUpcomingMovies = instance(GET_UPCOMING_MOVIES_USE_CASE),
-            getPopularMovies = instance(GET_POPULAR_MOVIES_USE_CASE)
+            getPopularMovies = instance(GET_POPULAR_MOVIES_USE_CASE),
+            getMoviesByKeyword = instance(GET_MOVIES_BY_KEYWORD_USE_CASE)
         )
     }
 

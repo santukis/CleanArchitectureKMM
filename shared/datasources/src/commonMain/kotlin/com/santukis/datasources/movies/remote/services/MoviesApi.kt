@@ -12,6 +12,7 @@ import io.ktor.client.request.*
 class MoviesApi(client: KtorClient): MovieDatabaseApi(client) {
 
     private val moviePath = "${endPoint}3/movie"
+    private val keywordPath = "${endPoint}3/keyword"
 
     suspend fun getMovieDetail(movieId: String): MovieDto =
         client.httpClient.get("$moviePath/$movieId").body()
@@ -33,6 +34,11 @@ class MoviesApi(client: KtorClient): MovieDatabaseApi(client) {
 
     suspend fun getKeywordsForMovie(movieId: String): KeywordsForMovieDto =
         client.httpClient.get("$moviePath/$movieId/keywords").body()
+
+    suspend fun getMoviesForKeyword(keywordId: Int, request: GetMoviesRequestDto): GetMoviesResponseDto =
+        client.httpClient.get("$keywordPath/$keywordId/movies"){
+            addQueryParameters(request)
+        }.body()
 
     private fun HttpRequestBuilder.addQueryParameters(request: GetMoviesRequestDto): HttpRequestBuilder {
         url {

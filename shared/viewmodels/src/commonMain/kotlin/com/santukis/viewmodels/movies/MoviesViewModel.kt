@@ -15,7 +15,8 @@ import kotlinx.coroutines.launch
 class MoviesViewModel(
     private val getNowPlayingMovies: UseCase<Unit, Flow<List<Movie>>>,
     private val getUpcomingMovies: UseCase<Unit, Flow<List<Movie>>>,
-    private val getPopularMovies: UseCase<Unit, Flow<List<Movie>>>
+    private val getPopularMovies: UseCase<Unit, Flow<List<Movie>>>,
+    private val getMoviesByKeyword: UseCase<Unit, Flow<List<Movie>>>
 ): ViewModel() {
 
     private val _moviesState: CMutableStateFlow<MoviesState> =
@@ -24,43 +25,61 @@ class MoviesViewModel(
     val moviesState: CStateFlow<MoviesState> = _moviesState.cStateFlow()
 
     fun loadHomeData() {
+        loadNowPlayingMovies()
+        loadUpcoming()
+        loadPopularMovies()
+        loadMoviesByMostFrequentlyKeyword()
+    }
+
+    private fun loadNowPlayingMovies() {
         viewModelScope.launch(Dispatchers.Main) {
-            loadNowPlayingMovies()
-            loadUpcoming()
-            loadPopularMovies()
+            getNowPlayingMovies(Unit)
+                .flowOn(Dispatchers.Default)
+                .catch { error ->
+                    _moviesState.value = _moviesState.value.copy(errorMessage = error.message)
+                }
+                .collect { movies ->
+                    _moviesState.value = _moviesState.value.copy(nowPlayingMovies = movies)
+                }
         }
     }
 
-    private suspend fun loadNowPlayingMovies() {
-        getNowPlayingMovies(Unit)
-            .flowOn(Dispatchers.Default)
-            .catch { error ->
-                _moviesState.value = _moviesState.value.copy(errorMessage = error.message)
-            }
-            .collect { movies ->
-                _moviesState.value = _moviesState.value.copy(nowPlayingMovies = movies)
-            }
+    private fun loadUpcoming() {
+        viewModelScope.launch(Dispatchers.Main) {
+            getUpcomingMovies(Unit)
+                .flowOn(Dispatchers.Default)
+                .catch { error ->
+                    _moviesState.value = _moviesState.value.copy(errorMessage = error.message)
+                }
+                .collect { movies ->
+                    _moviesState.value = _moviesState.value.copy(upcomingMovies = movies)
+                }
+        }
     }
 
-    private suspend fun loadUpcoming() {
-        getUpcomingMovies(Unit)
-            .flowOn(Dispatchers.Default)
-            .catch { error ->
-                _moviesState.value = _moviesState.value.copy(errorMessage = error.message)
-            }
-            .collect { movies ->
-                _moviesState.value = _moviesState.value.copy(upcomingMovies = movies)
-            }
+    private fun loadPopularMovies() {
+        viewModelScope.launch(Dispatchers.Main) {
+            getPopularMovies(Unit)
+                .flowOn(Dispatchers.Default)
+                .catch { error ->
+                    _moviesState.value = _moviesState.value.copy(errorMessage = error.message)
+                }
+                .collect { movies ->
+                    _moviesState.value = _moviesState.value.copy(popularMovies = movies)
+                }
+        }
     }
 
-    private suspend fun loadPopularMovies() {
-        getPopularMovies(Unit)
-            .flowOn(Dispatchers.Default)
-            .catch { error ->
-                _moviesState.value = _moviesState.value.copy(errorMessage = error.message)
-            }
-            .collect { movies ->
-                _moviesState.value = _moviesState.value.copy(popularMovies = movies)
-            }
+    private fun loadMoviesByMostFrequentlyKeyword() {
+        viewModelScope.launch(Dispatchers.Main) {
+            getMoviesByKeyword(Unit)
+                .flowOn(Dispatchers.Default)
+                .catch {  error ->
+                    _moviesState.value = _moviesState.value.copy(errorMessage = error.message)
+                }
+                .collect { movies ->
+                    _moviesState.value = _moviesState.value.copy(couldLikeMovies = movies)
+                }
+        }
     }
 }

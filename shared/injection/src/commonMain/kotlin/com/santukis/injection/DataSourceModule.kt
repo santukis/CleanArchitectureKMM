@@ -91,6 +91,14 @@ private fun movies() = DI.Module(
     bind<GetPopularMoviesDataSource>(tag = GET_POPULAR_MOVIES_DATA_SOURCE_FROM_REMOTE) with provider {
         instance<RemoteMovieDataSource>()
     }
+
+    bind<GetMostFrequentlyKeywordsDataSource>() with provider {
+        instance<LocalMovieDataSource>()
+    }
+
+    bind<GetMoviesByKeywordDataSource>() with provider {
+        instance<RemoteMovieDataSource>()
+    }
 }
 
 private fun configuration() = DI.Module(
