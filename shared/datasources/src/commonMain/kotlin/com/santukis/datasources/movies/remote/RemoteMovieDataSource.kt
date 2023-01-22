@@ -15,7 +15,8 @@ class RemoteMovieDataSource(
     GetNowPlayingMoviesDataSource,
     GetUpcomingMoviesDataSource,
     GetPopularMoviesDataSource,
-    GetKeywordsForMovieDataSource {
+    GetKeywordsForMovieDataSource,
+    GetMoviesByKeywordDataSource {
 
     override suspend fun getMovie(movieId: String): Movie {
         return moviesApi.getMovieDetail(movieId).toMovie()
@@ -35,6 +36,13 @@ class RemoteMovieDataSource(
 
     override suspend fun getKeywordsForMovie(movieId: String): List<Keyword> {
         return moviesApi.getKeywordsForMovie(movieId).toKeywords()
+    }
+
+    override suspend fun getMoviesByKeyword(keywords: List<Keyword>): List<Movie> {
+        val request = buildMoviesRequestDto()
+        return keywords
+            .flatMap { keyword -> moviesApi.getMoviesForKeyword(keyword.id, request).toMovies() }
+            .distinctBy { movie ->  movie.id }
     }
 
     private suspend fun buildMoviesRequestDto(): GetMoviesRequestDto {

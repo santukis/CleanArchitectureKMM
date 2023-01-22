@@ -4,10 +4,7 @@ import com.santukis.entities.movies.Keyword
 import com.santukis.entities.movies.Movie
 import com.santukis.repositories.movies.sources.*
 import com.santukis.repositories.strategies.RemoteStrategy
-import com.santukis.usecases.movies.GetMovieDetailGateway
-import com.santukis.usecases.movies.GetNowPlayingMoviesGateway
-import com.santukis.usecases.movies.GetPopularMoviesGateway
-import com.santukis.usecases.movies.GetUpcomingMoviesGateway
+import com.santukis.usecases.movies.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -16,14 +13,17 @@ class MovieRepository(
     private val saveMovieDetailToLocal: SaveMovieDetailDataSource,
     private val getKeywordsForMovieFromRemote: GetKeywordsForMovieDataSource,
     private val saveMovieKeywordsToLocal: SaveMovieKeywordsDataSource,
-    private val getNowPlayingMoviesDataSource: GetNowPlayingMoviesDataSource,
-    private val getUpcomingMoviesDataSource: GetUpcomingMoviesDataSource,
-    private val getPopularMoviesDataSource: GetPopularMoviesDataSource
+    private val getNowPlayingMoviesFromRemote: GetNowPlayingMoviesDataSource,
+    private val getUpcomingMoviesFromRemote: GetUpcomingMoviesDataSource,
+    private val getPopularMoviesFromRemote: GetPopularMoviesDataSource,
+    private val getMostFrequentlyKeywordsFromLocal: GetMostFrequentlyKeywordsDataSource,
+    private val getMoviesByKeywordFromRemote: GetMoviesByKeywordDataSource
 ) :
     GetMovieDetailGateway,
     GetNowPlayingMoviesGateway,
     GetUpcomingMoviesGateway,
-    GetPopularMoviesGateway {
+    GetPopularMoviesGateway,
+    GetMoviesByKeywordGateway {
 
     override suspend fun getMovie(movieId: String): Flow<Movie> =
         flow {
@@ -35,7 +35,7 @@ class MovieRepository(
         flow {
             val response = object : RemoteStrategy<Unit, List<Movie>>() {
                 override suspend fun loadFromRemote(input: Unit): List<Movie> =
-                    getNowPlayingMoviesDataSource.getNowPlayingMovies()
+                    getNowPlayingMoviesFromRemote.getNowPlayingMovies()
 
                 override suspend fun saveIntoLocal(output: List<Movie>): List<Movie> =
                     output
@@ -49,7 +49,7 @@ class MovieRepository(
         flow {
             val response = object : RemoteStrategy<Unit, List<Movie>>() {
                 override suspend fun loadFromRemote(input: Unit): List<Movie> =
-                    getUpcomingMoviesDataSource.getUpcomingMovies()
+                    getUpcomingMoviesFromRemote.getUpcomingMovies()
 
                 override suspend fun saveIntoLocal(output: List<Movie>): List<Movie> =
                     output
@@ -63,12 +63,26 @@ class MovieRepository(
         flow {
             val response = object : RemoteStrategy<Unit, List<Movie>>() {
                 override suspend fun loadFromRemote(input: Unit): List<Movie> =
-                    getPopularMoviesDataSource.getPopularMovies()
+                    getPopularMoviesFromRemote.getPopularMovies()
 
                 override suspend fun saveIntoLocal(output: List<Movie>): List<Movie> =
                     output
 
             }.execute(Unit)
+
+            emit(response)
+        }
+
+    override suspend fun getMoviesByKeyword(): Flow<List<Movie>> =
+        flow {
+            val response = object : RemoteStrategy<List<Keyword>, List<Movie>>() {
+                override suspend fun loadFromRemote(input: List<Keyword>): List<Movie> =
+                    getMoviesByKeywordFromRemote.getMoviesByKeyword(input)
+
+                override suspend fun saveIntoLocal(output: List<Movie>): List<Movie> =
+                    output
+
+            }.execute(getMostFrequentlyKeywordsFromLocal.getMostFrequentlyKeywords())
 
             emit(response)
         }

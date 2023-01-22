@@ -4,5 +4,6 @@
     <string name="upcoming">Upcoming</string>
     <string name="movies">Movies</string>
     <string name="tv_shows">TV</string>
+    <string name="could_like">We think you could like</string>
 
 </resources>

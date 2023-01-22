@@ -12,7 +12,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.santukis.cleanarchitecturekmm.android.R
-import com.santukis.cleanarchitecturekmm.android.core.components.SectionContent
 import com.santukis.cleanarchitecturekmm.android.core.entities.navigation.destinations.Destination
 import com.santukis.cleanarchitecturekmm.android.core.entities.navigation.destinations.MovieDetailDestination
 import com.santukis.cleanarchitecturekmm.android.home.components.NowPlayingContent
@@ -26,8 +25,10 @@ fun MoviesScreen(
 ) {
     val homeState = moviesViewModel.moviesState.collectAsState()
 
-    LaunchedEffect(true) {
-        moviesViewModel.loadHomeData()
+    LaunchedEffect(moviesViewModel) {
+        if (homeState.value.shouldUpdateData()) {
+            moviesViewModel.loadHomeData()
+        }
     }
 
     MoviesContent(
@@ -49,31 +50,49 @@ fun MoviesContent(
             .background(Color.Black),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        item {
-            NowPlayingContent(
-                modifier = modifier,
-                nowPlayingMovies = moviesState.nowPlayingMovies,
-                onNavigateTo = onNavigateTo
-            )
-        }
-
-        item {
-            MovieSectionContent(
-                modifier = modifier,
-                movies = moviesState.upcomingMovies,
-                sectionTitle = stringResource(id = R.string.upcoming)
-            ) { movie ->
-                onNavigateTo(MovieDetailDestination(movie.id))
+        moviesState.nowPlayingMovies.takeIf { it.isNotEmpty() }?.let { movies ->
+            item {
+                NowPlayingContent(
+                    modifier = modifier,
+                    nowPlayingMovies = movies,
+                    onNavigateTo = onNavigateTo
+                )
             }
         }
 
-        item {
-            MovieSectionContent(
-                modifier = modifier,
-                movies = moviesState.popularMovies,
-                sectionTitle = stringResource(id = R.string.popular)
-            ) { movie ->
-                onNavigateTo(MovieDetailDestination(movie.id))
+        moviesState.upcomingMovies.takeIf { it.isNotEmpty() }?.let { movies ->
+            item {
+                MovieSectionContent(
+                    modifier = modifier,
+                    movies = movies,
+                    sectionTitle = stringResource(id = R.string.upcoming)
+                ) { movie ->
+                    onNavigateTo(MovieDetailDestination(movie.id))
+                }
+            }
+        }
+
+        moviesState.popularMovies.takeIf { it.isNotEmpty() }?.let { movies ->
+            item {
+                MovieSectionContent(
+                    modifier = modifier,
+                    movies = movies,
+                    sectionTitle = stringResource(id = R.string.popular)
+                ) { movie ->
+                    onNavigateTo(MovieDetailDestination(movie.id))
+                }
+            }
+        }
+
+        moviesState.couldLikeMovies.takeIf { it.isNotEmpty() }?.let { movies ->
+            item {
+                MovieSectionContent(
+                    modifier = modifier,
+                    movies = movies,
+                    sectionTitle = stringResource(id = R.string.could_like)
+                ) { movie ->
+                    onNavigateTo(MovieDetailDestination(movie.id))
+                }
             }
         }
     }
