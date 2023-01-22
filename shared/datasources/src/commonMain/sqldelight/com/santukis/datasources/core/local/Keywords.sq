@@ -5,7 +5,7 @@ CREATE TABLE Keywords (
 );
 
 insertKeyword:
-INSERT INTO Keywords(id, name, count)
+INSERT OR REPLACE INTO Keywords(id, name, count)
 VALUES(?, ?, ?);
 
 selectKeywordById:
