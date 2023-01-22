@@ -2,12 +2,10 @@ package com.santukis.datasources.movies.remote
 
 import com.santukis.datasources.movies.remote.entities.GetMoviesRequestDto
 import com.santukis.datasources.movies.remote.services.MoviesApi
+import com.santukis.entities.movies.Keyword
 import com.santukis.entities.movies.Movie
 import com.santukis.repositories.configuration.sources.GetRegionDataSource
-import com.santukis.repositories.movies.sources.GetMovieDetailDataSource
-import com.santukis.repositories.movies.sources.GetNowPlayingMoviesDataSource
-import com.santukis.repositories.movies.sources.GetPopularMoviesDataSource
-import com.santukis.repositories.movies.sources.GetUpcomingMoviesDataSource
+import com.santukis.repositories.movies.sources.*
 
 class RemoteMovieDataSource(
     private val moviesApi: MoviesApi,
@@ -16,7 +14,8 @@ class RemoteMovieDataSource(
     GetMovieDetailDataSource,
     GetNowPlayingMoviesDataSource,
     GetUpcomingMoviesDataSource,
-    GetPopularMoviesDataSource {
+    GetPopularMoviesDataSource,
+    GetKeywordsForMovieDataSource {
 
     override suspend fun getMovie(movieId: String): Movie {
         return moviesApi.getMovieDetail(movieId).toMovie()
@@ -32,6 +31,10 @@ class RemoteMovieDataSource(
 
     override suspend fun getPopularMovies(): List<Movie> {
         return moviesApi.getPopular(buildMoviesRequestDto()).toMovies()
+    }
+
+    override suspend fun getKeywordsForMovie(movieId: String): List<Keyword> {
+        return moviesApi.getKeywordsForMovie(movieId).toKeywords()
     }
 
     private suspend fun buildMoviesRequestDto(): GetMoviesRequestDto {

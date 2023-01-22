@@ -1,5 +1,6 @@
 package com.santukis.repositories.movies
 
+import com.santukis.entities.movies.Keyword
 import com.santukis.entities.movies.Movie
 import com.santukis.repositories.movies.sources.*
 import com.santukis.repositories.strategies.RemoteStrategy
@@ -13,6 +14,8 @@ import kotlinx.coroutines.flow.flow
 class MovieRepository(
     private val getMovieDetailFromRemote: GetMovieDetailDataSource,
     private val saveMovieDetailToLocal: SaveMovieDetailDataSource,
+    private val getKeywordsForMovieFromRemote: GetKeywordsForMovieDataSource,
+    private val saveMovieKeywordsToLocal: SaveMovieKeywordsDataSource,
     private val getNowPlayingMoviesDataSource: GetNowPlayingMoviesDataSource,
     private val getUpcomingMoviesDataSource: GetUpcomingMoviesDataSource,
     private val getPopularMoviesDataSource: GetPopularMoviesDataSource
@@ -24,16 +27,8 @@ class MovieRepository(
 
     override suspend fun getMovie(movieId: String): Flow<Movie> =
         flow {
-            val response = object : RemoteStrategy<String, Movie>() {
-                override suspend fun loadFromRemote(input: String): Movie =
-                    getMovieDetailFromRemote.getMovie(input)
-
-                override suspend fun saveIntoLocal(output: Movie): Movie =
-                    saveMovieDetailToLocal.saveMovie(output)
-
-            }.execute(movieId)
-
-            emit(response)
+            emit(getMovieDetail(movieId))
+            getKeywordsForMovie(movieId)
         }
 
     override suspend fun getNowPlayingMovies(): Flow<List<Movie>> =
@@ -77,4 +72,26 @@ class MovieRepository(
 
             emit(response)
         }
+
+    private suspend fun getMovieDetail(movieId: String): Movie =
+        object : RemoteStrategy<String, Movie>() {
+            override suspend fun loadFromRemote(input: String): Movie =
+                getMovieDetailFromRemote.getMovie(input)
+
+            override suspend fun saveIntoLocal(output: Movie): Movie =
+                saveMovieDetailToLocal.saveMovie(output)
+
+        }.execute(movieId)
+
+    private suspend fun getKeywordsForMovie(movieId: String) {
+        object : RemoteStrategy<String, List<Keyword>>() {
+            override suspend fun loadFromRemote(input: String): List<Keyword> =
+                getKeywordsForMovieFromRemote.getKeywordsForMovie(movieId)
+
+            override suspend fun saveIntoLocal(output: List<Keyword>): List<Keyword> {
+                saveMovieKeywordsToLocal.saveMovieKeywords(movieId, output)
+                return output
+            }
+        }.execute(movieId)
+    }
 }

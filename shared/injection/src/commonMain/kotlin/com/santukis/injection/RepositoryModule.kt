@@ -61,6 +61,8 @@ private fun movies() = DI.Module(
         MovieRepository(
             getMovieDetailFromRemote = instance(GET_MOVIE_DETAIL_DATA_SOURCE_FROM_REMOTE),
             saveMovieDetailToLocal = instance(SAVE_MOVIE_DETAIL_DATA_SOURCE_INTO_LOCAL),
+            getKeywordsForMovieFromRemote = instance(),
+            saveMovieKeywordsToLocal = instance(),
             getNowPlayingMoviesDataSource = instance(GET_NOW_PLAYING_MOVIES_DATA_SOURCE_FROM_REMOTE),
             getUpcomingMoviesDataSource = instance(GET_UPCOMING_MOVIES_DATA_SOURCE_FROM_REMOTE),
             getPopularMoviesDataSource = instance(GET_POPULAR_MOVIES_DATA_SOURCE_FROM_REMOTE)

@@ -58,12 +58,26 @@ private fun movies() = DI.Module(
         )
     }
 
+    bind<LocalMovieDataSource>() with singleton {
+        LocalMovieDataSource(
+            database = instance(),
+        )
+    }
+
     bind<GetMovieDetailDataSource>(tag = GET_MOVIE_DETAIL_DATA_SOURCE_FROM_REMOTE) with singleton {
         instance<RemoteMovieDataSource>()
     }
 
     bind<SaveMovieDetailDataSource>(tag = SAVE_MOVIE_DETAIL_DATA_SOURCE_INTO_LOCAL) with provider {
-        LocalMovieDataSource(instance())
+        instance<LocalMovieDataSource>()
+    }
+
+    bind<GetKeywordsForMovieDataSource>() with singleton {
+        instance<RemoteMovieDataSource>()
+    }
+
+    bind<SaveMovieKeywordsDataSource>() with provider {
+        instance<LocalMovieDataSource>()
     }
 
     bind<GetNowPlayingMoviesDataSource>(tag = GET_NOW_PLAYING_MOVIES_DATA_SOURCE_FROM_REMOTE) with provider {
