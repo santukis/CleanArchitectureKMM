@@ -58,4 +58,10 @@ object Android {
     object SQLDelight {
         const val androidDriver = "com.squareup.sqldelight:android-driver:${Versions.SQLDelight.sqlDelight}"
     }
+
+    object Media {
+        const val exoplayer = "androidx.media3:media3-exoplayer:${Versions.Media.exoplayer}"
+        const val exoplayerUi = "androidx.media3:media3-ui:${Versions.Media.exoplayer}"
+        const val youtubePlayer = "com.pierfrancescosoffritti.androidyoutubeplayer:core:${Versions.Media.youtubePlayer}"
+    }
 }

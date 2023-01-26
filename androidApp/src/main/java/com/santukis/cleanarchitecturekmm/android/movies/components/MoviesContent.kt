@@ -2,11 +2,8 @@ package com.santukis.cleanarchitecturekmm.android.movies.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -15,29 +12,7 @@ import com.santukis.cleanarchitecturekmm.android.R
 import com.santukis.cleanarchitecturekmm.android.core.entities.navigation.destinations.Destination
 import com.santukis.cleanarchitecturekmm.android.core.entities.navigation.destinations.MovieDetailDestination
 import com.santukis.cleanarchitecturekmm.android.home.components.NowPlayingContent
-import com.santukis.viewmodels.movies.MoviesViewModel
 import com.santukis.viewmodels.movies.entities.MoviesState
-
-@Composable
-fun MoviesScreen(
-    moviesViewModel: MoviesViewModel,
-    onNavigateTo: (Destination) -> Unit
-) {
-    val homeState = moviesViewModel.moviesState.collectAsState()
-
-    LaunchedEffect(moviesViewModel) {
-        if (homeState.value.shouldUpdateData()) {
-            moviesViewModel.loadHomeData()
-        }
-    }
-
-    MoviesContent(
-        modifier = Modifier
-            .fillMaxSize(),
-        moviesState = homeState.value,
-        onNavigateTo = onNavigateTo
-    )
-}
 
 @Composable
 fun MoviesContent(

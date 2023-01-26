@@ -57,6 +57,7 @@ private fun movies() = DI.Module(
     bind<MovieRepository>(tag = MOVIES_REPOSITORY) with singleton {
         MovieRepository(
             getMovieDetailFromRemote = instance(GET_MOVIE_DETAIL_DATA_SOURCE_FROM_REMOTE),
+            getMovieVideosFromRemote = instance(),
             saveMovieDetailToLocal = instance(SAVE_MOVIE_DETAIL_DATA_SOURCE_INTO_LOCAL),
             getKeywordsForMovieFromRemote = instance(),
             saveMovieKeywordsToLocal = instance(),
@@ -69,6 +70,10 @@ private fun movies() = DI.Module(
     }
 
     bind<GetMovieDetailGateway>(tag = GET_MOVIE_DETAIL_GATEWAY) with singleton {
+        instance<MovieRepository>(tag = MOVIES_REPOSITORY)
+    }
+
+    bind<GetMovieVideosGateway>() with singleton {
         instance<MovieRepository>(tag = MOVIES_REPOSITORY)
     }
 

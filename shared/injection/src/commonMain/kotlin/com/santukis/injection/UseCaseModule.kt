@@ -9,11 +9,13 @@ import RepositoriesConstants.GET_UPCOMING_MOVIES_GATEWAY
 import com.santukis.entities.configuration.Country
 import com.santukis.entities.configuration.Language
 import com.santukis.entities.movies.Movie
+import com.santukis.entities.movies.Video
 import com.santukis.injection.UseCasesConstants.CONFIGURATION_MODULE_NAME
 import com.santukis.injection.UseCasesConstants.GET_COUNTRIES_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_LANGUAGES_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_MOVIES_BY_KEYWORD_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_MOVIE_DETAIL_USE_CASE
+import com.santukis.injection.UseCasesConstants.GET_MOVIE_VIDEOS_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_NOW_PLAYING_MOVIES_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_POPULAR_MOVIES_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_UPCOMING_MOVIES_USE_CASE
@@ -33,6 +35,7 @@ internal object UseCasesConstants {
     const val USE_CASES_MODULE_NAME = "useCases"
     const val MOVIES_MODULE_NAME = "moviesUseCasesModuleName"
     const val GET_MOVIE_DETAIL_USE_CASE = "getMovieDetail"
+    const val GET_MOVIE_VIDEOS_USE_CASE = "getMovieVideos"
     const val GET_NOW_PLAYING_MOVIES_USE_CASE = "getNowPlayingMoviesDetail"
     const val GET_UPCOMING_MOVIES_USE_CASE = "getUpcomingMoviesDetail"
     const val GET_POPULAR_MOVIES_USE_CASE = "getPopularMoviesDetail"
@@ -57,6 +60,10 @@ private fun movies() = DI.Module(
 ) {
     bind<UseCase<String, Flow<Movie>>>(tag = GET_MOVIE_DETAIL_USE_CASE) with provider {
         GetMovieDetail(instance(GET_MOVIE_DETAIL_GATEWAY))
+    }
+
+    bind<UseCase<String, Flow<List<Video>>>>(tag = GET_MOVIE_VIDEOS_USE_CASE) with provider {
+        GetMovieVideos(instance())
     }
 
     bind<UseCase<Unit, Flow<List<Movie>>>>(tag = GET_NOW_PLAYING_MOVIES_USE_CASE) with provider {

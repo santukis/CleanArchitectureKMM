@@ -99,6 +99,10 @@ private fun movies() = DI.Module(
     bind<GetMoviesByKeywordDataSource>() with provider {
         instance<RemoteMovieDataSource>()
     }
+
+    bind<GetMovieVideosDataSource>() with provider {
+        instance<RemoteMovieDataSource>()
+    }
 }
 
 private fun configuration() = DI.Module(

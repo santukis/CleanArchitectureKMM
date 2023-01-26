@@ -4,6 +4,7 @@ import com.santukis.datasources.movies.remote.entities.GetMoviesRequestDto
 import com.santukis.datasources.movies.remote.services.MoviesApi
 import com.santukis.entities.movies.Keyword
 import com.santukis.entities.movies.Movie
+import com.santukis.entities.movies.Video
 import com.santukis.repositories.configuration.sources.GetRegionDataSource
 import com.santukis.repositories.movies.sources.*
 
@@ -16,7 +17,8 @@ class RemoteMovieDataSource(
     GetUpcomingMoviesDataSource,
     GetPopularMoviesDataSource,
     GetKeywordsForMovieDataSource,
-    GetMoviesByKeywordDataSource {
+    GetMoviesByKeywordDataSource,
+    GetMovieVideosDataSource {
 
     override suspend fun getMovie(movieId: String): Movie {
         return moviesApi.getMovieDetail(movieId).toMovie()
@@ -43,6 +45,10 @@ class RemoteMovieDataSource(
         return keywords
             .flatMap { keyword -> moviesApi.getMoviesForKeyword(keyword.id, request).toMovies() }
             .distinctBy { movie ->  movie.id }
+    }
+
+    override suspend fun getVideosForMovie(movieId: String): List<Video> {
+        return moviesApi.getMovieVideos(movieId, buildMoviesRequestDto()).toVideos()
     }
 
     private suspend fun buildMoviesRequestDto(): GetMoviesRequestDto {

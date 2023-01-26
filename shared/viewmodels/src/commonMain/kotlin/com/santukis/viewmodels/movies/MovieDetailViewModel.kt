@@ -1,6 +1,7 @@
 package com.santukis.viewmodels.movies
 
 import com.santukis.entities.movies.Movie
+import com.santukis.entities.movies.Video
 import com.santukis.usecases.UseCase
 import com.santukis.viewmodels.movies.entities.MovieDetailState
 import dev.icerock.moko.mvvm.flow.CMutableStateFlow
@@ -13,7 +14,8 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class MovieDetailViewModel(
-    private val getMovieDetail: UseCase<String, Flow<Movie>>
+    private val getMovieDetail: UseCase<String, Flow<Movie>>,
+    private val getMovieVideos: UseCase<String, Flow<List<Video>>>
 ): ViewModel() {
 
     private val _movieDetailState: CMutableStateFlow<MovieDetailState> =
@@ -22,19 +24,33 @@ class MovieDetailViewModel(
     val movieDetailState: CStateFlow<MovieDetailState> = _movieDetailState.cStateFlow()
 
     fun loadMovie(movieId: String) {
+        loadMovieDetail(movieId)
+        loadMovieVideos(movieId)
+    }
+
+    private fun loadMovieDetail(movieId: String) {
         viewModelScope.launch(Dispatchers.Main) {
-            loadMovieDetail(movieId)
+            getMovieDetail(movieId)
+                .flowOn(Dispatchers.Default)
+                .catch { error ->
+                    _movieDetailState.value = _movieDetailState.value.copy(errorMessage = error.message.orEmpty())
+                }
+                .collect { movie ->
+                    _movieDetailState.value = _movieDetailState.value.copy(movie = movie)
+                }
         }
     }
 
-    private suspend fun loadMovieDetail(movieId: String) {
-        getMovieDetail(movieId)
-            .flowOn(Dispatchers.Default)
-            .catch { error ->
-                _movieDetailState.value = _movieDetailState.value.copy(errorMessage = error.message.orEmpty())
-            }
-            .collect { movie ->
-                _movieDetailState.value = _movieDetailState.value.copy(movie = movie)
-            }
+    private fun loadMovieVideos(movieId: String) {
+        viewModelScope.launch(Dispatchers.Main) {
+            getMovieVideos(movieId)
+                .flowOn(Dispatchers.Default)
+                .catch { error ->
+                    _movieDetailState.value = _movieDetailState.value.copy(errorMessage = error.message.orEmpty())
+                }
+                .collect { videos ->
+                    _movieDetailState.value = _movieDetailState.value.copy(videos = videos)
+                }
+        }
     }
 }
