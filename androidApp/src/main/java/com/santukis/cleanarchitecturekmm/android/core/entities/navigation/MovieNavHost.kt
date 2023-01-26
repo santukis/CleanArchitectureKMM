@@ -9,11 +9,13 @@ import com.santukis.cleanarchitecturekmm.android.core.entities.navigation.destin
 import com.santukis.cleanarchitecturekmm.android.core.entities.navigation.graphs.NavigationGraph
 import com.santukis.cleanarchitecturekmm.android.core.entities.navigation.graphs.homeNavigationGraph
 import com.santukis.cleanarchitecturekmm.android.core.entities.navigation.graphs.navigate
+import com.santukis.cleanarchitecturekmm.android.core.events.OnUiEvent
 
 @Composable
 fun MovieNavHost(
     modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+    onUiEvent: (OnUiEvent) -> Unit = {}
 ) {
 
     NavHost(
@@ -23,12 +25,14 @@ fun MovieNavHost(
     ) {
 
         homeNavigationGraph(
-            navController = navController
+            navController = navController,
+            onUiEvent = onUiEvent
         )
 
         navigate(
             navController = navController,
             destination = MovieDetailDestination(),
+            onUiEvent = onUiEvent
         )
     }
 }

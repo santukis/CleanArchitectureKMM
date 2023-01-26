@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.santukis.cleanarchitecturekmm.android.core.entities.navigation.destinations.Destination
+import com.santukis.cleanarchitecturekmm.android.core.events.OnUiEvent
 
 enum class NavigationGraph {
     HOME, USER
@@ -11,7 +12,8 @@ enum class NavigationGraph {
 
 fun NavGraphBuilder.navigate(
     navController: NavController,
-    destination: Destination
+    destination: Destination,
+    onUiEvent: (OnUiEvent) -> Unit = {}
 ) {
     composable(
         route = destination.template,
@@ -21,7 +23,8 @@ fun NavGraphBuilder.navigate(
 
         destination.DestinationScreen(
             navController = navController,
-            backStackEntry = backStackEntry
+            backStackEntry = backStackEntry,
+            onUiEvent = onUiEvent
         )
     }
 }

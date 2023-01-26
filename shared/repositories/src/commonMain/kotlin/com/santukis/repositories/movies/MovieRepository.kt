@@ -2,6 +2,7 @@ package com.santukis.repositories.movies
 
 import com.santukis.entities.movies.Keyword
 import com.santukis.entities.movies.Movie
+import com.santukis.entities.movies.Video
 import com.santukis.repositories.movies.sources.*
 import com.santukis.repositories.strategies.RemoteStrategy
 import com.santukis.usecases.movies.*
@@ -11,6 +12,7 @@ import kotlinx.coroutines.flow.flow
 class MovieRepository(
     private val getMovieDetailFromRemote: GetMovieDetailDataSource,
     private val saveMovieDetailToLocal: SaveMovieDetailDataSource,
+    private val getMovieVideosFromRemote: GetMovieVideosDataSource,
     private val getKeywordsForMovieFromRemote: GetKeywordsForMovieDataSource,
     private val saveMovieKeywordsToLocal: SaveMovieKeywordsDataSource,
     private val getNowPlayingMoviesFromRemote: GetNowPlayingMoviesDataSource,
@@ -23,12 +25,27 @@ class MovieRepository(
     GetNowPlayingMoviesGateway,
     GetUpcomingMoviesGateway,
     GetPopularMoviesGateway,
-    GetMoviesByKeywordGateway {
+    GetMoviesByKeywordGateway,
+    GetMovieVideosGateway {
 
     override suspend fun getMovie(movieId: String): Flow<Movie> =
         flow {
             emit(getMovieDetail(movieId))
             getKeywordsForMovie(movieId)
+        }
+
+    override suspend fun getMovieVideos(movieId: String): Flow<List<Video>> =
+        flow {
+            val response = object : RemoteStrategy<String, List<Video>>() {
+                override suspend fun loadFromRemote(input: String): List<Video> =
+                    getMovieVideosFromRemote.getVideosForMovie(input)
+
+                override suspend fun saveIntoLocal(output: List<Video>): List<Video> =
+                    output
+
+            }.execute(movieId)
+
+            emit(response)
         }
 
     override suspend fun getNowPlayingMovies(): Flow<List<Movie>> =
