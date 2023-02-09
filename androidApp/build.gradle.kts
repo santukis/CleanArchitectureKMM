@@ -56,6 +56,4 @@ dependencies {
     implementation(Android.Androidx.lifecycleViewModelCompose)
     implementation(Android.Coil.coil)
     implementation(Android.Snapper.snapper)
-
-    implementation(Shared.Kodein.kodein)
 }
