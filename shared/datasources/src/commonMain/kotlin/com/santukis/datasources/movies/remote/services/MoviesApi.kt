@@ -2,10 +2,7 @@ package com.santukis.datasources.movies.remote.services
 
 import com.santukis.datasources.core.remote.KtorClient
 import com.santukis.datasources.core.remote.services.MovieDatabaseApi
-import com.santukis.datasources.movies.remote.entities.GetMoviesRequestDto
-import com.santukis.datasources.movies.remote.entities.GetMoviesResponseDto
-import com.santukis.datasources.movies.remote.entities.KeywordsForMovieDto
-import com.santukis.datasources.movies.remote.entities.MovieDto
+import com.santukis.datasources.movies.remote.entities.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 
@@ -37,6 +34,11 @@ class MoviesApi(client: KtorClient): MovieDatabaseApi(client) {
 
     suspend fun getMoviesForKeyword(keywordId: Int, request: GetMoviesRequestDto): GetMoviesResponseDto =
         client.httpClient.get("$keywordPath/$keywordId/movies"){
+            addQueryParameters(request)
+        }.body()
+
+    suspend fun getMovieVideos(movieId: String, request: GetMoviesRequestDto): GetMovieVideosResponseDto =
+        client.httpClient.get("$moviePath/$movieId/videos"){
             addQueryParameters(request)
         }.body()
 

@@ -5,9 +5,11 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.navigation
 import com.santukis.cleanarchitecturekmm.android.core.entities.navigation.destinations.MoviesDestination
 import com.santukis.cleanarchitecturekmm.android.core.entities.navigation.destinations.ShowsDestination
+import com.santukis.cleanarchitecturekmm.android.core.events.OnUiEvent
 
 fun NavGraphBuilder.homeNavigationGraph(
-    navController: NavController
+    navController: NavController,
+    onUiEvent: (OnUiEvent) -> Unit = {}
 ) {
     navigation(
         startDestination = MoviesDestination().template,
@@ -15,12 +17,14 @@ fun NavGraphBuilder.homeNavigationGraph(
     ) {
         navigate(
             navController = navController,
-            destination = MoviesDestination()
+            destination = MoviesDestination(),
+            onUiEvent = onUiEvent
         )
 
         navigate(
             navController = navController,
-            destination = ShowsDestination()
+            destination = ShowsDestination(),
+            onUiEvent = onUiEvent
         )
     }
 }

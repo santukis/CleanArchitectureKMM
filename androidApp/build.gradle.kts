@@ -36,6 +36,8 @@ android {
 }
 
 dependencies {
+    implementation(fileTree(baseDir = "libs"))
+
     implementation(project(Modules.Injection))
     implementation(project(Modules.ViewModels))
     implementation(project(Modules.Entities))
@@ -56,4 +58,9 @@ dependencies {
     implementation(Android.Androidx.lifecycleViewModelCompose)
     implementation(Android.Coil.coil)
     implementation(Android.Snapper.snapper)
+    implementation(Android.Media.exoplayer)
+    implementation(Android.Media.exoplayerUi)
+    implementation(Android.Media.youtubePlayer)
+
+    implementation(Shared.Kodein.kodein)
 }

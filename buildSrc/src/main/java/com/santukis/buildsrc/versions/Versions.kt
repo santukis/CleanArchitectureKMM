@@ -59,4 +59,9 @@ object Versions {
     object SQLDelight {
         const val sqlDelight = "1.5.5"
     }
+
+    object Media {
+        const val exoplayer = "1.0.0-beta03"
+        const val youtubePlayer = "11.1.0"
+    }
 }

@@ -10,7 +10,8 @@ import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import com.santukis.cleanarchitecturekmm.android.R
-import com.santukis.cleanarchitecturekmm.android.movies.components.MoviesScreen
+import com.santukis.cleanarchitecturekmm.android.core.events.OnUiEvent
+import com.santukis.cleanarchitecturekmm.android.movies.screens.MoviesScreen
 import com.santukis.injection.getDependencyInjector
 
 class MoviesDestination: Destination {
@@ -21,18 +22,20 @@ class MoviesDestination: Destination {
     @Composable
     override fun DestinationScreen(
         navController: NavController,
-        backStackEntry: NavBackStackEntry
+        backStackEntry: NavBackStackEntry,
+        onUiEvent: (OnUiEvent) -> Unit
     ) {
         MoviesScreen(
             moviesViewModel = getDependencyInjector(LocalContext.current.applicationContext)
-                .moviesViewModel(LocalViewModelStoreOwner.current)
+                .moviesViewModel(LocalViewModelStoreOwner.current),
+            onUiEvent = onUiEvent
         ) { destination ->
             navController.navigate(destination.route)
         }
     }
 
     @Composable
-    override fun getNavigationItemName(): String = stringResource(id = R.string.movies)
+    override fun getDestinationName(): String = stringResource(id = R.string.movies)
 
-    override fun getNavigationItemIcon(): ImageVector = Icons.Filled.Movie
+    override fun getDestinationIcon(): ImageVector = Icons.Filled.Movie
 }

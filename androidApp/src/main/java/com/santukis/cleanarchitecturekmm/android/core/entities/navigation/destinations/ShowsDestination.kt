@@ -1,6 +1,7 @@
 package com.santukis.cleanarchitecturekmm.android.core.entities.navigation.destinations
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Movie
 import androidx.compose.material.icons.filled.Tv
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -10,7 +11,8 @@ import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import com.santukis.cleanarchitecturekmm.android.R
-import com.santukis.cleanarchitecturekmm.android.movies.components.MoviesScreen
+import com.santukis.cleanarchitecturekmm.android.core.events.OnUiEvent
+import com.santukis.cleanarchitecturekmm.android.movies.screens.MoviesScreen
 import com.santukis.injection.getDependencyInjector
 
 class ShowsDestination: Destination {
@@ -21,18 +23,20 @@ class ShowsDestination: Destination {
     @Composable
     override fun DestinationScreen(
         navController: NavController,
-        backStackEntry: NavBackStackEntry
+        backStackEntry: NavBackStackEntry,
+        onUiEvent: (OnUiEvent) -> Unit
     ) {
         MoviesScreen(
             moviesViewModel = getDependencyInjector(LocalContext.current.applicationContext)
-                .moviesViewModel(LocalViewModelStoreOwner.current)
+                .moviesViewModel(LocalViewModelStoreOwner.current),
+            onUiEvent = onUiEvent,
         ) { destination ->
             navController.navigate(destination.route)
         }
     }
 
     @Composable
-    override fun getNavigationItemName(): String = stringResource(id = R.string.tv_shows)
+    override fun getDestinationName(): String = stringResource(id = R.string.tv_shows)
 
-    override fun getNavigationItemIcon(): ImageVector = Icons.Filled.Tv
+    override fun getDestinationIcon(): ImageVector = Icons.Filled.Tv
 }
