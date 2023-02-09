@@ -61,7 +61,4 @@ dependencies {
     implementation(Android.Media.exoplayer)
     implementation(Android.Media.exoplayerUi)
     implementation(Android.Media.youtubePlayer)
-
-    implementation(Shared.Kodein.kodein)
-
 }
