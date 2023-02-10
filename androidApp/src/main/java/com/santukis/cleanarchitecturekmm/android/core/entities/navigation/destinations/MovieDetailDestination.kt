@@ -8,10 +8,9 @@ import com.santukis.cleanarchitecturekmm.android.core.events.OnUiEvent
 import com.santukis.cleanarchitecturekmm.android.movies.screens.MovieDetailScreen
 import com.santukis.injection.getDependencyInjector
 
-class MovieDetailDestination(movieId: Int = -1): Destination {
+class MovieDetailDestination(private val movieId: Int = -1): Destination {
 
     override val template: String = "movieDetail/{movieId}"
-    override val route: String = "movieDetail/$movieId"
 
     override fun getArguments(): List<NamedNavArgument> =
         listOf(
@@ -30,12 +29,11 @@ class MovieDetailDestination(movieId: Int = -1): Destination {
             movieId = backStackEntry.arguments?.getString("movieId").orEmpty(),
             onUiEvent = onUiEvent
         ) { destination ->
-            if (destination is PopBackStackDestination) {
-                navController.popBackStack()
-
-            } else {
-                navController.navigate(destination.route)
-            }
+            destination.navigate(navController)
         }
+    }
+
+    override fun navigate(navController: NavController, builder: NavOptionsBuilder.() -> Unit) {
+        navController.navigate("movieDetail/$movieId", builder)
     }
 }

@@ -4,16 +4,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.navigation.NamedNavArgument
-import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavController
-import androidx.navigation.NavDeepLink
+import androidx.navigation.*
 import com.santukis.cleanarchitecturekmm.android.core.events.OnUiEvent
 
 interface Destination {
 
     val template: String
-    val route: String
 
     fun getArguments(): List<NamedNavArgument> = listOf()
 
@@ -25,6 +21,8 @@ interface Destination {
         backStackEntry: NavBackStackEntry,
         onUiEvent: (OnUiEvent) -> Unit
     )
+
+    fun navigate(navController: NavController, builder: NavOptionsBuilder.() -> Unit = {})
 
     @Composable
     fun getDestinationName(): String = ""
