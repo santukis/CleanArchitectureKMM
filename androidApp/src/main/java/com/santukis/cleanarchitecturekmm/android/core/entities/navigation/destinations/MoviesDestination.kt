@@ -9,6 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
+import androidx.navigation.NavOptionsBuilder
 import com.santukis.cleanarchitecturekmm.android.R
 import com.santukis.cleanarchitecturekmm.android.core.events.OnUiEvent
 import com.santukis.cleanarchitecturekmm.android.movies.screens.MoviesScreen
@@ -17,7 +18,6 @@ import com.santukis.injection.getDependencyInjector
 class MoviesDestination: Destination {
 
     override val template: String = "movies"
-    override val route: String = "movies"
 
     @Composable
     override fun DestinationScreen(
@@ -30,8 +30,12 @@ class MoviesDestination: Destination {
                 .moviesViewModel(LocalViewModelStoreOwner.current),
             onUiEvent = onUiEvent
         ) { destination ->
-            navController.navigate(destination.route)
+            destination.navigate(navController)
         }
+    }
+
+    override fun navigate(navController: NavController, builder: NavOptionsBuilder.() -> Unit) {
+        navController.navigate(template, builder)
     }
 
     @Composable

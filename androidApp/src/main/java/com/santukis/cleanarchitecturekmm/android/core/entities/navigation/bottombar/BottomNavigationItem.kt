@@ -23,7 +23,7 @@ fun RowScope.NavigationItem(
         label = label,
         selected = currentDestination?.hierarchy?.any { it.route == destination.template } == true,
         onClick = {
-            navController.navigate(destination.route) {
+            destination.navigate(navController) {
                 popUpTo(navController.graph.findStartDestination().id) {
                     saveState = true
                 }

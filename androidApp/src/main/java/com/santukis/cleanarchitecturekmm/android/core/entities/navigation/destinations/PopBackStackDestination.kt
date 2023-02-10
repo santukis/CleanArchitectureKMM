@@ -3,12 +3,12 @@ package com.santukis.cleanarchitecturekmm.android.core.entities.navigation.desti
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
+import androidx.navigation.NavOptionsBuilder
 import com.santukis.cleanarchitecturekmm.android.core.events.OnUiEvent
 
 class PopBackStackDestination: Destination {
 
     override val template: String = ""
-    override val route: String = ""
 
     @Composable
     override fun DestinationScreen(
@@ -16,5 +16,9 @@ class PopBackStackDestination: Destination {
         backStackEntry: NavBackStackEntry,
         onUiEvent: (OnUiEvent) -> Unit) {
 
+    }
+
+    override fun navigate(navController: NavController, builder: NavOptionsBuilder.() -> Unit) {
+        navController.popBackStack()
     }
 }
