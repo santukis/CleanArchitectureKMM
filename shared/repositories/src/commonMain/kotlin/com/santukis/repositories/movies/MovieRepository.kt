@@ -14,9 +14,9 @@ class MovieRepository(
     private val getMovieDetailStrategy: RepositoryStrategy<String, Movie>,
     private val getMovieVideosStrategy: RepositoryStrategy<String, List<Video>>,
     private val getMovieKeywordsStrategy: RepositoryStrategy<String, List<Keyword>>,
-    private val getNowPlayingMoviesStrategy: RemoteStrategy<Unit, List<Movie>>,
-    private val getUpcomingMoviesStrategy: RemoteStrategy<Unit, List<Movie>>,
-    private val getPopularMoviesStrategy: RemoteStrategy<Unit, List<Movie>>,
+    private val getNowPlayingMoviesStrategy: RepositoryStrategy<Unit, List<Movie>>,
+    private val getUpcomingMoviesStrategy: RepositoryStrategy<Unit, List<Movie>>,
+    private val getPopularMoviesStrategy: RepositoryStrategy<Unit, List<Movie>>,
     private val getMostFrequentlyKeywordsStrategy: RepositoryStrategy<Unit, List<Keyword>>,
     private val getMoviesByKeywordStrategy: RepositoryStrategy<List<Keyword>, List<Movie>>
 ) :
