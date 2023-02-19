@@ -1,7 +1,6 @@
 import com.santukis.buildsrc.dependencies.Android
 import com.santukis.buildsrc.dependencies.Shared
 import com.santukis.buildsrc.modules.Modules
-import org.jetbrains.kotlin.cli.jvm.main
 
 plugins {
     id("com.android.application")

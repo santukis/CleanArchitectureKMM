@@ -4,11 +4,17 @@ import RepositoriesConstants.GET_COUNTRIES_GATEWAY
 import RepositoriesConstants.GET_LANGUAGES_GATEWAY
 import RepositoriesConstants.GET_MOVIE_DETAIL_GATEWAY
 import RepositoriesConstants.GET_NOW_PLAYING_MOVIES_GATEWAY
+import RepositoriesConstants.GET_NOW_PLAYING_MOVIES_STRATEGY
 import RepositoriesConstants.GET_POPULAR_MOVIES_GATEWAY
+import RepositoriesConstants.GET_POPULAR_MOVIES_STRATEGY
 import RepositoriesConstants.GET_UPCOMING_MOVIES_GATEWAY
+import RepositoriesConstants.GET_UPCOMING_MOVIES_STRATEGY
 import RepositoriesConstants.MOVIES_MODULE_NAME
 import RepositoriesConstants.MOVIES_REPOSITORY
 import RepositoriesConstants.REPOSITORIES_MODULE_NAME
+import com.santukis.entities.movies.Keyword
+import com.santukis.entities.movies.Movie
+import com.santukis.entities.movies.Video
 import com.santukis.injection.DataSourceConstants.GET_COUNTRIES_DATA_SOURCE_FROM_REMOTE
 import com.santukis.injection.DataSourceConstants.GET_LANGUAGES_DATA_SOURCE_FROM_REMOTE
 import com.santukis.injection.DataSourceConstants.GET_MOVIE_DETAIL_DATA_SOURCE_FROM_REMOTE
@@ -18,6 +24,9 @@ import com.santukis.injection.DataSourceConstants.GET_UPCOMING_MOVIES_DATA_SOURC
 import com.santukis.injection.DataSourceConstants.SAVE_MOVIE_DETAIL_DATA_SOURCE_INTO_LOCAL
 import com.santukis.repositories.configuration.ConfigurationRepository
 import com.santukis.repositories.movies.MovieRepository
+import com.santukis.repositories.movies.strategies.*
+import com.santukis.repositories.strategies.LocalStrategy
+import com.santukis.repositories.strategies.RemoteStrategy
 import com.santukis.usecases.configuration.GetCountriesGateway
 import com.santukis.usecases.configuration.GetLanguagesGateway
 import com.santukis.usecases.movies.*
@@ -34,6 +43,10 @@ internal object RepositoriesConstants {
     const val GET_NOW_PLAYING_MOVIES_GATEWAY = "getNowPlayingMoviesDetailGateway"
     const val GET_UPCOMING_MOVIES_GATEWAY = "getUpcomingMoviesDetailGateway"
     const val GET_POPULAR_MOVIES_GATEWAY = "getPopularMoviesDetailGateway"
+
+    const val GET_NOW_PLAYING_MOVIES_STRATEGY = "getNowPlayingMoviesStrategy"
+    const val GET_UPCOMING_MOVIES_STRATEGY = "getUpcomingMoviesStrategy"
+    const val GET_POPULAR_MOVIES_STRATEGY = "getPopularMoviesStrategy"
 
     const val CONFIGURATION_MODULE_NAME = "configurationRepositoriesModuleName"
     const val CONFIGURATION_REPOSITORY = "configurationRepository"
@@ -56,15 +69,63 @@ private fun movies() = DI.Module(
 ) {
     bind<MovieRepository>(tag = MOVIES_REPOSITORY) with singleton {
         MovieRepository(
+            getMovieDetailStrategy = instance(),
+            getMovieVideosStrategy = instance(),
+            getMovieKeywordsStrategy = instance(),
+            getNowPlayingMoviesStrategy = instance(GET_NOW_PLAYING_MOVIES_STRATEGY),
+            getUpcomingMoviesStrategy = instance(GET_UPCOMING_MOVIES_STRATEGY),
+            getPopularMoviesStrategy = instance(GET_POPULAR_MOVIES_STRATEGY),
+            getMostFrequentlyKeywordsStrategy = instance(),
+            getMoviesByKeywordStrategy = instance()
+        )
+    }
+
+    bind<RemoteStrategy<String, Movie>>() with singleton {
+        GetMovieDetailFromRemoteStrategy(
             getMovieDetailFromRemote = instance(GET_MOVIE_DETAIL_DATA_SOURCE_FROM_REMOTE),
-            getMovieVideosFromRemote = instance(),
-            saveMovieDetailToLocal = instance(SAVE_MOVIE_DETAIL_DATA_SOURCE_INTO_LOCAL),
-            getKeywordsForMovieFromRemote = instance(),
-            saveMovieKeywordsToLocal = instance(),
-            getNowPlayingMoviesFromRemote = instance(GET_NOW_PLAYING_MOVIES_DATA_SOURCE_FROM_REMOTE),
-            getUpcomingMoviesFromRemote = instance(GET_UPCOMING_MOVIES_DATA_SOURCE_FROM_REMOTE),
-            getPopularMoviesFromRemote = instance(GET_POPULAR_MOVIES_DATA_SOURCE_FROM_REMOTE),
-            getMostFrequentlyKeywordsFromLocal = instance(),
+            saveMovieDetailToLocal = instance(SAVE_MOVIE_DETAIL_DATA_SOURCE_INTO_LOCAL)
+        )
+    }
+
+    bind<RemoteStrategy<String, List<Video>>>() with singleton {
+        GetMovieVideosFromRemoteStrategy(
+            getMovieVideosFromRemote = instance()
+        )
+    }
+
+    bind<RemoteStrategy<String, List<Keyword>>>() with singleton {
+        GetMovieKeywordsFromRemoteStrategy(
+            getMovieKeywordsFromRemote = instance(),
+            saveMovieKeywordsToLocal = instance()
+        )
+    }
+
+    bind<LocalStrategy<Unit, List<Keyword>>>() with singleton {
+        GetMostFrequentlyKeywordsFromLocalStrategy(
+            getMostFrequentlyKeywordsFromLocal = instance()
+        )
+    }
+
+    bind<RemoteStrategy<Unit, List<Movie>>>(tag = GET_NOW_PLAYING_MOVIES_STRATEGY) with singleton {
+        GetNowPlayingMoviesFromRemoteStrategy(
+            getNowPlayingMoviesFromRemote = instance(GET_NOW_PLAYING_MOVIES_DATA_SOURCE_FROM_REMOTE)
+        )
+    }
+
+    bind<RemoteStrategy<Unit, List<Movie>>>(tag = GET_UPCOMING_MOVIES_STRATEGY) with singleton {
+        GetUpcomingMoviesFromRemoteStrategy(
+            getUpcomingMoviesFromRemote = instance(GET_UPCOMING_MOVIES_DATA_SOURCE_FROM_REMOTE)
+        )
+    }
+
+    bind<RemoteStrategy<Unit, List<Movie>>>(tag = GET_POPULAR_MOVIES_STRATEGY) with singleton {
+        GetPopularMoviesFromRemoteStrategy(
+            getPopularMoviesFromRemote = instance(GET_POPULAR_MOVIES_DATA_SOURCE_FROM_REMOTE)
+        )
+    }
+
+    bind<RemoteStrategy<List<Keyword>, List<Movie>>>() with singleton {
+        GetMoviesByKeywordFromRemoteStrategy(
             getMoviesByKeywordFromRemote = instance()
         )
     }

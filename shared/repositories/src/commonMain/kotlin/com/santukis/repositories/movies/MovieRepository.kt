@@ -3,23 +3,22 @@ package com.santukis.repositories.movies
 import com.santukis.entities.movies.Keyword
 import com.santukis.entities.movies.Movie
 import com.santukis.entities.movies.Video
-import com.santukis.repositories.movies.sources.*
 import com.santukis.repositories.strategies.RemoteStrategy
+import com.santukis.repositories.strategies.RepositoryStrategy
 import com.santukis.usecases.movies.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 
 class MovieRepository(
-    private val getMovieDetailFromRemote: GetMovieDetailDataSource,
-    private val saveMovieDetailToLocal: SaveMovieDetailDataSource,
-    private val getMovieVideosFromRemote: GetMovieVideosDataSource,
-    private val getKeywordsForMovieFromRemote: GetKeywordsForMovieDataSource,
-    private val saveMovieKeywordsToLocal: SaveMovieKeywordsDataSource,
-    private val getNowPlayingMoviesFromRemote: GetNowPlayingMoviesDataSource,
-    private val getUpcomingMoviesFromRemote: GetUpcomingMoviesDataSource,
-    private val getPopularMoviesFromRemote: GetPopularMoviesDataSource,
-    private val getMostFrequentlyKeywordsFromLocal: GetMostFrequentlyKeywordsDataSource,
-    private val getMoviesByKeywordFromRemote: GetMoviesByKeywordDataSource
+    private val getMovieDetailStrategy: RepositoryStrategy<String, Movie>,
+    private val getMovieVideosStrategy: RepositoryStrategy<String, List<Video>>,
+    private val getMovieKeywordsStrategy: RepositoryStrategy<String, List<Keyword>>,
+    private val getNowPlayingMoviesStrategy: RemoteStrategy<Unit, List<Movie>>,
+    private val getUpcomingMoviesStrategy: RemoteStrategy<Unit, List<Movie>>,
+    private val getPopularMoviesStrategy: RemoteStrategy<Unit, List<Movie>>,
+    private val getMostFrequentlyKeywordsStrategy: RepositoryStrategy<Unit, List<Keyword>>,
+    private val getMoviesByKeywordStrategy: RepositoryStrategy<List<Keyword>, List<Movie>>
 ) :
     GetMovieDetailGateway,
     GetNowPlayingMoviesGateway,
@@ -30,99 +29,23 @@ class MovieRepository(
 
     override suspend fun getMovie(movieId: String): Flow<Movie> =
         flow {
-            emit(getMovieDetail(movieId))
-            getKeywordsForMovie(movieId)
+            emit(getMovieDetailStrategy.execute(movieId))
+            getMovieKeywordsStrategy.execute(movieId)
         }
 
     override suspend fun getMovieVideos(movieId: String): Flow<List<Video>> =
-        flow {
-            val response = object : RemoteStrategy<String, List<Video>>() {
-                override suspend fun loadFromRemote(input: String): List<Video> =
-                    getMovieVideosFromRemote.getVideosForMovie(input)
-
-                override suspend fun saveIntoLocal(output: List<Video>): List<Video> =
-                    output
-
-            }.execute(movieId)
-
-            emit(response)
-        }
+        flowOf(getMovieVideosStrategy.execute(movieId))
 
     override suspend fun getNowPlayingMovies(): Flow<List<Movie>> =
-        flow {
-            val response = object : RemoteStrategy<Unit, List<Movie>>() {
-                override suspend fun loadFromRemote(input: Unit): List<Movie> =
-                    getNowPlayingMoviesFromRemote.getNowPlayingMovies()
-
-                override suspend fun saveIntoLocal(output: List<Movie>): List<Movie> =
-                    output
-
-            }.execute(Unit)
-
-            emit(response)
-        }
+        flowOf(getNowPlayingMoviesStrategy.execute(Unit))
 
     override suspend fun getUpcomingMovies(): Flow<List<Movie>> =
-        flow {
-            val response = object : RemoteStrategy<Unit, List<Movie>>() {
-                override suspend fun loadFromRemote(input: Unit): List<Movie> =
-                    getUpcomingMoviesFromRemote.getUpcomingMovies()
-
-                override suspend fun saveIntoLocal(output: List<Movie>): List<Movie> =
-                    output
-
-            }.execute(Unit)
-
-            emit(response)
-        }
+        flowOf(getUpcomingMoviesStrategy.execute(Unit))
 
     override suspend fun getPopularMovies(): Flow<List<Movie>> =
-        flow {
-            val response = object : RemoteStrategy<Unit, List<Movie>>() {
-                override suspend fun loadFromRemote(input: Unit): List<Movie> =
-                    getPopularMoviesFromRemote.getPopularMovies()
-
-                override suspend fun saveIntoLocal(output: List<Movie>): List<Movie> =
-                    output
-
-            }.execute(Unit)
-
-            emit(response)
-        }
+        flowOf(getPopularMoviesStrategy.execute(Unit))
 
     override suspend fun getMoviesByKeyword(): Flow<List<Movie>> =
-        flow {
-            val response = object : RemoteStrategy<List<Keyword>, List<Movie>>() {
-                override suspend fun loadFromRemote(input: List<Keyword>): List<Movie> =
-                    getMoviesByKeywordFromRemote.getMoviesByKeyword(input)
-
-                override suspend fun saveIntoLocal(output: List<Movie>): List<Movie> =
-                    output
-
-            }.execute(getMostFrequentlyKeywordsFromLocal.getMostFrequentlyKeywords())
-
-            emit(response)
-        }
-
-    private suspend fun getMovieDetail(movieId: String): Movie =
-        object : RemoteStrategy<String, Movie>() {
-            override suspend fun loadFromRemote(input: String): Movie =
-                getMovieDetailFromRemote.getMovie(input)
-
-            override suspend fun saveIntoLocal(output: Movie): Movie =
-                saveMovieDetailToLocal.saveMovie(output)
-
-        }.execute(movieId)
-
-    private suspend fun getKeywordsForMovie(movieId: String) {
-        object : RemoteStrategy<String, List<Keyword>>() {
-            override suspend fun loadFromRemote(input: String): List<Keyword> =
-                getKeywordsForMovieFromRemote.getKeywordsForMovie(movieId)
-
-            override suspend fun saveIntoLocal(output: List<Keyword>): List<Keyword> {
-                saveMovieKeywordsToLocal.saveMovieKeywords(movieId, output)
-                return output
-            }
-        }.execute(movieId)
-    }
+        flowOf(getMoviesByKeywordStrategy.execute(
+                getMostFrequentlyKeywordsStrategy.execute(Unit)))
 }
