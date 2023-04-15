@@ -1,0 +1,6 @@
+import com.santukis.buildsrc.dependencies.Android
+
+dependencies {
+    implementation(Android.Androidx.appcompat)
+    implementation(Android.Androidx.core)
+}
