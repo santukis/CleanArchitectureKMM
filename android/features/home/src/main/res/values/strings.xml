@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="popular">Popular movies</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="could_like">We think you could like</string>
+</resources>

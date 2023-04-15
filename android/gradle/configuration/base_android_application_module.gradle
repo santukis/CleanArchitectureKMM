@@ -1,0 +1,4 @@
+apply(from:"$rootDir/android/gradle/configuration/base_android_module.gradle")
+
+apply(from:"$rootDir/android/gradle/dependencies/base_compose_dependencies.gradle")
+apply(from:"$rootDir/android/gradle/dependencies/base_android_dependencies.gradle")
