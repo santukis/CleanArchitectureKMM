@@ -17,6 +17,5 @@ dependencies {
 
     implementation(project(Modules.Android.Theme))
     implementation(project(Modules.Android.Navigation))
-    implementation(project(Modules.Android.UiEvents))
     implementation(project(Modules.Android.Widgets))
 }

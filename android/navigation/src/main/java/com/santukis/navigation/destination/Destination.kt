@@ -2,7 +2,7 @@ package com.santukis.navigation.destination
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.*
-import com.santukis.uievents.OnUiEvent
+import com.santukis.viewmodels.events.OnUiEvent
 
 interface Destination {
 
