@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.santukis.moviedetail.widgets.MovieDetailContent
-import com.santukis.uievents.OnUiEvent
-import com.santukis.uievents.events.RequestDecorFitsSystemWindowsChange
+import com.santukis.viewmodels.events.OnUiEvent
+import com.santukis.viewmodels.events.RequestDecorFitsSystemWindowsChange
 import com.santukis.navigation.destination.DestinationArguments
 import com.santukis.navigation.destination.arguments.PopBackStackDestinationArguments
 import com.santukis.viewmodels.movies.MovieDetailViewModel
@@ -37,9 +37,9 @@ fun MovieDetailScreen(
 
         onUiEvent(
             RequestDecorFitsSystemWindowsChange(
-            decorFitsSystemWindows = true,
-            statusBarColor = android.graphics.Color.BLACK
-        )
+                decorFitsSystemWindows = true,
+                statusBarColor = android.graphics.Color.BLACK
+            )
         )
     }
 

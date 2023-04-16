@@ -6,10 +6,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import com.santukis.uievents.OnUiEvent
+import com.santukis.viewmodels.events.OnUiEvent
 import com.santukis.home.widgets.MoviesContent
 import com.santukis.navigation.destination.DestinationArguments
-import com.santukis.uievents.events.RequestDecorFitsSystemWindowsChange
+import com.santukis.viewmodels.events.RequestDecorFitsSystemWindowsChange
 import com.santukis.viewmodels.movies.MoviesViewModel
 
 @Composable
@@ -27,9 +27,9 @@ fun MoviesScreen(
 
         onUiEvent(
             RequestDecorFitsSystemWindowsChange(
-            decorFitsSystemWindows = false,
-            statusBarColor = Color.TRANSPARENT
-        )
+                decorFitsSystemWindows = false,
+                statusBarColor = Color.TRANSPARENT
+            )
         )
     }
 

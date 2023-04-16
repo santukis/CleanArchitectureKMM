@@ -12,5 +12,5 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.Android.UiEvents))
+    implementation(project(Modules.ViewModels))
 }
