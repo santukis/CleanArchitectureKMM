@@ -61,8 +61,13 @@ kotlin {
 android {
     namespace = "com.santukis.viewmodels"
     compileSdk = 33
+
     defaultConfig {
         minSdk = 21
-        targetSdk = 33
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }

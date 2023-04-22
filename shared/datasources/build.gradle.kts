@@ -81,7 +81,6 @@ android {
 
     defaultConfig {
         minSdk = 21
-        targetSdk = 33
 
         val movieDatabaseProperties = Properties()
         file(path = "movie_database.properties").inputStream().use { stream ->
@@ -93,6 +92,15 @@ android {
             name = "MOVIE_DATABASE_SECRET",
             value = movieDatabaseProperties.getProperty("MOVIE_DATABASE_SECRET")
         )
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 

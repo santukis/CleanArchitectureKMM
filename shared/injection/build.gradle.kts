@@ -88,9 +88,14 @@ kotlin {
 android {
     namespace = "com.santukis.injection"
     compileSdk = 33
+
     defaultConfig {
         minSdk = 23
-        targetSdk = 33
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
