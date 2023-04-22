@@ -15,6 +15,8 @@ import com.santukis.injection.ViewModelModuleConstants.MOVIES_VIEW_MODEL
 import com.santukis.injection.ViewModelModuleConstants.MOVIE_DETAIL_VIEW_MODEL
 import com.santukis.injection.ViewModelModuleConstants.VIEW_MODELS_MODULE_NAME
 import com.santukis.viewmodels.configuration.ConfigurationViewModel
+import com.santukis.viewmodels.movies.DefaultMovieDetailViewModel
+import com.santukis.viewmodels.movies.DefaultMoviesViewModel
 import com.santukis.viewmodels.movies.MoviesViewModel
 import com.santukis.viewmodels.movies.MovieDetailViewModel
 import org.kodein.di.DI
@@ -45,7 +47,7 @@ private fun movies() = DI.Module(
     allowSilentOverride = true
 ) {
     bind<MoviesViewModel>(tag = MOVIES_VIEW_MODEL) with provider {
-        MoviesViewModel(
+        DefaultMoviesViewModel(
             getNowPlayingMovies = instance(GET_NOW_PLAYING_MOVIES_USE_CASE),
             getUpcomingMovies = instance(GET_UPCOMING_MOVIES_USE_CASE),
             getPopularMovies = instance(GET_POPULAR_MOVIES_USE_CASE),
@@ -54,7 +56,7 @@ private fun movies() = DI.Module(
     }
 
     bind<MovieDetailViewModel>(tag = MOVIE_DETAIL_VIEW_MODEL) with provider {
-        MovieDetailViewModel(
+        DefaultMovieDetailViewModel(
             getMovieDetail = instance(GET_MOVIE_DETAIL_USE_CASE),
             getMovieVideos = instance(GET_MOVIE_VIDEOS_USE_CASE)
         )
