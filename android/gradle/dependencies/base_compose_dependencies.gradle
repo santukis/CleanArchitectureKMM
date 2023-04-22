@@ -1,11 +1,14 @@
 import com.santukis.buildsrc.dependencies.Android
 
 dependencies {
+    implementation(platform(Android.Androidx.composeBom))
     implementation(Android.Androidx.activityCompose)
     implementation(Android.Androidx.composeRuntime)
     implementation(Android.Androidx.composeUi)
     implementation(Android.Androidx.composeUiTooling)
+    implementation(Android.Androidx.composeUiToolingPreview)
     implementation(Android.Androidx.composeFoundation)
+    implementation(Android.Androidx.composeFoundationLayout)
     implementation(Android.Androidx.composeMaterial)
     implementation(Android.Androidx.composeMaterialIcons)
     implementation(Android.Androidx.composeMaterialIconsExtended)

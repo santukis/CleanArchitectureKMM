@@ -1,0 +1,13 @@
+import com.santukis.buildsrc.dependencies.Android
+
+dependencies {
+    androidTestImplementation(platform(Android.Androidx.composeBom))
+    androidTestImplementation(Android.Test.androidCoreTesting)
+    androidTestImplementation(Android.Test.espressoCore)
+    androidTestImplementation(Android.Test.espressoContrib)
+    androidTestImplementation(Android.Test.composeTestUi)
+    androidTestImplementation(Android.Test.composeUiTestJunit4)
+    
+    debugImplementation(Android.Test.composeUiTestManifest)
+    debugImplementation(Android.Androidx.composeUiTooling)
+}
