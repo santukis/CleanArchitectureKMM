@@ -20,9 +20,11 @@ android {
 dependencies {
     implementation(fileTree(baseDir = "libs"))
 
-    implementation(project(Modules.Injection))
-    implementation(project(Modules.ViewModels))
-    implementation(project(Modules.Entities))
+    implementation(project(Modules.injection))
+    implementation(project(Modules.ViewModel.coreViewModel))
+    implementation(project(Modules.ViewModel.homeViewModel))
+    implementation(project(Modules.ViewModel.movieDetailViewModel))
+    implementation(project(Modules.entities))
 
     implementation(project(Modules.Android.Theme))
     implementation(project(Modules.Android.Navigation))

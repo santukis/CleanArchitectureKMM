@@ -28,8 +28,11 @@ kotlin {
             isStatic = false
             linkerOpts.add("-lsqlite3")
 
-            export(project(Modules.ViewModels))
-            export(project(Modules.Entities))
+            export(project(Modules.ViewModel.coreViewModel))
+            export(project(Modules.ViewModel.homeViewModel))
+            export(project(Modules.ViewModel.movieDetailViewModel))
+            export(project(Modules.ViewModel.configurationViewModel))
+            export(project(Modules.entities))
             export(Shared.Moko.mvvmCore)
             export(Shared.Moko.mvvmFlow)
         }
@@ -38,11 +41,14 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(Modules.ViewModels))
-                implementation(project(Modules.UseCases))
-                api(project(Modules.Entities))
-                implementation(project(Modules.Repositories))
-                api(project(Modules.DataSources))
+                api(project(Modules.ViewModel.coreViewModel))
+                api(project(Modules.ViewModel.homeViewModel))
+                api(project(Modules.ViewModel.movieDetailViewModel))
+                api(project(Modules.ViewModel.configurationViewModel))
+                implementation(project(Modules.useCases))
+                api(project(Modules.entities))
+                implementation(project(Modules.repositories))
+                api(project(Modules.dataSources))
 
                 implementation(Shared.Kodein.kodein)
                 implementation(Shared.Kotlin.coroutinesCore)

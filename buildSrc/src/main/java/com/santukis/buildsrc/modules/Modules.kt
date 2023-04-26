@@ -1,12 +1,11 @@
 package com.santukis.buildsrc.modules
 
 object Modules {
-    const val Injection = ":shared:injection"
-    const val ViewModels = ":shared:viewmodels"
-    const val UseCases = ":shared:usecases"
-    const val Entities = ":shared:entities"
-    const val Repositories = ":shared:repositories"
-    const val DataSources = ":shared:datasources"
+    const val injection = ":shared:injection"
+    const val useCases = ":shared:usecases"
+    const val entities = ":shared:entities"
+    const val repositories = ":shared:repositories"
+    const val dataSources = ":shared:datasources"
 
     object Android {
         const val Theme = ":android:theme"
@@ -14,5 +13,12 @@ object Modules {
         const val Widgets = ":android:widgets"
         const val Home = ":android:features:home"
         const val MovieDetail = ":android:features:movieDetail"
+    }
+
+    object ViewModel {
+        const val coreViewModel = ":shared:viewmodels:core"
+        const val homeViewModel = ":shared:viewmodels:features:home"
+        const val movieDetailViewModel = ":shared:viewmodels:features:movieDetail"
+        const val configurationViewModel = ":shared:viewmodels:configuration"
     }
 }

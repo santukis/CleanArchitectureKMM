@@ -15,10 +15,10 @@ import com.santukis.injection.ViewModelModuleConstants.MOVIES_VIEW_MODEL
 import com.santukis.injection.ViewModelModuleConstants.MOVIE_DETAIL_VIEW_MODEL
 import com.santukis.injection.ViewModelModuleConstants.VIEW_MODELS_MODULE_NAME
 import com.santukis.viewmodels.configuration.ConfigurationViewModel
-import com.santukis.viewmodels.movies.DefaultMovieDetailViewModel
-import com.santukis.viewmodels.movies.DefaultMoviesViewModel
-import com.santukis.viewmodels.movies.MoviesViewModel
-import com.santukis.viewmodels.movies.MovieDetailViewModel
+import com.santukis.viewmodels.home.DefaultMoviesViewModel
+import com.santukis.viewmodels.home.MoviesViewModel
+import com.santukis.viewmodels.moviedetail.DefaultMovieDetailViewModel
+import com.santukis.viewmodels.moviedetail.MovieDetailViewModel
 import org.kodein.di.DI
 import org.kodein.di.bind
 import org.kodein.di.instance

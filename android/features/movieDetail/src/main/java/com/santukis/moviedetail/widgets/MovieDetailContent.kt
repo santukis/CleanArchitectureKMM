@@ -7,10 +7,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.santukis.viewmodels.core.events.OnUiEvent
+import com.santukis.viewmodels.moviedetail.entities.MovieDetailState
 import com.santukis.widgets.SectionContent
 import com.santukis.widgets.YoutubeVideoPlayer
-import com.santukis.viewmodels.events.OnUiEvent
-import com.santukis.viewmodels.movies.entities.MovieDetailState
 
 @Composable
 fun MovieDetailContent(

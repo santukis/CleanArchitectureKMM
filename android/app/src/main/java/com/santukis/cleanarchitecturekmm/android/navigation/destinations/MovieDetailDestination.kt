@@ -9,7 +9,7 @@ import com.santukis.cleanarchitecturekmm.android.navigation.AppRouter
 import com.santukis.moviedetail.screens.MovieDetailScreen
 import com.santukis.injection.getDependencyInjector
 import com.santukis.navigation.destination.Destination
-import com.santukis.viewmodels.events.OnUiEvent
+import com.santukis.viewmodels.core.events.OnUiEvent
 
 class MovieDetailDestination(private val movieId: Int = -1): Destination {
 

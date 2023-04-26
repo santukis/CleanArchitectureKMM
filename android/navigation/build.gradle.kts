@@ -12,5 +12,5 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.ViewModels))
+    implementation(project(Modules.ViewModel.coreViewModel))
 }

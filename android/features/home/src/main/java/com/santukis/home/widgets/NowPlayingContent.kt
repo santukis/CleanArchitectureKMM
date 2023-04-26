@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
@@ -28,6 +29,7 @@ import com.santukis.navigation.destination.arguments.MovieDetailDestinationArgum
 import com.santukis.theme.WhiteTransparent
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import dev.chrisbanes.snapper.rememberSnapperFlingBehavior
+import kotlinx.coroutines.delay
 
 @Composable
 @OptIn(ExperimentalSnapperApi::class)
@@ -37,6 +39,19 @@ fun NowPlayingContent(
     navigateTo: (DestinationArguments) -> Unit
 ) {
     val listState = rememberLazyListState()
+
+    LaunchedEffect(key1 = Unit) {
+        while (true) {
+            delay(5000)
+
+            if (listState.firstVisibleItemIndex == nowPlayingMovies.lastIndex) {
+                listState.scrollToItem(0)
+
+            } else {
+                listState.animateScrollToItem(listState.firstVisibleItemIndex + 1)
+            }
+        }
+    }
 
     Box(
         modifier = modifier
@@ -53,10 +68,12 @@ fun NowPlayingContent(
                 Box(
                     modifier = Modifier
                         .fillParentMaxWidth()
-                        .clickable { navigateTo(
-                            MovieDetailDestinationArguments(
-                                movieId = movie.id
-                            ))
+                        .clickable {
+                            navigateTo(
+                                MovieDetailDestinationArguments(
+                                    movieId = movie.id
+                                )
+                            )
                         }
                 ) {
                     AsyncImage(

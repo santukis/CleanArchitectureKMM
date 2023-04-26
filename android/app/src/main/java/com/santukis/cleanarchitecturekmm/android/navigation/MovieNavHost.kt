@@ -9,7 +9,7 @@ import com.santukis.cleanarchitecturekmm.android.navigation.destinations.MovieDe
 import com.santukis.cleanarchitecturekmm.android.navigation.graphs.NavigationGraph
 import com.santukis.cleanarchitecturekmm.android.navigation.graphs.homeNavigationGraph
 import com.santukis.navigation.graphs.navigate
-import com.santukis.viewmodels.events.OnUiEvent
+import com.santukis.viewmodels.core.events.OnUiEvent
 
 @Composable
 fun MovieNavHost(
