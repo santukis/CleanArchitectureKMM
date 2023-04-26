@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.santukis.home.R
 import com.santukis.navigation.destination.DestinationArguments
 import com.santukis.navigation.destination.arguments.MovieDetailDestinationArguments
-import com.santukis.viewmodels.movies.entities.MoviesState
+import com.santukis.viewmodels.home.entities.MoviesState
 
 @Composable
 fun MoviesContent(

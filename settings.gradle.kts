@@ -16,14 +16,20 @@ dependencyResolutionManagement {
 rootProject.name = "CleanArchitectureKMM"
 
 include(":android:app")
-include(":shared:viewmodels")
-include(":shared:usecases")
-include(":shared:entities")
-include(":shared:repositories")
-include(":shared:datasources")
-include(":shared:injection")
 include(":android:navigation")
 include(":android:features:home")
 include(":android:widgets")
 include(":android:theme")
 include(":android:features:movieDetail")
+
+include(":shared:usecases")
+include(":shared:entities")
+include(":shared:repositories")
+include(":shared:datasources")
+include(":shared:injection")
+
+//Viewmodels
+include(":shared:viewmodels:core")
+include(":shared:viewmodels:features:home")
+include(":shared:viewmodels:features:movieDetail")
+include(":shared:viewmodels:configuration")

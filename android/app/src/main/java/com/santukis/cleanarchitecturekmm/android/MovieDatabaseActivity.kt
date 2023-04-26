@@ -6,9 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
 import com.santukis.cleanarchitecturekmm.android.screens.MainScreen
-import com.santukis.viewmodels.events.OnUiEvent
-import com.santukis.viewmodels.events.RequestDecorFitsSystemWindowsChange
 import com.santukis.theme.MovieTheme
+import com.santukis.viewmodels.core.events.OnUiEvent
+import com.santukis.viewmodels.core.events.RequestDecorFitsSystemWindowsChange
 
 class MovieDatabaseActivity : ComponentActivity() {
 

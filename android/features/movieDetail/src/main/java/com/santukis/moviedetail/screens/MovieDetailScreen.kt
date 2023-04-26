@@ -16,11 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.santukis.moviedetail.widgets.MovieDetailContent
-import com.santukis.viewmodels.events.OnUiEvent
-import com.santukis.viewmodels.events.RequestDecorFitsSystemWindowsChange
 import com.santukis.navigation.destination.DestinationArguments
 import com.santukis.navigation.destination.arguments.PopBackStackDestinationArguments
-import com.santukis.viewmodels.movies.MovieDetailViewModel
+import com.santukis.viewmodels.core.events.OnUiEvent
+import com.santukis.viewmodels.core.events.RequestDecorFitsSystemWindowsChange
+import com.santukis.viewmodels.moviedetail.MovieDetailViewModel
 
 @Composable
 fun MovieDetailScreen(

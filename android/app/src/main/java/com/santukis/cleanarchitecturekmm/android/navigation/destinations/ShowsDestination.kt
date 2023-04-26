@@ -17,8 +17,7 @@ import com.santukis.cleanarchitecturekmm.android.navigation.AppRouter
 import com.santukis.home.screens.MoviesScreen
 import com.santukis.injection.getDependencyInjector
 import com.santukis.navigation.destination.DecoratedDestination
-import com.santukis.viewmodels.events.OnUiEvent
-
+import com.santukis.viewmodels.core.events.OnUiEvent
 class ShowsDestination: DecoratedDestination {
 
     override val template: String = "tv_shows"

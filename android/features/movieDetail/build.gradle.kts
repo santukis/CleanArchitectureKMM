@@ -12,8 +12,9 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.ViewModels))
-    implementation(project(Modules.Entities))
+    implementation(project(Modules.ViewModel.coreViewModel))
+    implementation(project(Modules.ViewModel.movieDetailViewModel))
+    implementation(project(Modules.entities))
 
     implementation(project(Modules.Android.Theme))
     implementation(project(Modules.Android.Navigation))

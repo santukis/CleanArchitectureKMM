@@ -6,11 +6,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import com.santukis.viewmodels.events.OnUiEvent
 import com.santukis.home.widgets.MoviesContent
 import com.santukis.navigation.destination.DestinationArguments
-import com.santukis.viewmodels.events.RequestDecorFitsSystemWindowsChange
-import com.santukis.viewmodels.movies.MoviesViewModel
+import com.santukis.viewmodels.core.events.OnUiEvent
+import com.santukis.viewmodels.core.events.RequestDecorFitsSystemWindowsChange
+import com.santukis.viewmodels.home.MoviesViewModel
 
 @Composable
 fun MoviesScreen(
