@@ -1,22 +1,19 @@
 package com.santukis.viewmodels.home
 
-import com.santukis.entities.movies.Movie
-import com.santukis.usecases.UseCase
+import com.santukis.viewmodels.core.strategies.ViewModelStrategy
 import com.santukis.viewmodels.home.entities.MoviesState
 import dev.icerock.moko.mvvm.flow.CMutableStateFlow
 import dev.icerock.moko.mvvm.flow.CStateFlow
 import dev.icerock.moko.mvvm.flow.cMutableStateFlow
 import dev.icerock.moko.mvvm.flow.cStateFlow
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class DefaultMoviesViewModel(
-    private val getNowPlayingMovies: UseCase<Unit, Flow<List<Movie>>>,
-    private val getUpcomingMovies: UseCase<Unit, Flow<List<Movie>>>,
-    private val getPopularMovies: UseCase<Unit, Flow<List<Movie>>>,
-    private val getMoviesByKeyword: UseCase<Unit, Flow<List<Movie>>>
+    private val loadNowPlayingMoviesStrategy: ViewModelStrategy<Unit, MoviesState>,
+    private val loadUpcomingMoviesStrategy: ViewModelStrategy<Unit, MoviesState>,
+    private val loadPopularMoviesStrategy: ViewModelStrategy<Unit, MoviesState>,
+    private val loadCouldLikeMoviesStrategy: ViewModelStrategy<Unit, MoviesState>,
 ):
     ViewModel(),
     MoviesViewModel {
@@ -34,55 +31,35 @@ class DefaultMoviesViewModel(
     }
 
     private fun loadNowPlayingMovies() {
-        viewModelScope.launch(Dispatchers.Main) {
-            getNowPlayingMovies(Unit)
-                .flowOn(Dispatchers.Default)
-                .catch { error ->
-                    _moviesState.value = _moviesState.value.copy(errorMessage = error.message)
-                }
-                .collect { movies ->
-                    _moviesState.value = _moviesState.value.copy(nowPlayingMovies = movies)
-                }
-        }
+        loadNowPlayingMoviesStrategy.execute(
+            viewModel = this,
+            input = Unit,
+            output = _moviesState
+        )
     }
 
     private fun loadUpcoming() {
-        viewModelScope.launch(Dispatchers.Main) {
-            getUpcomingMovies(Unit)
-                .flowOn(Dispatchers.Default)
-                .catch { error ->
-                    _moviesState.value = _moviesState.value.copy(errorMessage = error.message)
-                }
-                .collect { movies ->
-                    _moviesState.value = _moviesState.value.copy(upcomingMovies = movies)
-                }
-        }
+        loadUpcomingMoviesStrategy.execute(
+            viewModel = this,
+            input = Unit,
+            output = _moviesState
+        )
     }
 
     private fun loadPopularMovies() {
-        viewModelScope.launch(Dispatchers.Main) {
-            getPopularMovies(Unit)
-                .flowOn(Dispatchers.Default)
-                .catch { error ->
-                    _moviesState.value = _moviesState.value.copy(errorMessage = error.message)
-                }
-                .collect { movies ->
-                    _moviesState.value = _moviesState.value.copy(popularMovies = movies)
-                }
-        }
+        loadPopularMoviesStrategy.execute(
+            viewModel = this,
+            input = Unit,
+            output = _moviesState
+        )
     }
 
     private fun loadMoviesByMostFrequentlyKeyword() {
-        viewModelScope.launch(Dispatchers.Main) {
-            getMoviesByKeyword(Unit)
-                .flowOn(Dispatchers.Default)
-                .catch {  error ->
-                    _moviesState.value = _moviesState.value.copy(errorMessage = error.message)
-                }
-                .collect { movies ->
-                    _moviesState.value = _moviesState.value.copy(couldLikeMovies = movies)
-                }
-        }
+        loadCouldLikeMoviesStrategy.execute(
+            viewModel = this,
+            input = Unit,
+            output = _moviesState
+        )
     }
 }
 
