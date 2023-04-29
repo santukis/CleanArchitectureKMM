@@ -4,9 +4,9 @@ import MultiPlatformLibrary
 @main
 struct iOSApp: App {
     @StateObject
-    private var moviesViewModel: MoviesViewModel = DependencyInjectorIOSKt
+    private var moviesViewModel: DefaultMoviesViewModel = DependencyInjectorIOSKt
         .getDependencyInjector(moduleDependencies: nil)
-        .moviesViewModel(platformDependencies: nil)
+        .moviesViewModel(platformDependencies: nil) as! DefaultMoviesViewModel
     
     var body: some Scene {
         WindowGroup {
