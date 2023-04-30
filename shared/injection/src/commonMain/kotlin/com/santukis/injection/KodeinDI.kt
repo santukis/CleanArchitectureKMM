@@ -5,7 +5,7 @@ import org.kodein.di.DIAware
 import org.kodein.di.direct
 import org.kodein.di.instance
 
-internal class KodeinDI(private var moduleDependencies: Any? = null): DIAware {
+internal class KodeinDI(private val moduleDependencies: Any? = null): DIAware {
 
     override val di: DI by DI.lazy {
         import(applicationModule(moduleDependencies))

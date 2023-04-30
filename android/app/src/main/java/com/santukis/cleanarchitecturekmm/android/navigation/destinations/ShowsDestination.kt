@@ -6,7 +6,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Tv
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.NavBackStackEntry
@@ -29,7 +28,7 @@ class ShowsDestination: DecoratedDestination {
         onUiEvent: (OnUiEvent) -> Unit
     ) {
         MoviesScreen(
-            moviesViewModel = getDependencyInjector(LocalContext.current.applicationContext)
+            moviesViewModel = getDependencyInjector()
                 .moviesViewModel(LocalViewModelStoreOwner.current),
             onUiEvent = onUiEvent,
         ) { arguments ->

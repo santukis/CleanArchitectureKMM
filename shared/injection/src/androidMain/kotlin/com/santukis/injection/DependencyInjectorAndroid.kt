@@ -1,5 +1,8 @@
 package com.santukis.injection
 
 
-actual fun getDependencyInjector(moduleDependencies: Any?): DependencyInjector =
+actual fun initializeDependencyInjector(moduleDependencies: Any?) {
     AndroidDependencyInjector.initialize(moduleDependencies)
+}
+
+actual fun getDependencyInjector(): DependencyInjector = AndroidDependencyInjector

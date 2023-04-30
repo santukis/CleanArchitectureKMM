@@ -1,5 +1,8 @@
 package com.santukis.injection
 
-actual fun getDependencyInjector(moduleDependencies: Any?): DependencyInjector =
+actual fun initializeDependencyInjector(moduleDependencies: Any?) {
     IosDependencyInjector.initialize(moduleDependencies)
+}
+
+actual fun getDependencyInjector(): DependencyInjector = IosDependencyInjector
 
