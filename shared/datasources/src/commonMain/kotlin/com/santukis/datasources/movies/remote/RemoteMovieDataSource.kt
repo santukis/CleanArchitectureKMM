@@ -28,20 +28,28 @@ class RemoteMovieDataSource(
         return moviesApi.getNowPlaying(buildMoviesRequestDto()).toMovies()
     }
 
-    override suspend fun getUpcomingMovies(): List<Movie> {
-        return moviesApi.getUpcoming(buildMoviesRequestDto()).toMovies()
+    override suspend fun getUpcomingMovies(page: Int): List<Movie> {
+        return moviesApi.getUpcoming(
+            buildMoviesRequestDto(
+                page = page
+            )
+        ).toMovies()
     }
 
-    override suspend fun getPopularMovies(): List<Movie> {
-        return moviesApi.getPopular(buildMoviesRequestDto()).toMovies()
+    override suspend fun getPopularMovies(page: Int): List<Movie> {
+        return moviesApi.getPopular(
+            buildMoviesRequestDto(
+                page = page
+            )
+        ).toMovies()
     }
 
     override suspend fun getKeywordsForMovie(movieId: String): List<Keyword> {
         return moviesApi.getKeywordsForMovie(movieId).toKeywords()
     }
 
-    override suspend fun getMoviesByKeyword(keywords: List<Keyword>): List<Movie> {
-        val request = buildMoviesRequestDto()
+    override suspend fun getMoviesByKeyword(keywords: List<Keyword>, page: Int): List<Movie> {
+        val request = buildMoviesRequestDto(page = page)
         return keywords
             .flatMap { keyword -> moviesApi.getMoviesForKeyword(keyword.id, request).toMovies() }
             .distinctBy { movie ->  movie.id }
@@ -51,12 +59,14 @@ class RemoteMovieDataSource(
         return moviesApi.getMovieVideos(movieId, buildMoviesRequestDto()).toVideos()
     }
 
-    private suspend fun buildMoviesRequestDto(): GetMoviesRequestDto {
+    private suspend fun buildMoviesRequestDto(
+        page: Int = 1
+    ): GetMoviesRequestDto {
         val region = getRegionDataSource.getRegion()
         return GetMoviesRequestDto(
             language = region.getIso(),
             region = region.country.iso,
-            page = 1.toString()
+            page = page.toString()
         )
     }
 }

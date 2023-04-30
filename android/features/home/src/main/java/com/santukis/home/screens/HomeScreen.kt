@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import com.santukis.home.widgets.MoviesContent
+import com.santukis.home.widgets.HomeContent
 import com.santukis.navigation.destination.DestinationArguments
 import com.santukis.viewmodels.core.events.OnUiEvent
 import com.santukis.viewmodels.core.events.RequestDecorFitsSystemWindowsChange
@@ -18,7 +18,7 @@ fun HomeScreen(
     onUiEvent: (OnUiEvent) -> Unit = {},
     navigateTo: (DestinationArguments) -> Unit = {}
 ) {
-    val homeState = homeViewModel.moviesState.collectAsState()
+    val homeState = homeViewModel.homeState.collectAsState()
 
     LaunchedEffect(homeViewModel) {
         if (homeState.value.shouldUpdateData()) {
@@ -33,10 +33,10 @@ fun HomeScreen(
         )
     }
 
-    MoviesContent(
+    HomeContent(
         modifier = Modifier
             .fillMaxSize(),
-        moviesState = homeState.value,
+        homeState = homeState.value,
         navigateTo = navigateTo
     )
 }

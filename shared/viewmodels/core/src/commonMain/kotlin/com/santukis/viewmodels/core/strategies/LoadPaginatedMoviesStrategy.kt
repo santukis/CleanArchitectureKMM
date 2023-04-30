@@ -1,15 +1,16 @@
-package com.santukis.viewmodels.home.strategies
+package com.santukis.viewmodels.core.strategies
 
 import com.santukis.entities.movies.Movie
 import com.santukis.usecases.UseCase
 import com.santukis.viewmodels.core.executeUseCase
-import com.santukis.viewmodels.core.strategies.ViewModelStrategy
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.flow.Flow
 
-class LoadNowPlayingMoviesStrategy(
-    private val getNowPlayingMovies: UseCase<Unit, Flow<List<Movie>>>,
+class LoadPaginatedMoviesStrategy(
+    private val getMovies: UseCase<Int, Flow<List<Movie>>>
 ): ViewModelStrategy<Unit, List<Movie>> {
+
+    private var page: Int = 1
 
     override fun execute(
         viewModel: ViewModel,
@@ -17,8 +18,8 @@ class LoadNowPlayingMoviesStrategy(
         onSuccess: (List<Movie>) -> Unit
     ) {
         viewModel.executeUseCase(
-            useCase = getNowPlayingMovies,
-            request = input
+            useCase = getMovies,
+            request = page++
         ) { movies ->
             onSuccess(movies)
         }

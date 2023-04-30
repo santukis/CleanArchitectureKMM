@@ -6,10 +6,10 @@ import com.santukis.repositories.strategies.RemoteStrategy
 
 class GetPopularMoviesFromRemoteStrategy(
     private val getPopularMoviesFromRemote: GetPopularMoviesDataSource
-): RemoteStrategy<Unit, List<Movie>>() {
+): RemoteStrategy<Int, List<Movie>>() {
 
-    override suspend fun loadFromRemote(input: Unit): List<Movie> =
-        getPopularMoviesFromRemote.getPopularMovies()
+    override suspend fun loadFromRemote(input: Int): List<Movie> =
+        getPopularMoviesFromRemote.getPopularMovies(input)
 
     override suspend fun saveIntoLocal(output: List<Movie>): List<Movie> =
         output

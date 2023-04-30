@@ -5,5 +5,6 @@ data class Movie(
     val imdbId: String,
     val images: Images,
     val titles: Titles,
-    val rating: Rating
+    val rating: Rating,
+    val overview: String
 )

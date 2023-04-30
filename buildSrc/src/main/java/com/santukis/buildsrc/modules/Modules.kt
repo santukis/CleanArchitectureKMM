@@ -11,6 +11,7 @@ object Modules {
         const val theme = ":android:theme"
         const val navigation = ":android:navigation"
         const val widgets = ":android:widgets"
+        const val core = ":android:features:core"
         const val home = ":android:features:home"
         const val movies = ":android:features:movies"
         const val movieDetail = ":android:features:movieDetail"

@@ -8,15 +8,15 @@ struct HomeScreen: View {
     private var homeViewModel: HomeViewModel
     
     var body: some View {
-        let moviesState = homeViewModel.state(
+        let homeState = homeViewModel.state(
             \.moviesState,
             equals: { state1, state2 in return state1 == state2 },
-            mapper: { moviesState in return moviesState }
+            mapper: { homeState in return homeState }
         )
         
         GeometryReader { geometry in
             HomeContent(
-                moviesState: moviesState,
+                homeState: homeState,
                 geometry: geometry
                 
             ).onAppear {
@@ -29,24 +29,24 @@ struct HomeScreen: View {
 }
 
 struct HomeContent: View {
-    var moviesState: MoviesState
+    var homeState: HomeState
     var geometry: GeometryProxy
     
     var body: some View {
         ScrollView(.vertical) {
             VStack(spacing: 20) {
                 NowPlayingContent(
-                    movies: moviesState.nowPlayingMovies,
+                    movies: homeState.nowPlayingMovies,
                     geometry: geometry
                 )
                 
                 HomeSectionContent(
-                    movies: moviesState.upcomingMovies,
+                    movies: homeState.upcomingMovies,
                     sectionTitle: String(localized: "upcoming")
                 )
                 
                 HomeSectionContent(
-                    movies: moviesState.popularMovies,
+                    movies: homeState.popularMovies,
                     sectionTitle: String(localized: "popular_movies")
                 )
             }

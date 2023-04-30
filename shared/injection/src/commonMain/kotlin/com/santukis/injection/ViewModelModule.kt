@@ -1,5 +1,7 @@
 package com.santukis.injection
 
+import com.santukis.entities.movies.Movie
+import com.santukis.entities.movies.Video
 import com.santukis.injection.UseCasesConstants.GET_COUNTRIES_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_LANGUAGES_USE_CASE
 import com.santukis.injection.UseCasesConstants.GET_MOVIES_BY_KEYWORD_USE_CASE
@@ -22,14 +24,11 @@ import com.santukis.injection.ViewModelModuleConstants.MOVIES_VIEW_MODEL
 import com.santukis.injection.ViewModelModuleConstants.MOVIE_DETAIL_VIEW_MODEL
 import com.santukis.injection.ViewModelModuleConstants.VIEW_MODELS_MODULE_NAME
 import com.santukis.viewmodels.configuration.ConfigurationViewModel
+import com.santukis.viewmodels.core.strategies.LoadPaginatedMoviesStrategy
 import com.santukis.viewmodels.core.strategies.ViewModelStrategy
 import com.santukis.viewmodels.home.DefaultHomeViewModel
 import com.santukis.viewmodels.home.HomeViewModel
-import com.santukis.viewmodels.home.entities.MoviesState
-import com.santukis.viewmodels.home.strategies.LoadCouldLikeMoviesStrategy
 import com.santukis.viewmodels.home.strategies.LoadNowPlayingMoviesStrategy
-import com.santukis.viewmodels.home.strategies.LoadPopularMoviesStrategy
-import com.santukis.viewmodels.home.strategies.LoadUpcomingMoviesStrategy
 import com.santukis.viewmodels.moviedetail.DefaultMovieDetailViewModel
 import com.santukis.viewmodels.moviedetail.MovieDetailViewModel
 import com.santukis.viewmodels.moviedetail.entities.MovieDetailState
@@ -81,27 +80,27 @@ private fun movies() = DI.Module(
         )
     }
 
-    bind<ViewModelStrategy<Unit, MoviesState>>(LOAD_NOW_PLAYING_MOVIES_STRATEGY) with provider {
+    bind<ViewModelStrategy<Unit, List<Movie>>>(LOAD_NOW_PLAYING_MOVIES_STRATEGY) with provider {
         LoadNowPlayingMoviesStrategy(
             getNowPlayingMovies = instance(GET_NOW_PLAYING_MOVIES_USE_CASE)
         )
     }
 
-    bind<ViewModelStrategy<Unit, MoviesState>>(LOAD_POPULAR_MOVIES_STRATEGY) with provider {
-        LoadPopularMoviesStrategy(
-            getPopularMovies = instance(GET_POPULAR_MOVIES_USE_CASE)
+    bind<ViewModelStrategy<Unit, List<Movie>>>(LOAD_POPULAR_MOVIES_STRATEGY) with provider {
+        LoadPaginatedMoviesStrategy(
+            getMovies = instance(GET_POPULAR_MOVIES_USE_CASE)
         )
     }
 
-    bind<ViewModelStrategy<Unit, MoviesState>>(LOAD_UPCOMING_MOVIES_STRATEGY) with provider {
-        LoadUpcomingMoviesStrategy(
-            getUpcomingMovies = instance(GET_UPCOMING_MOVIES_USE_CASE)
+    bind<ViewModelStrategy<Unit, List<Movie>>>(LOAD_UPCOMING_MOVIES_STRATEGY) with provider {
+        LoadPaginatedMoviesStrategy(
+            getMovies = instance(GET_UPCOMING_MOVIES_USE_CASE)
         )
     }
 
-    bind<ViewModelStrategy<Unit, MoviesState>>(LOAD_COULD_LIKE_MOVIES_STRATEGY) with provider {
-        LoadCouldLikeMoviesStrategy(
-            getMoviesByKeyword = instance(GET_MOVIES_BY_KEYWORD_USE_CASE)
+    bind<ViewModelStrategy<Unit, List<Movie>>>(LOAD_COULD_LIKE_MOVIES_STRATEGY) with provider {
+        LoadPaginatedMoviesStrategy(
+            getMovies = instance(GET_MOVIES_BY_KEYWORD_USE_CASE)
         )
     }
 
@@ -112,20 +111,24 @@ private fun movies() = DI.Module(
         )
     }
 
-    bind<ViewModelStrategy<String, MovieDetailState>>(tag = LOAD_MOVIE_DETAIL_STRATEGY) with provider {
+    bind<ViewModelStrategy<String, Movie>>(tag = LOAD_MOVIE_DETAIL_STRATEGY) with provider {
         LoadMovieDetailStrategy(
             getMovieDetail = instance(GET_MOVIE_DETAIL_USE_CASE)
         )
     }
 
-    bind<ViewModelStrategy<String, MovieDetailState>>(tag = LOAD_MOVIE_VIDEOS_STRATEGY) with provider {
+    bind<ViewModelStrategy<String, List<Video>>>(tag = LOAD_MOVIE_VIDEOS_STRATEGY) with provider {
         LoadMovieVideosStrategy(
             getMovieVideos = instance(GET_MOVIE_VIDEOS_USE_CASE)
         )
     }
 
     bind<MoviesViewModel>(tag = MOVIES_VIEW_MODEL) with provider {
-        DefaultMoviesViewModel()
+        DefaultMoviesViewModel(
+            loadUpcomingMoviesStrategy = instance(LOAD_UPCOMING_MOVIES_STRATEGY),
+            loadPopularMoviesStrategy = instance(LOAD_POPULAR_MOVIES_STRATEGY),
+            loadCouldYouLikeMoviesStrategy = instance(LOAD_COULD_LIKE_MOVIES_STRATEGY)
+        )
     }
 }
 

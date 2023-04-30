@@ -4,5 +4,5 @@ import com.santukis.entities.movies.Movie
 
 interface GetPopularMoviesDataSource {
 
-    suspend fun getPopularMovies(): List<Movie>
+    suspend fun getPopularMovies(page: Int): List<Movie>
 }

@@ -1,5 +1,7 @@
 package com.santukis.viewmodels.moviedetail
 
+import com.santukis.entities.movies.Movie
+import com.santukis.entities.movies.Video
 import com.santukis.viewmodels.core.strategies.ViewModelStrategy
 import com.santukis.viewmodels.moviedetail.entities.MovieDetailState
 import dev.icerock.moko.mvvm.flow.CMutableStateFlow
@@ -9,8 +11,8 @@ import dev.icerock.moko.mvvm.flow.cStateFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class DefaultMovieDetailViewModel(
-    private val loadMovieDetailStrategy: ViewModelStrategy<String, MovieDetailState>,
-    private val loadMovieVideosStrategy: ViewModelStrategy<String, MovieDetailState>
+    private val loadMovieDetailStrategy: ViewModelStrategy<String, Movie>,
+    private val loadMovieVideosStrategy: ViewModelStrategy<String, List<Video>>
 ):
     MovieDetailViewModel() {
 
@@ -28,7 +30,9 @@ class DefaultMovieDetailViewModel(
         loadMovieDetailStrategy.execute(
             viewModel = this,
             input = movieId,
-            output = _movieDetailState
+            onSuccess = { movieDetail ->
+                _movieDetailState.value = _movieDetailState.value.copy(movie = movieDetail)
+            }
         )
     }
 
@@ -36,7 +40,9 @@ class DefaultMovieDetailViewModel(
         loadMovieVideosStrategy.execute(
             viewModel = this,
             input = movieId,
-            output = _movieDetailState
+            onSuccess = { videos ->
+                _movieDetailState.value = _movieDetailState.value.copy(videos = videos)
+            }
         )
     }
 }

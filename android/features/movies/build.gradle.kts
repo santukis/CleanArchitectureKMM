@@ -16,6 +16,7 @@ dependencies {
     implementation(project(Modules.ViewModel.moviesViewModel))
     implementation(project(Modules.entities))
 
+    implementation(project(Modules.Android.core))
     implementation(project(Modules.Android.theme))
     implementation(project(Modules.Android.navigation))
     implementation(project(Modules.Android.widgets))

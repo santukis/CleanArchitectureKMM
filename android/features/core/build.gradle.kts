@@ -8,15 +8,13 @@ plugins {
 apply(from = "$rootDir/android/gradle/configuration/base_android_library_module.gradle")
 
 android {
-    namespace = "com.santukis.home"
+    namespace = "com.santukis.core"
 }
 
 dependencies {
     implementation(project(Modules.ViewModel.coreViewModel))
-    implementation(project(Modules.ViewModel.homeViewModel))
     implementation(project(Modules.entities))
 
-    implementation(project(Modules.Android.core))
     implementation(project(Modules.Android.theme))
     implementation(project(Modules.Android.navigation))
     implementation(project(Modules.Android.widgets))

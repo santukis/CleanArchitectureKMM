@@ -6,16 +6,15 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.santukis.home.R
 import com.santukis.navigation.destination.DestinationArguments
-import com.santukis.viewmodels.home.entities.MoviesState
+import com.santukis.viewmodels.core.entities.MovieSection
+import com.santukis.viewmodels.home.entities.HomeState
 
 @Composable
-fun MoviesContent(
+fun HomeContent(
     modifier: Modifier,
-    moviesState: MoviesState,
+    homeState: HomeState,
     navigateTo: (DestinationArguments) -> Unit
 ) {
     LazyColumn(
@@ -23,7 +22,7 @@ fun MoviesContent(
             .background(Color.Black),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        moviesState.nowPlayingMovies.takeIf { it.isNotEmpty() }?.let { movies ->
+        homeState.nowPlayingMovies.takeIf { it.isNotEmpty() }?.let { movies ->
             item {
                 NowPlayingContent(
                     modifier = modifier,
@@ -33,34 +32,34 @@ fun MoviesContent(
             }
         }
 
-        moviesState.upcomingMovies.takeIf { it.isNotEmpty() }?.let { movies ->
+        homeState.upcomingMovies.takeIf { it.isNotEmpty() }?.let { movies ->
             item {
                 MovieSectionContent(
                     modifier = modifier,
                     movies = movies,
-                    sectionTitle = stringResource(id = R.string.upcoming),
+                    section = MovieSection.UpcomingMovies,
                     navigateTo = navigateTo
                 )
             }
         }
 
-        moviesState.popularMovies.takeIf { it.isNotEmpty() }?.let { movies ->
+        homeState.popularMovies.takeIf { it.isNotEmpty() }?.let { movies ->
             item {
                 MovieSectionContent(
                     modifier = modifier,
                     movies = movies,
-                    sectionTitle = stringResource(id = R.string.popular),
+                    section = MovieSection.PopularMovies,
                     navigateTo = navigateTo
                 )
             }
         }
 
-        moviesState.couldLikeMovies.takeIf { it.isNotEmpty() }?.let { movies ->
+        homeState.couldLikeMovies.takeIf { it.isNotEmpty() }?.let { movies ->
             item {
                 MovieSectionContent(
                     modifier = modifier,
                     movies = movies,
-                    sectionTitle = stringResource(id = R.string.could_like),
+                    section = MovieSection.CouldYouLikeMovies,
                     navigateTo = navigateTo
                 )
             }
