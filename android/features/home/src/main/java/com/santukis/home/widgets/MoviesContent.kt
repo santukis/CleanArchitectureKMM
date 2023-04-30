@@ -10,7 +10,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.santukis.home.R
 import com.santukis.navigation.destination.DestinationArguments
-import com.santukis.navigation.destination.arguments.MovieDetailDestinationArguments
 import com.santukis.viewmodels.home.entities.MoviesState
 
 @Composable
@@ -39,14 +38,9 @@ fun MoviesContent(
                 MovieSectionContent(
                     modifier = modifier,
                     movies = movies,
-                    sectionTitle = stringResource(id = R.string.upcoming)
-                ) { movie ->
-                    navigateTo(
-                        MovieDetailDestinationArguments(
-                            movieId = movie.id
-                        )
-                    )
-                }
+                    sectionTitle = stringResource(id = R.string.upcoming),
+                    navigateTo = navigateTo
+                )
             }
         }
 
@@ -55,14 +49,9 @@ fun MoviesContent(
                 MovieSectionContent(
                     modifier = modifier,
                     movies = movies,
-                    sectionTitle = stringResource(id = R.string.popular)
-                ) { movie ->
-                    navigateTo(
-                        MovieDetailDestinationArguments(
-                            movieId = movie.id
-                        )
-                    )
-                }
+                    sectionTitle = stringResource(id = R.string.popular),
+                    navigateTo = navigateTo
+                )
             }
         }
 
@@ -71,14 +60,9 @@ fun MoviesContent(
                 MovieSectionContent(
                     modifier = modifier,
                     movies = movies,
-                    sectionTitle = stringResource(id = R.string.could_like)
-                ) { movie ->
-                    navigateTo(
-                        MovieDetailDestinationArguments(
-                            movieId = movie.id
-                        )
-                    )
-                }
+                    sectionTitle = stringResource(id = R.string.could_like),
+                    navigateTo = navigateTo
+                )
             }
         }
     }

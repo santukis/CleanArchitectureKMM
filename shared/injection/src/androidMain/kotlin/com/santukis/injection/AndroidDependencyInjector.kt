@@ -1,8 +1,9 @@
 package com.santukis.injection
 
 import androidx.lifecycle.ViewModelStoreOwner
-import com.santukis.viewmodels.home.MoviesViewModel
+import com.santukis.viewmodels.home.HomeViewModel
 import com.santukis.viewmodels.moviedetail.MovieDetailViewModel
+import com.santukis.viewmodels.movies.MoviesViewModel
 import dev.icerock.moko.mvvm.getViewModel
 
 internal object AndroidDependencyInjector: DependencyInjector {
@@ -15,9 +16,9 @@ internal object AndroidDependencyInjector: DependencyInjector {
         }
     }
 
-    override fun moviesViewModel(platformDependencies: Any?): MoviesViewModel =
+    override fun homeViewModel(platformDependencies: Any?): HomeViewModel =
         (platformDependencies as? ViewModelStoreOwner)?.getViewModel {
-            kodeinDI?.getInstance(ViewModelModuleConstants.MOVIES_VIEW_MODEL)
+            kodeinDI?.getInstance(ViewModelModuleConstants.HOME_VIEW_MODEL)
                 ?: throw Exception("KodeinDI is not initialized")
         } ?: throw Exception("Unable to load MoviesViewModel")
 
@@ -26,4 +27,11 @@ internal object AndroidDependencyInjector: DependencyInjector {
             kodeinDI?.getInstance(ViewModelModuleConstants.MOVIE_DETAIL_VIEW_MODEL)
                 ?: throw Exception("KodeinDI is not initialized")
         } ?: throw Exception("Unable to load MovieDetailViewModel")
+
+    override fun moviesViewModel(platformDependencies: Any?): MoviesViewModel {
+        return (platformDependencies as? ViewModelStoreOwner)?.getViewModel {
+            kodeinDI?.getInstance(ViewModelModuleConstants.MOVIES_VIEW_MODEL)
+                ?: throw Exception("KodeinDI is not initialized")
+        } ?: throw Exception("Unable to load MoviesViewModel")
+    }
 }

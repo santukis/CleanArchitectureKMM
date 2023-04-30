@@ -10,19 +10,19 @@ import com.santukis.home.widgets.MoviesContent
 import com.santukis.navigation.destination.DestinationArguments
 import com.santukis.viewmodels.core.events.OnUiEvent
 import com.santukis.viewmodels.core.events.RequestDecorFitsSystemWindowsChange
-import com.santukis.viewmodels.home.MoviesViewModel
+import com.santukis.viewmodels.home.HomeViewModel
 
 @Composable
-fun MoviesScreen(
-    moviesViewModel: MoviesViewModel,
+fun HomeScreen(
+    homeViewModel: HomeViewModel,
     onUiEvent: (OnUiEvent) -> Unit = {},
     navigateTo: (DestinationArguments) -> Unit = {}
 ) {
-    val homeState = moviesViewModel.moviesState.collectAsState()
+    val homeState = homeViewModel.moviesState.collectAsState()
 
-    LaunchedEffect(moviesViewModel) {
+    LaunchedEffect(homeViewModel) {
         if (homeState.value.shouldUpdateData()) {
-            moviesViewModel.loadHomeData()
+            homeViewModel.loadHomeData()
         }
 
         onUiEvent(

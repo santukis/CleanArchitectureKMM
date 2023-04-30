@@ -17,13 +17,14 @@ import com.santukis.injection.ViewModelModuleConstants.LOAD_NOW_PLAYING_MOVIES_S
 import com.santukis.injection.ViewModelModuleConstants.LOAD_POPULAR_MOVIES_STRATEGY
 import com.santukis.injection.ViewModelModuleConstants.LOAD_UPCOMING_MOVIES_STRATEGY
 import com.santukis.injection.ViewModelModuleConstants.MOVIES_MODULE_NAME
+import com.santukis.injection.ViewModelModuleConstants.HOME_VIEW_MODEL
 import com.santukis.injection.ViewModelModuleConstants.MOVIES_VIEW_MODEL
 import com.santukis.injection.ViewModelModuleConstants.MOVIE_DETAIL_VIEW_MODEL
 import com.santukis.injection.ViewModelModuleConstants.VIEW_MODELS_MODULE_NAME
 import com.santukis.viewmodels.configuration.ConfigurationViewModel
 import com.santukis.viewmodels.core.strategies.ViewModelStrategy
-import com.santukis.viewmodels.home.DefaultMoviesViewModel
-import com.santukis.viewmodels.home.MoviesViewModel
+import com.santukis.viewmodels.home.DefaultHomeViewModel
+import com.santukis.viewmodels.home.HomeViewModel
 import com.santukis.viewmodels.home.entities.MoviesState
 import com.santukis.viewmodels.home.strategies.LoadCouldLikeMoviesStrategy
 import com.santukis.viewmodels.home.strategies.LoadNowPlayingMoviesStrategy
@@ -34,6 +35,8 @@ import com.santukis.viewmodels.moviedetail.MovieDetailViewModel
 import com.santukis.viewmodels.moviedetail.entities.MovieDetailState
 import com.santukis.viewmodels.moviedetail.strategies.LoadMovieDetailStrategy
 import com.santukis.viewmodels.moviedetail.strategies.LoadMovieVideosStrategy
+import com.santukis.viewmodels.movies.DefaultMoviesViewModel
+import com.santukis.viewmodels.movies.MoviesViewModel
 import org.kodein.di.DI
 import org.kodein.di.bind
 import org.kodein.di.instance
@@ -42,6 +45,7 @@ import org.kodein.di.provider
 internal object ViewModelModuleConstants {
     const val VIEW_MODELS_MODULE_NAME = "viewModelsModule"
     const val MOVIES_MODULE_NAME = "moviesViewModelModule"
+    const val HOME_VIEW_MODEL = "homeViewModel"
     const val MOVIES_VIEW_MODEL = "moviesViewModel"
     const val MOVIE_DETAIL_VIEW_MODEL = "moviesDetailViewModel"
 
@@ -68,8 +72,8 @@ private fun movies() = DI.Module(
     name = MOVIES_MODULE_NAME,
     allowSilentOverride = true
 ) {
-    bind<MoviesViewModel>(tag = MOVIES_VIEW_MODEL) with provider {
-        DefaultMoviesViewModel(
+    bind<HomeViewModel>(tag = HOME_VIEW_MODEL) with provider {
+        DefaultHomeViewModel(
             loadNowPlayingMoviesStrategy = instance(LOAD_NOW_PLAYING_MOVIES_STRATEGY),
             loadUpcomingMoviesStrategy = instance(LOAD_UPCOMING_MOVIES_STRATEGY),
             loadPopularMoviesStrategy = instance(LOAD_POPULAR_MOVIES_STRATEGY),
@@ -118,6 +122,10 @@ private fun movies() = DI.Module(
         LoadMovieVideosStrategy(
             getMovieVideos = instance(GET_MOVIE_VIDEOS_USE_CASE)
         )
+    }
+
+    bind<MoviesViewModel>(tag = MOVIES_VIEW_MODEL) with provider {
+        DefaultMoviesViewModel()
     }
 }
 

@@ -8,12 +8,12 @@ plugins {
 apply(from = "$rootDir/android/gradle/configuration/base_android_library_module.gradle")
 
 android {
-    namespace = "com.santukis.moviedetail"
+    namespace = "com.santukis.movies"
 }
 
 dependencies {
     implementation(project(Modules.ViewModel.coreViewModel))
-    implementation(project(Modules.ViewModel.movieDetailViewModel))
+    implementation(project(Modules.ViewModel.moviesViewModel))
     implementation(project(Modules.entities))
 
     implementation(project(Modules.Android.theme))
