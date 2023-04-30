@@ -9,23 +9,21 @@ internal object AndroidDependencyInjector: DependencyInjector {
 
     private var kodeinDI: KodeinDI? = null
 
-    internal fun initialize(moduleDependencies: Any? = null): DependencyInjector {
+    internal fun initialize(moduleDependencies: Any? = null) {
         if (kodeinDI == null) {
             kodeinDI = KodeinDI(moduleDependencies)
         }
-
-        return this
     }
 
     override fun moviesViewModel(platformDependencies: Any?): MoviesViewModel =
         (platformDependencies as? ViewModelStoreOwner)?.getViewModel {
             kodeinDI?.getInstance(ViewModelModuleConstants.MOVIES_VIEW_MODEL)
-                ?: throw Exception("Unable to load HomeViewModel")
-        } ?: throw Exception("Unable to load HomeViewModel")
+                ?: throw Exception("KodeinDI is not initialized")
+        } ?: throw Exception("Unable to load MoviesViewModel")
 
     override fun movieDetailViewModel(platformDependencies: Any?): MovieDetailViewModel =
         (platformDependencies as? ViewModelStoreOwner)?.getViewModel {
             kodeinDI?.getInstance(ViewModelModuleConstants.MOVIE_DETAIL_VIEW_MODEL)
-                ?: throw Exception("Unable to load MovieDetailViewModel")
+                ?: throw Exception("KodeinDI is not initialized")
         } ?: throw Exception("Unable to load MovieDetailViewModel")
 }

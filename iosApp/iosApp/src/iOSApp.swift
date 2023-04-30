@@ -5,7 +5,7 @@ import MultiPlatformLibrary
 struct iOSApp: App {
     @StateObject
     private var moviesViewModel: MoviesViewModel = DependencyInjectorIOSKt
-        .getDependencyInjector(moduleDependencies: nil)
+        .getDependencyInjector()
         .moviesViewModel(platformDependencies: nil)
     
     var body: some Scene {

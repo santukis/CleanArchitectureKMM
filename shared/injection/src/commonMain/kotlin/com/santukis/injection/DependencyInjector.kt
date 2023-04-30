@@ -9,4 +9,6 @@ interface DependencyInjector {
     fun movieDetailViewModel(platformDependencies: Any? = null): MovieDetailViewModel
 }
 
-expect fun getDependencyInjector(moduleDependencies: Any? = null): DependencyInjector
+expect fun initializeDependencyInjector(moduleDependencies: Any? = null)
+
+expect fun getDependencyInjector(): DependencyInjector

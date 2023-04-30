@@ -2,7 +2,6 @@ package com.santukis.cleanarchitecturekmm.android.navigation.destinations
 
 import android.content.Intent
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.*
 import com.santukis.cleanarchitecturekmm.android.navigation.AppRouter
@@ -39,7 +38,7 @@ class MovieDetailDestination(private val movieId: Int = -1): Destination {
         onUiEvent: (OnUiEvent) -> Unit
     ) {
         MovieDetailScreen(
-            movieDetailViewModel = getDependencyInjector(LocalContext.current.applicationContext)
+            movieDetailViewModel = getDependencyInjector()
                 .movieDetailViewModel(LocalViewModelStoreOwner.current),
             movieId = backStackEntry.arguments?.getString("movieId").orEmpty(),
             onUiEvent = onUiEvent
