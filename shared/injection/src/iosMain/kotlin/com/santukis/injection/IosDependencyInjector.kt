@@ -1,7 +1,8 @@
 package com.santukis.injection
 
-import com.santukis.viewmodels.home.MoviesViewModel
+import com.santukis.viewmodels.home.HomeViewModel
 import com.santukis.viewmodels.moviedetail.MovieDetailViewModel
+import com.santukis.viewmodels.movies.MoviesViewModel
 
 @ThreadLocal
 internal object IosDependencyInjector: DependencyInjector {
@@ -14,11 +15,15 @@ internal object IosDependencyInjector: DependencyInjector {
         }
     }
 
-    override fun moviesViewModel(platformDependencies: Any?): MoviesViewModel =
-        kodeinDI?.getInstance(ViewModelModuleConstants.MOVIES_VIEW_MODEL)
+    override fun homeViewModel(platformDependencies: Any?): HomeViewModel =
+        kodeinDI?.getInstance(ViewModelModuleConstants.HOME_VIEW_MODEL)
             ?: throw Exception("KodeinDI is not initialized")
 
     override fun movieDetailViewModel(platformDependencies: Any?): MovieDetailViewModel =
         kodeinDI?.getInstance(ViewModelModuleConstants.MOVIE_DETAIL_VIEW_MODEL)
+            ?: throw Exception("KodeinDI is not initialized")
+
+    override fun moviesViewModel(platformDependencies: Any?): MoviesViewModel =
+        kodeinDI?.getInstance(ViewModelModuleConstants.MOVIES_VIEW_MODEL)
             ?: throw Exception("KodeinDI is not initialized")
 }

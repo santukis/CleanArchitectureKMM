@@ -3,7 +3,7 @@ package com.santukis.cleanarchitecturekmm.android.navigation.destinations
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Tv
+import androidx.compose.material.icons.filled.Movie
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -17,9 +17,10 @@ import com.santukis.home.screens.HomeScreen
 import com.santukis.injection.getDependencyInjector
 import com.santukis.navigation.destination.DecoratedDestination
 import com.santukis.viewmodels.core.events.OnUiEvent
-class ShowsDestination: DecoratedDestination {
 
-    override val template: String = "tv_shows"
+class HomeDestination: DecoratedDestination {
+
+    override val template: String = "home"
 
     @Composable
     override fun DestinationScreen(
@@ -30,7 +31,7 @@ class ShowsDestination: DecoratedDestination {
         HomeScreen(
             homeViewModel = getDependencyInjector()
                 .homeViewModel(LocalViewModelStoreOwner.current),
-            onUiEvent = onUiEvent,
+            onUiEvent = onUiEvent
         ) { arguments ->
             AppRouter.getDestination(arguments)?.navigate(navController)
         }
@@ -39,7 +40,7 @@ class ShowsDestination: DecoratedDestination {
     @Composable
     override fun DestinationLabel() {
         Text(
-            text =  stringResource(id = R.string.tv_shows),
+            text =  stringResource(id = R.string.movies),
             color = Color.White
         )
     }
@@ -47,7 +48,7 @@ class ShowsDestination: DecoratedDestination {
     @Composable
     override fun DestinationIcon() {
         Icon(
-            imageVector = Icons.Filled.Tv,
+            imageVector = Icons.Filled.Movie,
             contentDescription = "",
             tint = Color.White
         )

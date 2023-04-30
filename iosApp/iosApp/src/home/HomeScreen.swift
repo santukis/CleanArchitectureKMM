@@ -5,10 +5,10 @@ import Combine
 
 struct HomeScreen: View {
     @EnvironmentObject
-    private var moviesViewModel: MoviesViewModel
+    private var homeViewModel: HomeViewModel
     
     var body: some View {
-        let moviesState = moviesViewModel.state(
+        let moviesState = homeViewModel.state(
             \.moviesState,
             equals: { state1, state2 in return state1 == state2 },
             mapper: { moviesState in return moviesState }
@@ -20,7 +20,7 @@ struct HomeScreen: View {
                 geometry: geometry
                 
             ).onAppear {
-                moviesViewModel.loadHomeData()
+                homeViewModel.loadHomeData()
             }
         }
         .edgesIgnoringSafeArea(.all)

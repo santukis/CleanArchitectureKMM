@@ -3,7 +3,7 @@ package com.santukis.cleanarchitecturekmm.android.navigation.graphs
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.navigation
-import com.santukis.cleanarchitecturekmm.android.navigation.destinations.MoviesDestination
+import com.santukis.cleanarchitecturekmm.android.navigation.destinations.HomeDestination
 import com.santukis.cleanarchitecturekmm.android.navigation.destinations.ShowsDestination
 import com.santukis.navigation.graphs.navigate
 import com.santukis.viewmodels.core.events.OnUiEvent
@@ -13,12 +13,12 @@ fun NavGraphBuilder.homeNavigationGraph(
     onUiEvent: (OnUiEvent) -> Unit = {}
 ) {
     navigation(
-        startDestination = MoviesDestination().template,
+        startDestination = HomeDestination().template,
         route = NavigationGraph.HOME.name
     ) {
         navigate(
             navController = navController,
-            destination = MoviesDestination(),
+            destination = HomeDestination(),
             onUiEvent = onUiEvent
         )
 

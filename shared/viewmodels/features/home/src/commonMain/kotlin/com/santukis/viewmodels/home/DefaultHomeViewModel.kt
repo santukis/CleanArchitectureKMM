@@ -8,13 +8,13 @@ import dev.icerock.moko.mvvm.flow.cMutableStateFlow
 import dev.icerock.moko.mvvm.flow.cStateFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 
-class DefaultMoviesViewModel(
+class DefaultHomeViewModel(
     private val loadNowPlayingMoviesStrategy: ViewModelStrategy<Unit, MoviesState>,
     private val loadUpcomingMoviesStrategy: ViewModelStrategy<Unit, MoviesState>,
     private val loadPopularMoviesStrategy: ViewModelStrategy<Unit, MoviesState>,
     private val loadCouldLikeMoviesStrategy: ViewModelStrategy<Unit, MoviesState>,
 ):
-    MoviesViewModel() {
+    HomeViewModel() {
 
     private val _moviesState: CMutableStateFlow<MoviesState> =
         MutableStateFlow(MoviesState()).cMutableStateFlow()

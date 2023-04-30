@@ -11,7 +11,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.santukis.navigation.bottombar.BottomNavigationAnimatedVisibility
 import com.santukis.cleanarchitecturekmm.android.navigation.MovieNavHost
-import com.santukis.cleanarchitecturekmm.android.navigation.destinations.MoviesDestination
+import com.santukis.cleanarchitecturekmm.android.navigation.destinations.HomeDestination
 import com.santukis.cleanarchitecturekmm.android.navigation.destinations.ShowsDestination
 import com.santukis.viewmodels.core.events.OnUiEvent
 
@@ -29,7 +29,7 @@ fun MainScreen(
             BottomNavigationAnimatedVisibility(
                 navController = navController,
                 bottomNavigationDestinations = listOf(
-                    MoviesDestination(),
+                    HomeDestination(),
                     ShowsDestination()
                 )
             )

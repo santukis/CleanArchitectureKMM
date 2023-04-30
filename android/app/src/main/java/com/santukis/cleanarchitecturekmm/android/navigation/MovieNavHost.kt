@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.santukis.cleanarchitecturekmm.android.navigation.destinations.MovieDetailDestination
+import com.santukis.cleanarchitecturekmm.android.navigation.destinations.MoviesDestination
 import com.santukis.cleanarchitecturekmm.android.navigation.graphs.NavigationGraph
 import com.santukis.cleanarchitecturekmm.android.navigation.graphs.homeNavigationGraph
 import com.santukis.navigation.graphs.navigate
@@ -32,6 +33,12 @@ fun MovieNavHost(
         navigate(
             navController = navController,
             destination = MovieDetailDestination(),
+            onUiEvent = onUiEvent
+        )
+
+        navigate(
+            navController = navController,
+            destination = MoviesDestination(),
             onUiEvent = onUiEvent
         )
     }

@@ -18,6 +18,9 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.santukis.entities.movies.Movie
 import com.santukis.entities.movies.PosterSize
+import com.santukis.navigation.destination.DestinationArguments
+import com.santukis.navigation.destination.arguments.MovieDetailDestinationArguments
+import com.santukis.navigation.destination.arguments.MoviesDestinationArguments
 import com.santukis.widgets.SectionContent
 
 @Composable
@@ -25,7 +28,7 @@ fun MovieSectionContent(
     modifier: Modifier = Modifier,
     movies: List<Movie>,
     sectionTitle: String,
-    onMovieClick: (Movie) -> Unit
+    navigateTo: (DestinationArguments) -> Unit
 ) {
 
     SectionContent(
@@ -40,6 +43,12 @@ fun MovieSectionContent(
             )
 
             Icon(
+                modifier = Modifier
+                    .clickable {
+                        navigateTo(
+                            MoviesDestinationArguments()
+                        )
+                    },
                 imageVector = Icons.Filled.Add,
                 contentDescription = "",
                 tint = Color.White
@@ -52,7 +61,12 @@ fun MovieSectionContent(
                     .fillParentMaxWidth(0.4f)
                     .aspectRatio(0.7f)
                     .clip(RoundedCornerShape(4.dp))
-                    .clickable { onMovieClick(movie) },
+                    .clickable {
+                        navigateTo(
+                            MovieDetailDestinationArguments(
+                                movieId = movie.id
+                            )
+                        ) },
                 model = movie.images.posterImage?.getUrl(PosterSize.W_342),
                 contentDescription = "",
                 contentScale = ContentScale.Crop,

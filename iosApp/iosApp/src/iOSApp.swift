@@ -4,14 +4,14 @@ import MultiPlatformLibrary
 @main
 struct iOSApp: App {
     @StateObject
-    private var moviesViewModel: MoviesViewModel = DependencyInjectorIOSKt
+    private var homeViewModel: HomeViewModel = DependencyInjectorIOSKt
         .getDependencyInjector()
-        .moviesViewModel(platformDependencies: nil)
+        .homeViewModel(platformDependencies: nil)
     
     var body: some Scene {
         WindowGroup {
             HomeScreen()
-                .environmentObject(moviesViewModel)
+                .environmentObject(homeViewModel)
         }
     }
 }

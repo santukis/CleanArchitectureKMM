@@ -16,7 +16,7 @@ dependencies {
     implementation(project(Modules.ViewModel.homeViewModel))
     implementation(project(Modules.entities))
 
-    implementation(project(Modules.Android.Theme))
-    implementation(project(Modules.Android.Navigation))
-    implementation(project(Modules.Android.Widgets))
+    implementation(project(Modules.Android.theme))
+    implementation(project(Modules.Android.navigation))
+    implementation(project(Modules.Android.widgets))
 }
