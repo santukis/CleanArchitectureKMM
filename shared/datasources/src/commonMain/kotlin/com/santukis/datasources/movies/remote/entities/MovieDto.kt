@@ -75,6 +75,7 @@ data class MovieDto(
             rating = Rating(
                 average = voteAverage ?: 0.0,
                 count = voteCount ?: 0
-            )
+            ),
+            overview = overview.orEmpty()
         )
 }

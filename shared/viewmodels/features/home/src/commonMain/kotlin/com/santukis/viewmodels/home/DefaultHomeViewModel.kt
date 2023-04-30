@@ -1,7 +1,8 @@
 package com.santukis.viewmodels.home
 
+import com.santukis.entities.movies.Movie
 import com.santukis.viewmodels.core.strategies.ViewModelStrategy
-import com.santukis.viewmodels.home.entities.MoviesState
+import com.santukis.viewmodels.home.entities.HomeState
 import dev.icerock.moko.mvvm.flow.CMutableStateFlow
 import dev.icerock.moko.mvvm.flow.CStateFlow
 import dev.icerock.moko.mvvm.flow.cMutableStateFlow
@@ -9,17 +10,17 @@ import dev.icerock.moko.mvvm.flow.cStateFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class DefaultHomeViewModel(
-    private val loadNowPlayingMoviesStrategy: ViewModelStrategy<Unit, MoviesState>,
-    private val loadUpcomingMoviesStrategy: ViewModelStrategy<Unit, MoviesState>,
-    private val loadPopularMoviesStrategy: ViewModelStrategy<Unit, MoviesState>,
-    private val loadCouldLikeMoviesStrategy: ViewModelStrategy<Unit, MoviesState>,
+    private val loadNowPlayingMoviesStrategy: ViewModelStrategy<Unit, List<Movie>>,
+    private val loadUpcomingMoviesStrategy: ViewModelStrategy<Unit,  List<Movie>>,
+    private val loadPopularMoviesStrategy: ViewModelStrategy<Unit,  List<Movie>>,
+    private val loadCouldLikeMoviesStrategy: ViewModelStrategy<Unit,  List<Movie>>,
 ):
     HomeViewModel() {
 
-    private val _moviesState: CMutableStateFlow<MoviesState> =
-        MutableStateFlow(MoviesState()).cMutableStateFlow()
+    private val _homeState: CMutableStateFlow<HomeState> =
+        MutableStateFlow(HomeState()).cMutableStateFlow()
 
-    override val moviesState: CStateFlow<MoviesState> = _moviesState.cStateFlow()
+    override val homeState: CStateFlow<HomeState> = _homeState.cStateFlow()
 
     override fun loadHomeData() {
         loadNowPlayingMovies()
@@ -32,7 +33,11 @@ class DefaultHomeViewModel(
         loadNowPlayingMoviesStrategy.execute(
             viewModel = this,
             input = Unit,
-            output = _moviesState
+            onSuccess = { movies ->
+                _homeState.value = _homeState.value.copy(
+                    nowPlayingMovies = movies
+                )
+            }
         )
     }
 
@@ -40,7 +45,11 @@ class DefaultHomeViewModel(
         loadUpcomingMoviesStrategy.execute(
             viewModel = this,
             input = Unit,
-            output = _moviesState
+            onSuccess = { movies ->
+                _homeState.value = _homeState.value.copy(
+                    upcomingMovies = movies
+                )
+            }
         )
     }
 
@@ -48,7 +57,11 @@ class DefaultHomeViewModel(
         loadPopularMoviesStrategy.execute(
             viewModel = this,
             input = Unit,
-            output = _moviesState
+            onSuccess = { movies ->
+                _homeState.value = _homeState.value.copy(
+                    popularMovies = movies
+                )
+            }
         )
     }
 
@@ -56,7 +69,11 @@ class DefaultHomeViewModel(
         loadCouldLikeMoviesStrategy.execute(
             viewModel = this,
             input = Unit,
-            output = _moviesState
+            onSuccess = { movies ->
+                _homeState.value = _homeState.value.copy(
+                    couldLikeMovies = movies
+                )
+            }
         )
     }
 }

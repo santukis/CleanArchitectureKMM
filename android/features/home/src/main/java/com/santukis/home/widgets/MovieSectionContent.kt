@@ -16,18 +16,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.santukis.core.entities.getSectionTitle
 import com.santukis.entities.movies.Movie
 import com.santukis.entities.movies.PosterSize
 import com.santukis.navigation.destination.DestinationArguments
 import com.santukis.navigation.destination.arguments.MovieDetailDestinationArguments
 import com.santukis.navigation.destination.arguments.MoviesDestinationArguments
+import com.santukis.viewmodels.core.entities.MovieSection
 import com.santukis.widgets.SectionContent
 
 @Composable
 fun MovieSectionContent(
     modifier: Modifier = Modifier,
     movies: List<Movie>,
-    sectionTitle: String,
+    section: MovieSection,
     navigateTo: (DestinationArguments) -> Unit
 ) {
 
@@ -36,7 +38,7 @@ fun MovieSectionContent(
         items = movies,
         sectionRow = {
             Text(
-                text = sectionTitle,
+                text = section.getSectionTitle(),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White
@@ -46,7 +48,7 @@ fun MovieSectionContent(
                 modifier = Modifier
                     .clickable {
                         navigateTo(
-                            MoviesDestinationArguments()
+                            MoviesDestinationArguments(section = section)
                         )
                     },
                 imageVector = Icons.Filled.Add,
@@ -66,7 +68,8 @@ fun MovieSectionContent(
                             MovieDetailDestinationArguments(
                                 movieId = movie.id
                             )
-                        ) },
+                        )
+                    },
                 model = movie.images.posterImage?.getUrl(PosterSize.W_342),
                 contentDescription = "",
                 contentScale = ContentScale.Crop,

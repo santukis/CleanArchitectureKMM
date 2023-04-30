@@ -14,7 +14,7 @@ object AppRouter {
     fun getDestination(arguments: DestinationArguments): Destination? =
         when (arguments) {
             is MovieDetailDestinationArguments -> MovieDetailDestination(movieId = arguments.movieId)
-            is MoviesDestinationArguments -> MoviesDestination()
+            is MoviesDestinationArguments -> MoviesDestination(section = arguments.section)
             is PopBackStackDestinationArguments -> PopBackStackDestination()
             else -> null
         }

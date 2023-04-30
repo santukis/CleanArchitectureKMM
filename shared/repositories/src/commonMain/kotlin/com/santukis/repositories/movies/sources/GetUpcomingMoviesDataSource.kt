@@ -4,5 +4,5 @@ import com.santukis.entities.movies.Movie
 
 interface GetUpcomingMoviesDataSource {
 
-    suspend fun getUpcomingMovies(): List<Movie>
+    suspend fun getUpcomingMovies(page: Int): List<Movie>
 }

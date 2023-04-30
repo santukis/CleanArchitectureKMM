@@ -70,15 +70,15 @@ private fun movies() = DI.Module(
         GetNowPlayingMovies(instance(GET_NOW_PLAYING_MOVIES_GATEWAY))
     }
 
-    bind<UseCase<Unit, Flow<List<Movie>>>>(tag = GET_UPCOMING_MOVIES_USE_CASE) with provider {
+    bind<UseCase<Int, Flow<List<Movie>>>>(tag = GET_UPCOMING_MOVIES_USE_CASE) with provider {
         GetUpcomingMovies(instance(GET_UPCOMING_MOVIES_GATEWAY))
     }
 
-    bind<UseCase<Unit, Flow<List<Movie>>>>(tag = GET_POPULAR_MOVIES_USE_CASE) with provider {
+    bind<UseCase<Int, Flow<List<Movie>>>>(tag = GET_POPULAR_MOVIES_USE_CASE) with provider {
         GetPopularMovies(instance(GET_POPULAR_MOVIES_GATEWAY))
     }
 
-    bind<UseCase<Unit, Flow<List<Movie>>>>(tag = GET_MOVIES_BY_KEYWORD_USE_CASE) with provider {
+    bind<UseCase<Int, Flow<List<Movie>>>>(tag = GET_MOVIES_BY_KEYWORD_USE_CASE) with provider {
         GetMoviesByKeyword(instance())
     }
 }

@@ -7,15 +7,19 @@ import com.santukis.cleanarchitecturekmm.android.navigation.AppRouter
 import com.santukis.injection.getDependencyInjector
 import com.santukis.movies.screens.MoviesScreen
 import com.santukis.navigation.destination.Destination
+import com.santukis.viewmodels.core.entities.MovieSection
 import com.santukis.viewmodels.core.events.OnUiEvent
 
-class MoviesDestination(): Destination {
+class MoviesDestination(private val section: MovieSection = MovieSection.UpcomingMovies) : Destination {
 
-    override val template: String = "movies"
+    override val template: String = "movies/{section}"
 
     override fun getArguments(): List<NamedNavArgument> =
         listOf(
-
+            navArgument("section") {
+                type = NavType.StringType
+                defaultValue = MovieSection.UpcomingMovies.value
+            }
         )
 
     @Composable
@@ -25,6 +29,7 @@ class MoviesDestination(): Destination {
         onUiEvent: (OnUiEvent) -> Unit
     ) {
         MoviesScreen(
+            section = MovieSection.from(backStackEntry.arguments?.getString("section").orEmpty()),
             moviesViewModel = getDependencyInjector()
                 .moviesViewModel(LocalViewModelStoreOwner.current),
             onUiEvent = onUiEvent
@@ -37,6 +42,6 @@ class MoviesDestination(): Destination {
         navController: NavController,
         builder: NavOptionsBuilder.() -> Unit
     ) {
-        navController.navigate(template, builder)
+        navController.navigate("movies/${section.value}", builder)
     }
 }

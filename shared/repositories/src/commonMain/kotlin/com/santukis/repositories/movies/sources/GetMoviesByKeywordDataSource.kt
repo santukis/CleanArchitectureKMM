@@ -5,5 +5,5 @@ import com.santukis.entities.movies.Movie
 
 interface GetMoviesByKeywordDataSource {
 
-    suspend fun getMoviesByKeyword(keywords: List<Keyword>): List<Movie>
+    suspend fun getMoviesByKeyword(keywords: List<Keyword>, page: Int): List<Movie>
 }

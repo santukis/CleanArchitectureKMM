@@ -3,7 +3,7 @@ package com.santukis.repositories.movies
 import com.santukis.entities.movies.Keyword
 import com.santukis.entities.movies.Movie
 import com.santukis.entities.movies.Video
-import com.santukis.repositories.strategies.RemoteStrategy
+import com.santukis.repositories.movies.entities.GetMoviesByKeywordRequest
 import com.santukis.repositories.strategies.RepositoryStrategy
 import com.santukis.usecases.movies.*
 import kotlinx.coroutines.flow.Flow
@@ -15,10 +15,10 @@ class MovieRepository(
     private val getMovieVideosStrategy: RepositoryStrategy<String, List<Video>>,
     private val getMovieKeywordsStrategy: RepositoryStrategy<String, List<Keyword>>,
     private val getNowPlayingMoviesStrategy: RepositoryStrategy<Unit, List<Movie>>,
-    private val getUpcomingMoviesStrategy: RepositoryStrategy<Unit, List<Movie>>,
-    private val getPopularMoviesStrategy: RepositoryStrategy<Unit, List<Movie>>,
+    private val getUpcomingMoviesStrategy: RepositoryStrategy<Int, List<Movie>>,
+    private val getPopularMoviesStrategy: RepositoryStrategy<Int, List<Movie>>,
     private val getMostFrequentlyKeywordsStrategy: RepositoryStrategy<Unit, List<Keyword>>,
-    private val getMoviesByKeywordStrategy: RepositoryStrategy<List<Keyword>, List<Movie>>
+    private val getMoviesByKeywordStrategy: RepositoryStrategy<GetMoviesByKeywordRequest, List<Movie>>
 ) :
     GetMovieDetailGateway,
     GetNowPlayingMoviesGateway,
@@ -39,13 +39,17 @@ class MovieRepository(
     override suspend fun getNowPlayingMovies(): Flow<List<Movie>> =
         flowOf(getNowPlayingMoviesStrategy.execute(Unit))
 
-    override suspend fun getUpcomingMovies(): Flow<List<Movie>> =
-        flowOf(getUpcomingMoviesStrategy.execute(Unit))
+    override suspend fun getUpcomingMovies(page: Int): Flow<List<Movie>> =
+        flowOf(getUpcomingMoviesStrategy.execute(page))
 
-    override suspend fun getPopularMovies(): Flow<List<Movie>> =
-        flowOf(getPopularMoviesStrategy.execute(Unit))
+    override suspend fun getPopularMovies(page: Int): Flow<List<Movie>> =
+        flowOf(getPopularMoviesStrategy.execute(page))
 
-    override suspend fun getMoviesByKeyword(): Flow<List<Movie>> =
+    override suspend fun getMoviesByKeyword(page: Int): Flow<List<Movie>> =
         flowOf(getMoviesByKeywordStrategy.execute(
-                getMostFrequentlyKeywordsStrategy.execute(Unit)))
+            GetMoviesByKeywordRequest(
+                keywords = getMostFrequentlyKeywordsStrategy.execute(Unit),
+                page = page
+            ))
+        )
 }

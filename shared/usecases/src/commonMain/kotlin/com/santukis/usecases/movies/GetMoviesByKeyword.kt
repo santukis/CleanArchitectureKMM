@@ -5,13 +5,13 @@ import com.santukis.usecases.UseCase
 import kotlinx.coroutines.flow.Flow
 
 interface GetMoviesByKeywordGateway {
-    suspend fun getMoviesByKeyword(): Flow<List<Movie>>
+    suspend fun getMoviesByKeyword(page: Int): Flow<List<Movie>>
 }
 
 class GetMoviesByKeyword(
     private val gateway: GetMoviesByKeywordGateway
-) : UseCase<Unit, Flow<List<Movie>>> {
+) : UseCase<Int, Flow<List<Movie>>> {
 
-    override suspend fun invoke(params: Unit): Flow<List<Movie>> =
-        gateway.getMoviesByKeyword()
+    override suspend fun invoke(params: Int): Flow<List<Movie>> =
+        gateway.getMoviesByKeyword(params)
 }

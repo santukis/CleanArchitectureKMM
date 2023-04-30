@@ -5,13 +5,13 @@ import com.santukis.usecases.UseCase
 import kotlinx.coroutines.flow.Flow
 
 interface GetPopularMoviesGateway {
-    suspend fun getPopularMovies(): Flow<List<Movie>>
+    suspend fun getPopularMovies(page: Int): Flow<List<Movie>>
 }
 
 class GetPopularMovies(
     private val gateway: GetPopularMoviesGateway
-) : UseCase<Unit, Flow<List<Movie>>> {
+) : UseCase<Int, Flow<List<Movie>>> {
 
-    override suspend fun invoke(params: Unit): Flow<List<Movie>> =
-        gateway.getPopularMovies()
+    override suspend fun invoke(params: Int): Flow<List<Movie>> =
+        gateway.getPopularMovies(params)
 }

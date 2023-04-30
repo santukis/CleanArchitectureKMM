@@ -24,6 +24,7 @@ import com.santukis.injection.DataSourceConstants.GET_UPCOMING_MOVIES_DATA_SOURC
 import com.santukis.injection.DataSourceConstants.SAVE_MOVIE_DETAIL_DATA_SOURCE_INTO_LOCAL
 import com.santukis.repositories.configuration.ConfigurationRepository
 import com.santukis.repositories.movies.MovieRepository
+import com.santukis.repositories.movies.entities.GetMoviesByKeywordRequest
 import com.santukis.repositories.movies.strategies.*
 import com.santukis.repositories.strategies.RepositoryStrategy
 import com.santukis.usecases.configuration.GetCountriesGateway
@@ -111,19 +112,19 @@ private fun movies() = DI.Module(
         )
     }
 
-    bind<RepositoryStrategy<Unit, List<Movie>>>(tag = GET_UPCOMING_MOVIES_STRATEGY) with singleton {
+    bind<RepositoryStrategy<Int, List<Movie>>>(tag = GET_UPCOMING_MOVIES_STRATEGY) with singleton {
         GetUpcomingMoviesFromRemoteStrategy(
             getUpcomingMoviesFromRemote = instance(GET_UPCOMING_MOVIES_DATA_SOURCE_FROM_REMOTE)
         )
     }
 
-    bind<RepositoryStrategy<Unit, List<Movie>>>(tag = GET_POPULAR_MOVIES_STRATEGY) with singleton {
+    bind<RepositoryStrategy<Int, List<Movie>>>(tag = GET_POPULAR_MOVIES_STRATEGY) with singleton {
         GetPopularMoviesFromRemoteStrategy(
             getPopularMoviesFromRemote = instance(GET_POPULAR_MOVIES_DATA_SOURCE_FROM_REMOTE)
         )
     }
 
-    bind<RepositoryStrategy<List<Keyword>, List<Movie>>>() with singleton {
+    bind<RepositoryStrategy<GetMoviesByKeywordRequest, List<Movie>>>() with singleton {
         GetMoviesByKeywordFromRemoteStrategy(
             getMoviesByKeywordFromRemote = instance()
         )
