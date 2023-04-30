@@ -6,15 +6,13 @@ import dev.icerock.moko.mvvm.flow.CMutableStateFlow
 import dev.icerock.moko.mvvm.flow.CStateFlow
 import dev.icerock.moko.mvvm.flow.cMutableStateFlow
 import dev.icerock.moko.mvvm.flow.cStateFlow
-import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class DefaultMovieDetailViewModel(
     private val loadMovieDetailStrategy: ViewModelStrategy<String, MovieDetailState>,
     private val loadMovieVideosStrategy: ViewModelStrategy<String, MovieDetailState>
 ):
-    ViewModel(),
-    MovieDetailViewModel {
+    MovieDetailViewModel() {
 
     private val _movieDetailState: CMutableStateFlow<MovieDetailState> =
         MutableStateFlow(MovieDetailState()).cMutableStateFlow()
