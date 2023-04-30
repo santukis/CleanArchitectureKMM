@@ -5,7 +5,7 @@ import Combine
 
 struct HomeScreen: View {
     @EnvironmentObject
-    private var moviesViewModel: DefaultMoviesViewModel
+    private var moviesViewModel: MoviesViewModel
     
     var body: some View {
         let moviesState = moviesViewModel.state(

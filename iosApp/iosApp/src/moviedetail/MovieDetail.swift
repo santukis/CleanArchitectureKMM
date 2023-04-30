@@ -6,7 +6,7 @@ import Combine
 
 struct MovieDetailView: View {
     @EnvironmentObject
-    private var movieDetailViewModel: DefaultMovieDetailViewModel
+    private var movieDetailViewModel: MovieDetailViewModel
     var movieId: String
 
     var body: some View {

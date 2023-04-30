@@ -6,7 +6,6 @@ import dev.icerock.moko.mvvm.flow.CMutableStateFlow
 import dev.icerock.moko.mvvm.flow.CStateFlow
 import dev.icerock.moko.mvvm.flow.cMutableStateFlow
 import dev.icerock.moko.mvvm.flow.cStateFlow
-import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class DefaultMoviesViewModel(
@@ -15,8 +14,7 @@ class DefaultMoviesViewModel(
     private val loadPopularMoviesStrategy: ViewModelStrategy<Unit, MoviesState>,
     private val loadCouldLikeMoviesStrategy: ViewModelStrategy<Unit, MoviesState>,
 ):
-    ViewModel(),
-    MoviesViewModel {
+    MoviesViewModel() {
 
     private val _moviesState: CMutableStateFlow<MoviesState> =
         MutableStateFlow(MoviesState()).cMutableStateFlow()
