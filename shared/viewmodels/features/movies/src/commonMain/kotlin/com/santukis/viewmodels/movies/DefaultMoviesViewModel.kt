@@ -32,35 +32,15 @@ class DefaultMoviesViewModel(
 
     override fun loadSectionMovies(section: MovieSection) {
         when(section) {
-            MovieSection.UpcomingMovies -> loadUpcomingMovies()
-            MovieSection.PopularMovies -> loadPopularMovies()
-            MovieSection.CouldYouLikeMovies -> loadCouldYouLikeMovies()
+            MovieSection.UpcomingMovies -> loadMovies(loadUpcomingMoviesStrategy)
+            MovieSection.PopularMovies -> loadMovies(loadPopularMoviesStrategy)
+            MovieSection.CouldYouLikeMovies -> loadMovies(loadCouldYouLikeMoviesStrategy)
             else -> {}
         }
     }
 
-    private fun loadUpcomingMovies() {
-        loadUpcomingMoviesStrategy.execute(
-            viewModel = this,
-            input = Unit,
-            onSuccess = { movies ->
-                _moviesState.value = _moviesState.value.addMovies(movies)
-            }
-        )
-    }
-
-    private fun loadPopularMovies() {
-        loadPopularMoviesStrategy.execute(
-            viewModel = this,
-            input = Unit,
-            onSuccess = { movies ->
-                _moviesState.value = _moviesState.value.addMovies(movies)
-            }
-        )
-    }
-
-    private fun loadCouldYouLikeMovies() {
-        loadCouldYouLikeMoviesStrategy.execute(
+    private fun loadMovies(strategy: ViewModelStrategy<Unit, List<Movie>>) {
+        strategy.execute(
             viewModel = this,
             input = Unit,
             onSuccess = { movies ->

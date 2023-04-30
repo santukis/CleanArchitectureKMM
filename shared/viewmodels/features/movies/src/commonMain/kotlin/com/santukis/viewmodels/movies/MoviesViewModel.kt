@@ -9,6 +9,7 @@ import dev.icerock.moko.mvvm.viewmodel.ViewModel
 abstract class MoviesViewModel: ViewModel() {
 
     abstract val moviesState: CStateFlow<MoviesState>
+
     abstract fun loadSectionMovies(section: MovieSection)
 
     abstract fun onUiEvent(event: OnUiEvent)
