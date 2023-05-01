@@ -1,32 +1,16 @@
+//
+//  HomeContent.swift
+//  iosApp
+//
+//  Created by David Santamaría Álvarez on 1/5/23.
+//  Copyright © 2023 orgName. All rights reserved.
+//
+
+import Foundation
 import SwiftUI
 import MultiPlatformLibrary
 import mokoMvvmFlowSwiftUI
 import Combine
-
-struct HomeScreen: View {
-    @EnvironmentObject
-    private var homeViewModel: HomeViewModel
-    
-    var body: some View {
-        let homeState = homeViewModel.state(
-            \.moviesState,
-            equals: { state1, state2 in return state1 == state2 },
-            mapper: { homeState in return homeState }
-        )
-        
-        GeometryReader { geometry in
-            HomeContent(
-                homeState: homeState,
-                geometry: geometry
-                
-            ).onAppear {
-                homeViewModel.loadHomeData()
-            }
-        }
-        .edgesIgnoringSafeArea(.all)
-        .background(Color.black)
-    }
-}
 
 struct HomeContent: View {
     var homeState: HomeState

@@ -37,7 +37,7 @@ fun MoviesScreen(
         onUiEvent(uiEvent)
     }
 
-    LaunchedEffect(true) {
+    LaunchedEffect(moviesViewModel) {
         moviesViewModel.loadSectionMovies(section)
 
         onUiEvent(

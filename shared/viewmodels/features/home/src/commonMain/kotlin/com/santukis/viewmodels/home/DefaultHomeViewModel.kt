@@ -30,9 +30,8 @@ class DefaultHomeViewModel(
     }
 
     private fun loadNowPlayingMovies() {
-        loadNowPlayingMoviesStrategy.execute(
-            viewModel = this,
-            input = Unit,
+        loadMovies(
+            strategy = loadNowPlayingMoviesStrategy,
             onSuccess = { movies ->
                 _homeState.value = _homeState.value.copy(
                     nowPlayingMovies = movies
@@ -42,9 +41,8 @@ class DefaultHomeViewModel(
     }
 
     private fun loadUpcoming() {
-        loadUpcomingMoviesStrategy.execute(
-            viewModel = this,
-            input = Unit,
+        loadMovies(
+            strategy = loadUpcomingMoviesStrategy,
             onSuccess = { movies ->
                 _homeState.value = _homeState.value.copy(
                     upcomingMovies = movies
@@ -54,9 +52,8 @@ class DefaultHomeViewModel(
     }
 
     private fun loadPopularMovies() {
-        loadPopularMoviesStrategy.execute(
-            viewModel = this,
-            input = Unit,
+        loadMovies(
+            strategy = loadPopularMoviesStrategy,
             onSuccess = { movies ->
                 _homeState.value = _homeState.value.copy(
                     popularMovies = movies
@@ -66,13 +63,25 @@ class DefaultHomeViewModel(
     }
 
     private fun loadMoviesByMostFrequentlyKeyword() {
-        loadCouldLikeMoviesStrategy.execute(
-            viewModel = this,
-            input = Unit,
+        loadMovies(
+            strategy = loadCouldLikeMoviesStrategy,
             onSuccess = { movies ->
                 _homeState.value = _homeState.value.copy(
                     couldLikeMovies = movies
                 )
+            }
+        )
+    }
+
+    private fun loadMovies(
+        strategy: ViewModelStrategy<Unit, List<Movie>>,
+        onSuccess: (List<Movie>) -> Unit
+    ) {
+        strategy.execute(
+            viewModel = this,
+            input = Unit,
+            onSuccess = { movies ->
+                onSuccess(movies)
             }
         )
     }

@@ -8,6 +8,10 @@ struct iOSApp: App {
         .getDependencyInjector()
         .homeViewModel(platformDependencies: nil)
     
+    init() {
+        DependencyInjectorIOSKt.initializeDependencyInjector(moduleDependencies: nil)
+    }
+    
     var body: some Scene {
         WindowGroup {
             HomeScreen()
