@@ -1,4 +1,5 @@
 import com.santukis.buildsrc.dependencies.Android
+import com.santukis.buildsrc.modules.Modules
 
 plugins {
     id("com.android.library")
@@ -12,6 +13,8 @@ android {
 }
 
 dependencies {
+    implementation(project(Modules.entities))
+
     implementation(Android.Media.exoplayer)
     implementation(Android.Media.exoplayerUi)
     implementation(Android.Media.youtubePlayer)

@@ -7,4 +7,6 @@ data class Movie(
     val titles: Titles,
     val rating: Rating,
     val overview: String
-)
+) {
+    fun isRated(): Boolean = rating.isRated()
+}
