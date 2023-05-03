@@ -79,7 +79,8 @@ fun NowPlayingContent(
 
                     MovieHeader(
                         modifier =  Modifier
-                            .align(Alignment.BottomStart),
+                            .align(Alignment.BottomStart)
+                            .padding(vertical = 32.dp),
                         movie = movie
                     )
                 }

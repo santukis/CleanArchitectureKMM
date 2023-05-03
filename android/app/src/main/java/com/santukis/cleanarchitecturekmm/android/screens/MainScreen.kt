@@ -1,12 +1,14 @@
 package com.santukis.cleanarchitecturekmm.android.screens
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.santukis.navigation.bottombar.BottomNavigationAnimatedVisibility
@@ -21,25 +23,29 @@ fun MainScreen(
     onUiEvent: (OnUiEvent) -> Unit
 ) {
 
-    Scaffold(
-        modifier = Modifier.navigationBarsPadding(),
-        scaffoldState = rememberScaffoldState(),
-        backgroundColor = Color.Black,
-        bottomBar = {
-            BottomNavigationAnimatedVisibility(
-                navController = navController,
-                bottomNavigationDestinations = listOf(
-                    HomeDestination(),
-                    ShowsDestination()
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colors.background
+    ) {
+        Scaffold(
+            modifier = Modifier.navigationBarsPadding(),
+            scaffoldState = rememberScaffoldState(),
+            bottomBar = {
+                BottomNavigationAnimatedVisibility(
+                    navController = navController,
+                    bottomNavigationDestinations = listOf(
+                        HomeDestination(),
+                        ShowsDestination()
+                    )
                 )
+            }
+        ) { paddingValues ->
+            MovieNavHost(
+                modifier = Modifier
+                    .padding(paddingValues),
+                navController = navController,
+                onUiEvent = onUiEvent
             )
         }
-    ) { paddingValues ->
-        MovieNavHost(
-            modifier = Modifier
-                .padding(paddingValues),
-            navController = navController,
-            onUiEvent = onUiEvent
-        )
     }
 }

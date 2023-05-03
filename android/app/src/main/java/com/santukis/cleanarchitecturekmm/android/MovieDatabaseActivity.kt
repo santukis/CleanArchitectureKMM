@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.compose.rememberNavController
 import com.santukis.cleanarchitecturekmm.android.screens.MainScreen
 import com.santukis.theme.MovieTheme
@@ -30,7 +31,15 @@ class MovieDatabaseActivity : ComponentActivity() {
     }
 
     private fun changesStatusBarColor(event: RequestDecorFitsSystemWindowsChange) {
-        WindowCompat.setDecorFitsSystemWindows(window, event.decorFitsSystemWindows)
+        val insetsController =  WindowCompat.getInsetsController(window, window.decorView)
+
+        if (event.decorFitsSystemWindows) {
+            insetsController.show(WindowInsetsCompat.Type.statusBars())
+
+        } else {
+            insetsController.hide(WindowInsetsCompat.Type.statusBars())
+        }
+
         window.statusBarColor = event.statusBarColor
     }
 }

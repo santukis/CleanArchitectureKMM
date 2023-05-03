@@ -43,3 +43,12 @@ fun MovieTheme(
         content = content
     )
 }
+
+@Composable
+fun MaterialTheme.statusBarColor(): Color =
+    if (isSystemInDarkTheme()) {
+        colors.surface
+
+    } else {
+        colors.primary
+    }

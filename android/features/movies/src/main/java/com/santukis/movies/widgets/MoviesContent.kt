@@ -9,11 +9,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.santukis.navigation.destination.DestinationArguments
 import com.santukis.navigation.destination.arguments.MovieDetailDestinationArguments
@@ -42,7 +42,7 @@ fun MoviesContent(
     LazyColumn(
         state = listState,
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
         items(
             items = moviesState.movies,
@@ -69,7 +69,8 @@ fun MoviesContent(
 
                     MovieHeader(
                         modifier =  Modifier
-                            .align(Alignment.BottomStart),
+                            .align(Alignment.BottomStart)
+                            .padding(vertical = 8.dp),
                         movie = movie
                     )
                 }
@@ -77,9 +78,10 @@ fun MoviesContent(
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp),
+                        .padding(horizontal = 8.dp),
                     text = movie.overview,
-                    color = MaterialTheme.colors.onPrimary
+                    maxLines = 3,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
         }

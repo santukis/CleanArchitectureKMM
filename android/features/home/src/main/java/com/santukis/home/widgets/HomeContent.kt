@@ -20,8 +20,6 @@ fun HomeContent(
     navigateTo: (DestinationArguments) -> Unit
 ) {
     LazyColumn(
-        modifier = modifier
-            .background(Color.Black),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         addHighlight(

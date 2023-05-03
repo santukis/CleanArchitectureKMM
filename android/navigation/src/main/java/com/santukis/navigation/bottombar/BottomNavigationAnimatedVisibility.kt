@@ -9,7 +9,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.santukis.navigation.destination.DecoratedDestination
@@ -29,9 +28,7 @@ fun BottomNavigationAnimatedVisibility(
         enter = slideInVertically(initialOffsetY = { contentHeight -> contentHeight }),
         exit = slideOutVertically(targetOffsetY = { contentHeight -> contentHeight })
     ) {
-        BottomNavigation(
-            backgroundColor = Color.Transparent
-        ) {
+        BottomNavigation() {
             bottomNavigationDestinations.forEach { destination ->
                 NavigationItem(
                     destination = destination,

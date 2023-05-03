@@ -40,8 +40,7 @@ fun MovieSectionContent(
             Text(
                 text = section.getSectionTitle(),
                 fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White
+                fontWeight = FontWeight.Bold
             )
 
             Icon(
@@ -52,8 +51,7 @@ fun MovieSectionContent(
                         )
                     },
                 imageVector = Icons.Filled.Add,
-                contentDescription = "",
-                tint = Color.White
+                contentDescription = ""
             )
         },
         itemRow = { movie ->

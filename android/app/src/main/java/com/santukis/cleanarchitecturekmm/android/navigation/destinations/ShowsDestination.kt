@@ -39,8 +39,7 @@ class ShowsDestination: DecoratedDestination {
     @Composable
     override fun DestinationLabel() {
         Text(
-            text =  stringResource(id = R.string.tv_shows),
-            color = Color.White
+            text =  stringResource(id = R.string.tv_shows)
         )
     }
 
@@ -48,8 +47,7 @@ class ShowsDestination: DecoratedDestination {
     override fun DestinationIcon() {
         Icon(
             imageVector = Icons.Filled.Tv,
-            contentDescription = "",
-            tint = Color.White
+            contentDescription = ""
         )
     }
 
