@@ -71,7 +71,7 @@ private fun LazyListScope.addItem(
     movies: List<Movie>,
     widget: @Composable () -> Unit
 ) {
-    movies.takeIf { it.isNotEmpty() }?.let {
+    if (movies.isNotEmpty()) {
         item {
             widget()
         }
