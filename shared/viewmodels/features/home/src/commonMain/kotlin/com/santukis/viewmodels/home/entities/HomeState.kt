@@ -1,6 +1,7 @@
 package com.santukis.viewmodels.home.entities
 
 import com.santukis.entities.movies.Movie
+import com.santukis.viewmodels.core.entities.MovieSection
 
 data class HomeState(
     val nowPlayingMovies: List<Movie> = emptyList(),
@@ -14,4 +15,11 @@ data class HomeState(
         nowPlayingMovies.isEmpty()
                 || upcomingMovies.isEmpty()
                 || popularMovies.isEmpty()
+
+    fun getSections(): List<Pair<MovieSection, List<Movie>>> =
+        listOf(
+            MovieSection.UpcomingMovies to upcomingMovies,
+            MovieSection.PopularMovies to popularMovies,
+            MovieSection.CouldYouLikeMovies to couldLikeMovies
+        )
 }

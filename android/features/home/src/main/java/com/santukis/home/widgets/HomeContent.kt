@@ -26,26 +26,14 @@ fun HomeContent(
             navigateTo = navigateTo
         )
 
-        addSection(
-            modifier = modifier,
-            movies = homeState.upcomingMovies,
-            section = MovieSection.UpcomingMovies,
-            navigateTo = navigateTo
-        )
-
-        addSection(
-            modifier = modifier,
-            movies = homeState.popularMovies,
-            section = MovieSection.PopularMovies,
-            navigateTo = navigateTo
-        )
-
-        addSection(
-            modifier = modifier,
-            movies = homeState.couldLikeMovies,
-            section = MovieSection.CouldYouLikeMovies,
-            navigateTo = navigateTo
-        )
+        homeState.getSections().forEach { section ->
+            addSection(
+                modifier = modifier,
+                movies = section.second,
+                section = section.first,
+                navigateTo = navigateTo
+            )
+        }
     }
 }
 
