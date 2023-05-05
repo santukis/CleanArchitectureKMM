@@ -1,50 +1,39 @@
 package com.santukis.home.widgets
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.Circle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import com.santukis.entities.movies.*
+import com.santukis.entities.movies.Movie
+import com.santukis.home.stateholders.rememberNowPlayingContentState
 import com.santukis.navigation.destination.DestinationArguments
 import com.santukis.navigation.destination.arguments.MovieDetailDestinationArguments
-import com.santukis.theme.WhiteTransparent
 import com.santukis.widgets.movies.MovieHeader
 import com.santukis.widgets.movies.MoviePoster
-import dev.chrisbanes.snapper.ExperimentalSnapperApi
-import dev.chrisbanes.snapper.rememberSnapperFlingBehavior
-import kotlinx.coroutines.delay
 
 @Composable
-@OptIn(ExperimentalSnapperApi::class)
 fun NowPlayingContent(
     modifier: Modifier,
     nowPlayingMovies: List<Movie>,
     navigateTo: (DestinationArguments) -> Unit
 ) {
-    val listState = rememberLazyListState()
+    val nowPlayingContentHolder = rememberNowPlayingContentState(listSize = nowPlayingMovies.size)
 
-    LaunchedEffect(key1 = Unit) {
-        while (true) {
-            delay(5000)
-
-            if (listState.firstVisibleItemIndex == nowPlayingMovies.lastIndex) {
-                listState.scrollToItem(0)
-
-            } else {
-                listState.animateScrollToItem(listState.firstVisibleItemIndex + 1)
-            }
-        }
+    LaunchedEffect(key1 = nowPlayingMovies) {
+        nowPlayingContentHolder.startScrollAnimation()
     }
 
     Box(
@@ -53,8 +42,8 @@ fun NowPlayingContent(
             .height(height = (LocalConfiguration.current.screenHeightDp * 0.7).dp),
     ) {
         LazyRow(
-            state = listState,
-            flingBehavior = rememberSnapperFlingBehavior(lazyListState = listState),
+            state = nowPlayingContentHolder.listState,
+            flingBehavior = nowPlayingContentHolder.flingBehavior,
         ) {
             items(
                 items = nowPlayingMovies,
@@ -78,7 +67,7 @@ fun NowPlayingContent(
                     )
 
                     MovieHeader(
-                        modifier =  Modifier
+                        modifier = Modifier
                             .align(Alignment.BottomStart)
                             .padding(vertical = 32.dp),
                         movie = movie
@@ -93,15 +82,13 @@ fun NowPlayingContent(
                 .padding(8.dp)
         ) {
             items(nowPlayingMovies.size) { index ->
-                val color = if (listState.firstVisibleItemIndex == index) Color.White else WhiteTransparent
-
                 Icon(
                     imageVector = Icons.Filled.Circle,
                     contentDescription = "",
                     modifier = Modifier
                         .padding(horizontal = 2.dp)
                         .width(8.dp),
-                    tint = color
+                    tint = nowPlayingContentHolder.getColorForPosition(index)
                 )
             }
         }

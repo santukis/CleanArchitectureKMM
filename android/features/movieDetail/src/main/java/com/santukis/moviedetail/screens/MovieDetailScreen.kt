@@ -4,7 +4,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -14,13 +13,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
+import com.santukis.moviedetail.stateholders.rememberMovieDetailScreenState
 import com.santukis.moviedetail.widgets.MovieDetailContent
 import com.santukis.navigation.destination.DestinationArguments
 import com.santukis.navigation.destination.arguments.PopBackStackDestinationArguments
-import com.santukis.theme.statusBarColor
 import com.santukis.viewmodels.core.events.OnUiEvent
 import com.santukis.viewmodels.core.events.RequestDecorFitsSystemWindowsChange
 import com.santukis.viewmodels.moviedetail.MovieDetailViewModel
@@ -33,8 +30,9 @@ fun MovieDetailScreen(
     navigateTo: (DestinationArguments) -> Unit = {}
 ) {
 
-    val movieDetailState = movieDetailViewModel.movieDetailState.collectAsState()
-    val statusBarColor = MaterialTheme.statusBarColor()
+    val movieDetailStateHolder = rememberMovieDetailScreenState(
+        movieDetailState = movieDetailViewModel.movieDetailState.collectAsState()
+    )
 
     LaunchedEffect(true) {
         movieDetailViewModel.loadMovie(movieId)
@@ -42,7 +40,7 @@ fun MovieDetailScreen(
         onUiEvent(
             RequestDecorFitsSystemWindowsChange(
                 decorFitsSystemWindows = true,
-                statusBarColor = statusBarColor.toArgb()
+                statusBarColor = movieDetailStateHolder.statusBarColorAsInt()
             )
         )
     }
@@ -53,8 +51,7 @@ fun MovieDetailScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = movieDetailState.value.movie?.titles?.title.orEmpty(),
-                        color = Color.White
+                        text = movieDetailStateHolder.getMovieTitle()
                     )
                 },
                 navigationIcon = { 
@@ -63,20 +60,17 @@ fun MovieDetailScreen(
                             .padding(horizontal = 8.dp)
                             .clickable { navigateTo(PopBackStackDestinationArguments()) },
                         imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = "",
-                        tint = Color.White
+                        contentDescription = ""
                     )
-                },
-                backgroundColor = Color.Black
+                }
             )
         },
-        backgroundColor = Color.Black
     ) { paddingValues ->
         MovieDetailContent(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues),
-            movieDetailState = movieDetailState.value
+            movieDetailState = movieDetailStateHolder.getMovieDetailState()
         )
     }
 }

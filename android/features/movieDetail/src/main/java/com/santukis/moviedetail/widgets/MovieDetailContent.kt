@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.santukis.viewmodels.core.events.OnUiEvent
 import com.santukis.viewmodels.moviedetail.entities.MovieDetailState
 import com.santukis.widgets.SectionContent
@@ -37,8 +36,7 @@ fun MovieDetailContent(
         }
 
         Text(
-            text = movieDetailState.movie?.titles?.title ?: "No Title",
-            color = Color.White
+            text = movieDetailState.movie?.titles?.title ?: "No Title"
         )
     }
 
