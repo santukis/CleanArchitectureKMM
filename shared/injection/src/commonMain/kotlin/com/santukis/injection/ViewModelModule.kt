@@ -31,7 +31,6 @@ import com.santukis.viewmodels.home.HomeViewModel
 import com.santukis.viewmodels.home.strategies.LoadNowPlayingMoviesStrategy
 import com.santukis.viewmodels.moviedetail.DefaultMovieDetailViewModel
 import com.santukis.viewmodels.moviedetail.MovieDetailViewModel
-import com.santukis.viewmodels.moviedetail.entities.MovieDetailState
 import com.santukis.viewmodels.moviedetail.strategies.LoadMovieDetailStrategy
 import com.santukis.viewmodels.moviedetail.strategies.LoadMovieVideosStrategy
 import com.santukis.viewmodels.movies.DefaultMoviesViewModel

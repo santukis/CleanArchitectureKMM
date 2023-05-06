@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import com.santukis.viewmodels.core.events.OnUiEvent
 import com.santukis.viewmodels.moviedetail.entities.MovieDetailState
 import com.santukis.widgets.SectionContent
-import com.santukis.widgets.YoutubeVideoPlayer
+import com.santukis.widgets.video.YoutubeVideoPlayer
 
 @Composable
 fun MovieDetailContent(

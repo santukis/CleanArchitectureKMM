@@ -18,19 +18,12 @@ android {
 }
 
 dependencies {
-    implementation(fileTree(baseDir = "libs"))
-
     implementation(project(Modules.injection))
-    implementation(project(Modules.ViewModel.coreViewModel))
-    implementation(project(Modules.ViewModel.homeViewModel))
-    implementation(project(Modules.ViewModel.moviesViewModel))
-    implementation(project(Modules.ViewModel.movieDetailViewModel))
-    implementation(project(Modules.entities))
+    implementation(project(Modules.ViewModel.core))
 
     implementation(project(Modules.Android.theme))
-    implementation(project(Modules.Android.navigation))
-    implementation(project(Modules.Android.widgets))
-    implementation(project(Modules.Android.home))
-    implementation(project(Modules.Android.movies))
-    implementation(project(Modules.Android.movieDetail))
+    implementation(project(Modules.Android.Navigation.core))
+    implementation(project(Modules.Android.Navigation.graphs))
+    implementation(project(Modules.Android.Navigation.destinations))
+    implementation(project(Modules.Android.Widgets.core))
 }

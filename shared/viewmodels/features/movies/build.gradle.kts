@@ -35,7 +35,7 @@ kotlin {
 
                 implementation(project(Modules.useCases))
                 api(project(Modules.entities))
-                api(project(Modules.ViewModel.coreViewModel))
+                api(project(Modules.ViewModel.core))
             }
         }
         val commonTest by getting {
