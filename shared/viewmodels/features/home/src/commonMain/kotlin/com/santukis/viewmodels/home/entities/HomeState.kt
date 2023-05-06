@@ -16,6 +16,7 @@ data class HomeState(
                 || upcomingMovies.isEmpty()
                 || popularMovies.isEmpty()
 
+
     fun getSections(): List<Pair<MovieSection, List<Movie>>> =
         listOf(
             MovieSection.UpcomingMovies to upcomingMovies,
