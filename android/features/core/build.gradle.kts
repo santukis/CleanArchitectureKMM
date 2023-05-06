@@ -12,10 +12,10 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.ViewModel.coreViewModel))
+    implementation(project(Modules.ViewModel.core))
     implementation(project(Modules.entities))
 
     implementation(project(Modules.Android.theme))
-    implementation(project(Modules.Android.navigation))
-    implementation(project(Modules.Android.widgets))
+    implementation(project(Modules.Android.Navigation.core))
+    implementation(project(Modules.Android.Widgets.core))
 }
