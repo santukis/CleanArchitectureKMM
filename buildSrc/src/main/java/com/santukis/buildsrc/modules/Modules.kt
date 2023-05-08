@@ -39,7 +39,7 @@ object Modules {
 
     object UseCases {
         const val core = ":shared:usecases:core"
-        const val configuration = ":shared:usecases:configuration"
-        const val movies = ":shared:usecases:movies"
+        const val configuration = ":shared:usecases:features:configuration"
+        const val movies = ":shared:usecases:features:movies"
     }
 }

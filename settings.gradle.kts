@@ -30,8 +30,8 @@ include(":android:features:movies")
 
 //Usecases
 include(":shared:usecases:core")
-include(":shared:usecases:configuration")
-include(":shared:usecases:movies")
+include(":shared:usecases:features:configuration")
+include(":shared:usecases:features:movies")
 
 include(":shared:entities")
 include(":shared:repositories")
