@@ -2,7 +2,6 @@ package com.santukis.buildsrc.modules
 
 object Modules {
     const val injection = ":shared:injection"
-    const val useCases = ":shared:usecases"
     const val entities = ":shared:entities"
     const val repositories = ":shared:repositories"
     const val dataSources = ":shared:datasources"
@@ -36,5 +35,11 @@ object Modules {
         const val movieDetail = ":shared:viewmodels:features:movieDetail"
         const val movies = ":shared:viewmodels:features:movies"
         const val configuration = ":shared:viewmodels:features:configuration"
+    }
+
+    object UseCases {
+        const val core = ":shared:usecases:core"
+        const val configuration = ":shared:usecases:configuration"
+        const val movies = ":shared:usecases:movies"
     }
 }

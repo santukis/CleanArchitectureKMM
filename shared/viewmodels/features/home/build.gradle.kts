@@ -33,9 +33,9 @@ kotlin {
                 api(Shared.Moko.mvvmCore)
                 api(Shared.Moko.mvvmFlow)
 
-                implementation(project(Modules.useCases))
-                api(project(Modules.entities))
-                api(project(Modules.ViewModel.core))
+                implementation(project(Modules.UseCases.core))
+                implementation(project(Modules.entities))
+                implementation(project(Modules.ViewModel.core))
             }
         }
         val commonTest by getting {
@@ -50,24 +50,6 @@ kotlin {
                 implementation(Android.Androidx.lifecycleViewModel)
                 implementation(Android.Androidx.lifecycleViewModelCompose)
             }
-        }
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-        }
-        val iosX64Test by getting
-        val iosArm64Test by getting
-        val iosSimulatorArm64Test by getting
-        val iosTest by creating {
-            dependsOn(commonTest)
-            iosX64Test.dependsOn(this)
-            iosArm64Test.dependsOn(this)
-            iosSimulatorArm64Test.dependsOn(this)
         }
     }
 }

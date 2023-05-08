@@ -1,6 +1,5 @@
-import com.santukis.buildsrc.modules.Modules
-import com.santukis.buildsrc.dependencies.Android
 import com.santukis.buildsrc.dependencies.Shared
+import com.santukis.buildsrc.modules.Modules
 
 plugins {
     kotlin("multiplatform")
@@ -30,12 +29,8 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(Shared.Kotlin.coroutinesCore)
-                api(Shared.Moko.mvvmCore)
-                api(Shared.Moko.mvvmFlow)
-
                 implementation(project(Modules.UseCases.core))
                 implementation(project(Modules.entities))
-                implementation(project(Modules.ViewModel.core))
             }
         }
         val commonTest by getting {
@@ -43,19 +38,11 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting {
-            dependencies {
-                api(Android.Moko.mvvmCompose)
-                implementation(Android.Androidx.core)
-                implementation(Android.Androidx.lifecycleViewModel)
-                implementation(Android.Androidx.lifecycleViewModelCompose)
-            }
-        }
     }
 }
 
 android {
-    namespace = "com.santukis.viewmodels.configuration"
+    namespace = "com.santukis.usecases.configuration"
     compileSdk = 33
 
     defaultConfig {

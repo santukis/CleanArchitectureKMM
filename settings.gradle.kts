@@ -26,9 +26,13 @@ include(":android:widgets:video")
 include(":android:features:home")
 include(":android:features:core")
 include(":android:features:movieDetail")
-
 include(":android:features:movies")
-include(":shared:usecases")
+
+//Usecases
+include(":shared:usecases:core")
+include(":shared:usecases:configuration")
+include(":shared:usecases:movies")
+
 include(":shared:entities")
 include(":shared:repositories")
 include(":shared:datasources")

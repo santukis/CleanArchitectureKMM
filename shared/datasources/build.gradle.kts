@@ -21,7 +21,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(Modules.repositories))
-                api(project(Modules.entities))
+                implementation(project(Modules.entities))
 
                 implementation(Shared.Ktor.ktorCore)
                 implementation(Shared.Ktor.ktorCio)
