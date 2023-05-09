@@ -3,14 +3,10 @@ package com.santukis.datasources.configuration.local
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import com.santukis.datasources.configuration.defaultRegion
-import com.santukis.datasources.configuration.remote.entities.RegionDto
 import com.santukis.datasources.configuration.remote.mappers.toRegionDto
 import com.santukis.entities.configuration.Region
 import com.santukis.repositories.configuration.sources.GetRegionDataSource
 import com.santukis.repositories.configuration.sources.SaveRegionDataSource
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.single
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
 

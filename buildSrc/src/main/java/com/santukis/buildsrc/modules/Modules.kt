@@ -3,7 +3,6 @@ package com.santukis.buildsrc.modules
 object Modules {
     const val injection = ":shared:injection"
     const val entities = ":shared:entities"
-    const val repositories = ":shared:repositories"
     const val dataSources = ":shared:datasources"
 
     object Android {
@@ -39,7 +38,18 @@ object Modules {
 
     object UseCases {
         const val core = ":shared:usecases:core"
-        const val configuration = ":shared:usecases:features:configuration"
-        const val movies = ":shared:usecases:features:movies"
+        const val configuration = ":shared:usecases:features:configuration:usecases"
+        const val movies = ":shared:usecases:features:movies:usecases"
+
+        object Outputs {
+            const val configuration = ":shared:usecases:features:configuration:outputs"
+            const val movies = ":shared:usecases:features:movies:outputs"
+        }
+    }
+
+    object Repositories {
+        const val core = ":shared:repositories:core"
+        const val configuration = ":shared:repositories:features:configuration"
+        const val movies = ":shared:repositories:features:movies"
     }
 }
