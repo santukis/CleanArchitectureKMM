@@ -20,7 +20,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(Modules.repositories))
+                implementation(project(Modules.Repositories.core))
+                implementation(project(Modules.Repositories.configuration))
+                implementation(project(Modules.Repositories.movies))
                 implementation(project(Modules.entities))
 
                 implementation(Shared.Ktor.ktorCore)

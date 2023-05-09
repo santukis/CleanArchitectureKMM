@@ -30,11 +30,16 @@ include(":android:features:movies")
 
 //Usecases
 include(":shared:usecases:core")
-include(":shared:usecases:features:configuration")
-include(":shared:usecases:features:movies")
+include(":shared:usecases:features:configuration:usecases")
+include(":shared:usecases:features:configuration:outputs")
+include(":shared:usecases:features:movies:usecases")
+include(":shared:usecases:features:movies:outputs")
+
+include(":shared:repositories:core")
+include(":shared:repositories:features:configuration")
+include(":shared:repositories:features:movies")
 
 include(":shared:entities")
-include(":shared:repositories")
 include(":shared:datasources")
 include(":shared:injection")
 

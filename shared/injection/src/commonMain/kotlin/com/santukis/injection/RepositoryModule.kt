@@ -27,9 +27,14 @@ import com.santukis.repositories.movies.MovieRepository
 import com.santukis.repositories.movies.entities.GetMoviesByKeywordRequest
 import com.santukis.repositories.movies.strategies.*
 import com.santukis.repositories.strategies.RepositoryStrategy
-import com.santukis.usecases.configuration.GetCountriesGateway
-import com.santukis.usecases.configuration.GetLanguagesGateway
-import com.santukis.usecases.movies.*
+import com.santukis.usecases.configuration.outputs.GetCountriesOutput
+import com.santukis.usecases.configuration.outputs.GetLanguagesOutput
+import com.santukis.usecases.movies.outputs.GetMovieDetailOutput
+import com.santukis.usecases.movies.outputs.GetMovieVideosOutput
+import com.santukis.usecases.movies.outputs.GetMoviesByKeywordOutput
+import com.santukis.usecases.movies.outputs.GetNowPlayingMoviesOutput
+import com.santukis.usecases.movies.outputs.GetPopularMoviesOutput
+import com.santukis.usecases.movies.outputs.GetUpcomingMoviesOutput
 import org.kodein.di.DI
 import org.kodein.di.bind
 import org.kodein.di.instance
@@ -130,27 +135,27 @@ private fun movies() = DI.Module(
         )
     }
 
-    bind<GetMovieDetailGateway>(tag = GET_MOVIE_DETAIL_GATEWAY) with singleton {
+    bind<GetMovieDetailOutput>(tag = GET_MOVIE_DETAIL_GATEWAY) with singleton {
         instance<MovieRepository>(tag = MOVIES_REPOSITORY)
     }
 
-    bind<GetMovieVideosGateway>() with singleton {
+    bind<GetMovieVideosOutput>() with singleton {
         instance<MovieRepository>(tag = MOVIES_REPOSITORY)
     }
 
-    bind<GetNowPlayingMoviesGateway>(tag = GET_NOW_PLAYING_MOVIES_GATEWAY) with singleton {
+    bind<GetNowPlayingMoviesOutput>(tag = GET_NOW_PLAYING_MOVIES_GATEWAY) with singleton {
         instance<MovieRepository>(tag = MOVIES_REPOSITORY)
     }
 
-    bind<GetUpcomingMoviesGateway>(tag = GET_UPCOMING_MOVIES_GATEWAY) with singleton {
+    bind<GetUpcomingMoviesOutput>(tag = GET_UPCOMING_MOVIES_GATEWAY) with singleton {
         instance<MovieRepository>(tag = MOVIES_REPOSITORY)
     }
 
-    bind<GetPopularMoviesGateway>(tag = GET_POPULAR_MOVIES_GATEWAY) with singleton {
+    bind<GetPopularMoviesOutput>(tag = GET_POPULAR_MOVIES_GATEWAY) with singleton {
         instance<MovieRepository>(tag = MOVIES_REPOSITORY)
     }
 
-    bind<GetMoviesByKeywordGateway>() with singleton {
+    bind<GetMoviesByKeywordOutput>() with singleton {
         instance<MovieRepository>(tag = MOVIES_REPOSITORY)
     }
 }
@@ -166,11 +171,11 @@ private fun configuration() = DI.Module(
         )
     }
 
-    bind<GetCountriesGateway>(tag = GET_COUNTRIES_GATEWAY) with singleton {
+    bind<GetCountriesOutput>(tag = GET_COUNTRIES_GATEWAY) with singleton {
         instance<ConfigurationRepository>(tag = CONFIGURATION_REPOSITORY)
     }
 
-    bind<GetLanguagesGateway>(tag = GET_LANGUAGES_GATEWAY) with singleton {
+    bind<GetLanguagesOutput>(tag = GET_LANGUAGES_GATEWAY) with singleton {
         instance<ConfigurationRepository>(tag = CONFIGURATION_REPOSITORY)
     }
 }
