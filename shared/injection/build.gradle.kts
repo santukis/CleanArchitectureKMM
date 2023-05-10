@@ -56,6 +56,8 @@ kotlin {
                 implementation(project(Modules.Repositories.core))
                 implementation(project(Modules.Repositories.configuration))
                 implementation(project(Modules.Repositories.movies))
+                implementation(project(Modules.Repositories.Sources.configuration))
+                implementation(project(Modules.Repositories.Sources.movies))
                 implementation(project(Modules.dataSources))
 
                 implementation(Shared.Kodein.kodein)

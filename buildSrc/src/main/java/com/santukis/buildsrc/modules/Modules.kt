@@ -49,7 +49,12 @@ object Modules {
 
     object Repositories {
         const val core = ":shared:repositories:core"
-        const val configuration = ":shared:repositories:features:configuration"
-        const val movies = ":shared:repositories:features:movies"
+        const val configuration = ":shared:repositories:features:configuration:repositories"
+        const val movies = ":shared:repositories:features:movies:repositories"
+
+        object Sources {
+            const val configuration = ":shared:repositories:features:configuration:sources"
+            const val movies = ":shared:repositories:features:movies:sources"
+        }
     }
 }

@@ -21,7 +21,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "configuration"
+            baseName = "sources"
         }
     }
 
@@ -30,8 +30,6 @@ kotlin {
             dependencies {
                 implementation(Shared.Kotlin.coroutinesCore)
                 implementation(project(Modules.entities))
-                implementation(project(Modules.Repositories.core))
-                implementation(project(Modules.UseCases.Outputs.configuration))
             }
         }
         val commonTest by getting {
@@ -43,7 +41,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.santukis.repositories.configuration"
+    namespace = "com.santukis.repositories.configuration.sources"
     compileSdk = 33
 
     defaultConfig {

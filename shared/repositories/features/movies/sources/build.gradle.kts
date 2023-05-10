@@ -21,7 +21,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "movies"
+            baseName = "sources"
         }
     }
 
@@ -30,9 +30,6 @@ kotlin {
             dependencies {
                 implementation(Shared.Kotlin.coroutinesCore)
                 implementation(project(Modules.entities))
-                implementation(project(Modules.Repositories.core))
-                implementation(project(Modules.UseCases.movies))
-                implementation(project(Modules.UseCases.Outputs.movies))
             }
         }
         val commonTest by getting {
@@ -44,7 +41,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.santukis.repositories.movies"
+    namespace = "com.santukis.repositories.movies.sources"
     compileSdk = 33
 
     defaultConfig {

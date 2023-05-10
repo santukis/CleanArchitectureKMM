@@ -7,16 +7,32 @@ plugins {
 }
 
 kotlin {
-    android()
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+    android {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = JavaVersion.VERSION_17.toString()
+            }
+        }
+    }
     
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach {
+        it.binaries.framework {
+            baseName = "movies"
+        }
+    }
+
     sourceSets {
         val commonMain by getting {
             dependencies {
                 implementation(Shared.Kotlin.coroutinesCore)
                 implementation(project(Modules.entities))
+                implementation(project(Modules.Repositories.core))
+                implementation(project(Modules.Repositories.Sources.movies))
+                implementation(project(Modules.UseCases.Outputs.movies))
             }
         }
         val commonTest by getting {
@@ -28,7 +44,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.santukis.repositories"
+    namespace = "com.santukis.repositories.movies"
     compileSdk = 33
 
     defaultConfig {

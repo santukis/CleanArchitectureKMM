@@ -33,9 +33,9 @@ kotlin {
                 api(Shared.Moko.mvvmCore)
                 api(Shared.Moko.mvvmFlow)
 
+                implementation(project(Modules.ViewModel.core))
                 implementation(project(Modules.UseCases.core))
                 implementation(project(Modules.entities))
-                implementation(project(Modules.ViewModel.core))
             }
         }
         val commonTest by getting {

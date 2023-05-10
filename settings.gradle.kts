@@ -36,8 +36,10 @@ include(":shared:usecases:features:movies:usecases")
 include(":shared:usecases:features:movies:outputs")
 
 include(":shared:repositories:core")
-include(":shared:repositories:features:configuration")
-include(":shared:repositories:features:movies")
+include(":shared:repositories:features:configuration:repositories")
+include(":shared:repositories:features:configuration:sources")
+include(":shared:repositories:features:movies:repositories")
+include(":shared:repositories:features:movies:sources")
 
 include(":shared:entities")
 include(":shared:datasources")
