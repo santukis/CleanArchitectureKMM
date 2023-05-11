@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
-import com.santukis.datasources.core.local.DatabaseDriverFactory
+import com.santukis.datasources.local.DatabaseDriverFactory
 import okio.Path.Companion.toPath
 import org.kodein.di.DI
 import org.kodein.di.android.x.androidXModule

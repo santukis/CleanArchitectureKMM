@@ -1,7 +1,7 @@
 package com.santukis.injection
 
-import com.santukis.datasources.core.local.DatabaseDriverFactory
-import com.santukis.datasources.core.local.MovieDatabase
+import com.santukis.datasources.local.DatabaseDriverFactory
+import com.santukis.datasources.local.MovieDatabase
 import com.santukis.injection.DatabaseModuleConstants.DATABASE_MODULE_NAME
 import com.santukis.injection.DatabaseModuleConstants.LOCAL_MODULE_NAME
 import org.kodein.di.DI

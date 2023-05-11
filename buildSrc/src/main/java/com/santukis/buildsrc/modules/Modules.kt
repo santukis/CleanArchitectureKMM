@@ -3,7 +3,6 @@ package com.santukis.buildsrc.modules
 object Modules {
     const val injection = ":shared:injection"
     const val entities = ":shared:entities"
-    const val dataSources = ":shared:datasources"
 
     object Android {
         const val theme = ":android:theme"
@@ -56,5 +55,11 @@ object Modules {
             const val configuration = ":shared:repositories:features:configuration:sources"
             const val movies = ":shared:repositories:features:movies:sources"
         }
+    }
+
+    object DataSources {
+        const val core = ":shared:datasources:core"
+        const val configuration = ":shared:datasources:features:configuration"
+        const val movies = ":shared:datasources:features:movies"
     }
 }

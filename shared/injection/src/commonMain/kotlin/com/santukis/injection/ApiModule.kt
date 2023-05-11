@@ -1,8 +1,8 @@
 package com.santukis.injection
 
 import com.santukis.datasources.configuration.remote.services.ConfigurationApi
-import com.santukis.datasources.core.remote.KtorClient
-import com.santukis.datasources.core.remote.getHttpClientEngine
+import com.santukis.datasources.remote.KtorClient
+import com.santukis.datasources.remote.getHttpClientEngine
 import com.santukis.datasources.movies.remote.services.MoviesApi
 import com.santukis.injection.ApiModuleConstants.API_MODULE_NAME
 import com.santukis.injection.ApiModuleConstants.HTTP_CLIENT_MODULE_NAME

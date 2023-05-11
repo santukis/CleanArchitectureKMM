@@ -12,3 +12,4 @@ xcuserdata
 /shared/datasources/movie_database.properties
 /iosApp/Podfile.lock
 /iosApp/Pods/
+/shared/datasources/core/movie_database.properties
