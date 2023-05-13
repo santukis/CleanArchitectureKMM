@@ -7,7 +7,7 @@ internal class KoinDI(private val moduleDependencies: Any? = null) {
     init {
         startKoin {
             modules(
-                platformModules(moduleDependencies)
+                applicationModule(moduleDependencies)
             )
         }
     }
