@@ -29,6 +29,10 @@ object Android {
         const val kodein = "org.kodein.di:kodein-di-framework-android-x:${Versions.Kodein.kodein}"
     }
 
+    object Koin {
+        const val koin = "io.insert-koin:koin-android:${Versions.Koin.koin}"
+    }
+
     object Androidx {
         const val appcompat = "androidx.appcompat:appcompat:${Versions.Androidx.appcompat}"
         const val core = "androidx.core:core-ktx:${Versions.Androidx.core}"

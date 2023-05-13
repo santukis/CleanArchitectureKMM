@@ -38,6 +38,10 @@ object Versions {
         const val kodein = "7.15.0"
     }
 
+    object Koin {
+        const val koin = "3.4.0"
+    }
+
     object Ktor {
         const val ktor = "2.2.1"
     }

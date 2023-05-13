@@ -30,6 +30,10 @@ object Shared {
         const val kodein = "org.kodein.di:kodein-di:${Versions.Kodein.kodein}"
     }
 
+    object Koin {
+        const val koin = "io.insert-koin:koin-core:${Versions.Koin.koin}"
+    }
+
     object Moko {
         const val mvvmCore = "dev.icerock.moko:mvvm-core:${Versions.Moko.moko}"
         const val mvvmFlow = "dev.icerock.moko:mvvm-flow:${Versions.Moko.moko}"
