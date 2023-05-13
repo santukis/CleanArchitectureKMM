@@ -18,7 +18,7 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.injection))
+    implementation(project(Modules.Injection.provider))
     implementation(project(Modules.ViewModel.core))
 
     implementation(project(Modules.Android.theme))

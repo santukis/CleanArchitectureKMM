@@ -1,7 +1,6 @@
 package com.santukis.buildsrc.modules
 
 object Modules {
-    const val injection = ":shared:injection"
     const val entities = ":shared:entities"
 
     object Android {
@@ -24,6 +23,16 @@ object Modules {
             const val core = ":android:widgets:core"
             const val movies = ":android:widgets:movies"
             const val video = ":android:widgets:video"
+        }
+    }
+
+    object Injection {
+        const val core = ":shared:injection:core"
+        const val provider = ":shared:injection:provider"
+
+        object Providers {
+            const val kodein = ":shared:injection:providers:kodein"
+            const val koin = ":shared:injection:providers:koin"
         }
     }
 

@@ -3,7 +3,7 @@ package com.santukis.navigation.destinations
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.*
-import com.santukis.injection.getDependencyInjector
+import com.santukis.injection.provider.DependencyInjectorProvider
 import com.santukis.movies.screens.MoviesScreen
 import com.santukis.navigation.destination.Destination
 import com.santukis.viewmodels.core.entities.MovieSection
@@ -29,7 +29,7 @@ class MoviesDestination(private val section: MovieSection = MovieSection.Upcomin
     ) {
         MoviesScreen(
             section = MovieSection.from(backStackEntry.arguments?.getString("section").orEmpty()),
-            moviesViewModel = getDependencyInjector()
+            moviesViewModel = DependencyInjectorProvider.get()
                 .moviesViewModel(LocalViewModelStoreOwner.current),
             onUiEvent = onUiEvent
         ) { arguments ->

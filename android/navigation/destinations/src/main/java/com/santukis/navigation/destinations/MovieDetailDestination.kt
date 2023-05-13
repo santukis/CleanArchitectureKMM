@@ -4,8 +4,8 @@ import android.content.Intent
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.*
+import com.santukis.injection.provider.DependencyInjectorProvider
 import com.santukis.moviedetail.screens.MovieDetailScreen
-import com.santukis.injection.getDependencyInjector
 import com.santukis.navigation.destination.Destination
 import com.santukis.viewmodels.core.events.OnUiEvent
 
@@ -37,7 +37,7 @@ class MovieDetailDestination(private val movieId: Int = -1): Destination {
         onUiEvent: (OnUiEvent) -> Unit
     ) {
         MovieDetailScreen(
-            movieDetailViewModel = getDependencyInjector()
+            movieDetailViewModel = DependencyInjectorProvider.get()
                 .movieDetailViewModel(LocalViewModelStoreOwner.current),
             movieId = backStackEntry.arguments?.getString("movieId").orEmpty(),
             onUiEvent = onUiEvent

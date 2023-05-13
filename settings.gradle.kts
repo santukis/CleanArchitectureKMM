@@ -28,7 +28,10 @@ include(":android:features:core")
 include(":android:features:movieDetail")
 include(":android:features:movies")
 
-include(":shared:injection")
+include(":shared:injection:core")
+include(":shared:injection:provider")
+include(":shared:injection:providers:kodein")
+include(":shared:injection:providers:koin")
 
 include(":shared:viewmodels:core")
 include(":shared:viewmodels:features:home")

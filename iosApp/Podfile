@@ -2,7 +2,7 @@ target 'iosApp' do
   use_frameworks!
   platform :ios, '15.0'
 
-  pod 'MultiPlatformLibrary', :path => '../shared/injection'
+  pod 'MultiPlatformLibrary', :path => '../shared/injection/provider'
   pod 'mokoMvvmFlowSwiftUI', :podspec => 'https://raw.githubusercontent.com/icerockdev/moko-mvvm/release/0.15.0/mokoMvvmFlowSwiftUI.podspec'
 
 end

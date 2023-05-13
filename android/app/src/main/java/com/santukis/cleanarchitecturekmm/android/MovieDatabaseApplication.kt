@@ -1,12 +1,12 @@
 package com.santukis.cleanarchitecturekmm.android
 
 import android.app.Application
-import com.santukis.injection.initializeDependencyInjector
+import com.santukis.injection.provider.DependencyInjectorProvider
 
 class MovieDatabaseApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        initializeDependencyInjector(moduleDependencies = this)
+        DependencyInjectorProvider.initialize(moduleDependencies = this)
     }
 }

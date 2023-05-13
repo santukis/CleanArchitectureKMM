@@ -11,7 +11,7 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavOptionsBuilder
 import com.santukis.home.screens.HomeScreen
-import com.santukis.injection.getDependencyInjector
+import com.santukis.injection.provider.DependencyInjectorProvider
 import com.santukis.navigation.destination.DecoratedDestination
 import com.santukis.viewmodels.core.events.OnUiEvent
 
@@ -26,7 +26,7 @@ class HomeDestination: DecoratedDestination {
         onUiEvent: (OnUiEvent) -> Unit
     ) {
         HomeScreen(
-            homeViewModel = getDependencyInjector()
+            homeViewModel = DependencyInjectorProvider.get()
                 .homeViewModel(LocalViewModelStoreOwner.current),
             onUiEvent = onUiEvent
         ) { arguments ->
