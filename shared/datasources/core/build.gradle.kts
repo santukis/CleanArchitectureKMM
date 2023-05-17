@@ -11,11 +11,10 @@ plugins {
     id("com.squareup.sqldelight")
 }
 
+apply(from = "$rootDir/shared/gradle/configuration/base_multiplatform_module.gradle")
+
 kotlin {
     android()
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
     
     sourceSets {
         val commonMain by getting {
@@ -74,11 +73,8 @@ kotlin {
 
 android {
     namespace = "com.santukis.datasources"
-    compileSdk = 33
 
     defaultConfig {
-        minSdk = 21
-
         val movieDatabaseProperties = Properties()
         file(path = "movie_database.properties").inputStream().use { stream ->
             movieDatabaseProperties.load(stream)
@@ -93,11 +89,6 @@ android {
 
     buildFeatures {
         buildConfig = true
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 

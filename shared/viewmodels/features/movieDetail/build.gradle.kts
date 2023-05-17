@@ -7,15 +7,9 @@ plugins {
     id("com.android.library")
 }
 
+apply(from = "$rootDir/shared/gradle/configuration/base_multiplatform_module.gradle")
+
 kotlin {
-    android {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = JavaVersion.VERSION_17.toString()
-            }
-        }
-    }
-    
     listOf(
         iosX64(),
         iosArm64(),
@@ -56,14 +50,4 @@ kotlin {
 
 android {
     namespace = "com.santukis.viewmodels.moviedetail"
-    compileSdk = 33
-
-    defaultConfig {
-        minSdk = 21
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
 }

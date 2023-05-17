@@ -6,12 +6,9 @@ plugins {
     id("com.android.library")
 }
 
+apply(from = "$rootDir/shared/gradle/configuration/base_multiplatform_module.gradle")
+
 kotlin {
-    android()
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-    
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -29,14 +26,4 @@ kotlin {
 
 android {
     namespace = "com.santukis.repositories"
-    compileSdk = 33
-
-    defaultConfig {
-        minSdk = 21
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
 }

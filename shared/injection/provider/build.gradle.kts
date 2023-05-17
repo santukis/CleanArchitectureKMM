@@ -8,12 +8,9 @@ plugins {
     id("dev.icerock.moko.kswift")
 }
 
-kotlin {
-    android()
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+apply(from = "$rootDir/shared/gradle/configuration/base_multiplatform_module.gradle")
 
+kotlin {
     cocoapods {
         name = "MultiPlatformLibrary"
         summary = "MovieDatabase"
@@ -77,16 +74,6 @@ kotlin {
 
 android {
     namespace = "com.santukis.injection.provider"
-    compileSdk = 33
-
-    defaultConfig {
-        minSdk = 21
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
 }
 
 kswift {
