@@ -16,6 +16,7 @@ dependencies {
     implementation(Android.Androidx.composeUtil)
     implementation(Android.Androidx.composeNavigation)
     implementation(Android.Androidx.lifecycleViewModelCompose)
+    implementation(Android.Androidx.composeZoomable)
     implementation(Android.Coil.coil)
     implementation(Android.Snapper.snapper)
 }

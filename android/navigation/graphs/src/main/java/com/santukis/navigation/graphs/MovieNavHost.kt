@@ -5,6 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.santukis.navigation.destinations.MovieDetailDestination
+import com.santukis.navigation.destinations.MoviesDestination
 import com.santukis.viewmodels.core.events.OnUiEvent
 
 @Composable
@@ -27,13 +29,13 @@ fun MovieNavHost(
 
         navigate(
             navController = navController,
-            destination = com.santukis.navigation.destinations.MovieDetailDestination(),
+            destination = MovieDetailDestination(),
             onUiEvent = onUiEvent
         )
 
         navigate(
             navController = navController,
-            destination = com.santukis.navigation.destinations.MoviesDestination(),
+            destination = MoviesDestination(),
             onUiEvent = onUiEvent
         )
     }

@@ -54,6 +54,7 @@ object Android {
         const val activityCompose = "androidx.activity:activity-compose:${Versions.Androidx.activityCompose}"
         const val composeConstraintLayout = "androidx.constraintlayout:constraintlayout-compose:${Versions.Androidx.composeConstraintLayout}"
         const val composeNavigation = "androidx.navigation:navigation-compose:${Versions.Androidx.composeNavigation}"
+        const val composeZoomable = "me.saket.telephoto:zoomable:${Versions.Androidx.composeZoomable}"
     }
 
     object Moko {

@@ -16,6 +16,7 @@ object Versions {
     }
 
     object Androidx {
+        const val composeZoomable= "0.3.0"
         const val composeBoom = "2023.03.00"
         const val lifecycle = "2.4.1"
         const val appcompat = "1.4.2"
