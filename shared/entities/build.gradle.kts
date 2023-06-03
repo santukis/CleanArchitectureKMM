@@ -1,12 +1,8 @@
 import com.santukis.buildsrc.dependencies.Shared
-import com.santukis.buildsrc.modules.Modules
 
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
+    id("base_multiplatform_module")
 }
-
-apply(from = "$rootDir/shared/gradle/configuration/base_multiplatform_module.gradle")
 
 kotlin {
     sourceSets {

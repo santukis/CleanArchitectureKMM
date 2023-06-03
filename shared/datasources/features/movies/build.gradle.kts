@@ -4,13 +4,10 @@ import com.santukis.buildsrc.dependencies.Shared
 import com.santukis.buildsrc.modules.Modules
 
 plugins {
-    kotlin("multiplatform")
+    id("base_multiplatform_module")
     kotlin("plugin.serialization") version "1.7.10"
-    id("com.android.library")
     id("com.squareup.sqldelight")
 }
-
-apply(from = "$rootDir/shared/gradle/configuration/base_multiplatform_module.gradle")
 
 kotlin {
     listOf(

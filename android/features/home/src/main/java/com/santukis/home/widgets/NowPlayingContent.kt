@@ -24,6 +24,7 @@ import com.santukis.navigation.destination.arguments.MovieDetailDestinationArgum
 import com.santukis.widgets.movies.MovieHeader
 import com.santukis.widgets.movies.MoviePoster
 
+@SuppressWarnings("LongMethod")
 @Composable
 fun NowPlayingContent(
     modifier: Modifier,

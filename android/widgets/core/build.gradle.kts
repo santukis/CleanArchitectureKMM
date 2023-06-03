@@ -1,11 +1,8 @@
 import com.santukis.buildsrc.modules.Modules
 
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    id("base_android_library_module")
 }
-
-apply(from = "$rootDir/android/gradle/configuration/base_android_library_module.gradle")
 
 android {
     namespace = "com.santukis.widgets"

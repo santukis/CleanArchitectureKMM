@@ -1,11 +1,8 @@
 import com.santukis.buildsrc.modules.Modules
 
 plugins {
-    id("com.android.application")
-    kotlin("android")
+    id("base_android_application_module")
 }
-
-apply(from ="$rootDir/android/gradle/configuration/base_android_application_module.gradle")
 
 android {
     namespace = "com.santukis.cleanarchitecturekmm.android"

@@ -38,14 +38,13 @@ class NowPlayingContentHolder(
     private val listSize: Int
 ) {
 
-
     suspend fun startScrollAnimation() {
         while (true) {
-            delay(5000)
+            val animationTime: Long = 5000
+            delay(animationTime)
 
             if (listState.firstVisibleItemIndex == listSize - 1) {
                 listState.scrollToItem(0)
-
             } else {
                 listState.animateScrollToItem(listState.firstVisibleItemIndex + 1)
             }
@@ -55,9 +54,7 @@ class NowPlayingContentHolder(
     fun getColorForPosition(position: Int): Color =
         if (listState.firstVisibleItemIndex == position) {
             dotColorHolder.selectedColor
-
         } else {
             dotColorHolder.unselectedColor
         }
 }
-

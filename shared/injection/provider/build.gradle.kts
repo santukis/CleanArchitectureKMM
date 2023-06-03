@@ -2,20 +2,16 @@ import com.santukis.buildsrc.dependencies.Shared
 import com.santukis.buildsrc.modules.Modules
 
 plugins {
-    kotlin("multiplatform")
+    id("base_multiplatform_module")
     kotlin("native.cocoapods")
-    id("com.android.library")
-    id("dev.icerock.moko.kswift")
 }
 
-apply(from = "$rootDir/shared/gradle/configuration/base_multiplatform_module.gradle")
+version = "1.0"
 
 kotlin {
     cocoapods {
-        name = "MultiPlatformLibrary"
         summary = "MovieDatabase"
         homepage = "https://github.com/santukis/CleanArchitectureKMM"
-        version = "1.0"
         ios.deploymentTarget = "15.0"
         podfile = project.file("../../../iosApp/Podfile")
 

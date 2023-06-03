@@ -31,7 +31,6 @@ fun MovieSectionContent(
     section: MovieSection,
     navigateTo: (DestinationArguments) -> Unit
 ) {
-
     SectionContent(
         modifier = modifier,
         items = movies,

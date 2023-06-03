@@ -7,7 +7,6 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-
 private val DarkColorPalette = darkColors(
     primary = Blue,
     primaryVariant = DarkBlue,
@@ -33,7 +32,6 @@ fun MovieTheme(
 ) {
     val colors = if (darkTheme) {
         DarkColorPalette
-
     } else {
         LightColorPalette
     }

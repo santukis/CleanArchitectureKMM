@@ -1,3 +1,9 @@
+plugins {
+    kotlin("multiplatform")
+    id("com.android.library")
+    id("dev.icerock.moko.kswift")
+    id("detekt")
+}
 
 kotlin {
     android {

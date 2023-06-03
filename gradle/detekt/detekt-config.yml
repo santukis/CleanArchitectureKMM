@@ -1,0 +1,27 @@
+naming:
+  active: true
+  excludes: &testFolders
+    - "**/test/**"
+    - "**/androidTest/**"
+    - "**/commonTest/**"
+  FunctionNaming:
+    active: true
+    excludes: *testFolders
+    functionPattern: "[a-zA-Z][a-zA-Z0-9]*"
+    ignoreAnnotated: [ 'Composable' ]
+  TopLevelPropertyNaming:
+    active: true
+    excludes: *testFolders
+    constantPattern: "[A-Z][A-Za-z0-9]*"
+style:
+  active: true
+  MagicNumber:
+    active: true
+    excludes: *testFolders
+    ignoreNumbers: [ '0', '1' ]
+    ignoreHashCodeFunction: true
+    ignorePropertyDeclaration: true
+    ignoreConstantDeclaration: true
+    ignoreCompanionObjectPropertyDeclaration: true
+    ignoreNamedArgument: true
+    ignoreEnums: false

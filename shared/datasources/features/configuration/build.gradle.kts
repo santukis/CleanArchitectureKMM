@@ -4,12 +4,9 @@ import com.santukis.buildsrc.dependencies.Shared
 import com.santukis.buildsrc.modules.Modules
 
 plugins {
-    kotlin("multiplatform")
+    id("base_multiplatform_module")
     kotlin("plugin.serialization") version "1.7.10"
-    id("com.android.library")
 }
-
-apply(from = "$rootDir/shared/gradle/configuration/base_multiplatform_module.gradle")
 
 kotlin {
     listOf(
