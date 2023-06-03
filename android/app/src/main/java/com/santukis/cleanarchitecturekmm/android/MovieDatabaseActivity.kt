@@ -31,11 +31,11 @@ class MovieDatabaseActivity : ComponentActivity() {
     }
 
     private fun changesStatusBarColor(event: RequestDecorFitsSystemWindowsChange) {
-        val insetsController =  WindowCompat.getInsetsController(window, window.decorView)
+        val insetsController =
+            WindowCompat.getInsetsController(window, window.decorView)
 
         if (event.decorFitsSystemWindows) {
             insetsController.show(WindowInsetsCompat.Type.statusBars())
-
         } else {
             insetsController.hide(WindowInsetsCompat.Type.statusBars())
         }
@@ -43,4 +43,3 @@ class MovieDatabaseActivity : ComponentActivity() {
         window.statusBarColor = event.statusBarColor
     }
 }
-

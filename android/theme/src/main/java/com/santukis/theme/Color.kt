@@ -15,7 +15,6 @@ val WhiteTransparent = Color(0x80FFFFFF)
 fun MaterialTheme.statusBarColor(): Color =
     if (isSystemInDarkTheme()) {
         colors.surface
-
     } else {
         colors.primary
     }
@@ -24,7 +23,6 @@ fun MaterialTheme.statusBarColor(): Color =
 fun MaterialTheme.selectedDotColor(): Color =
     if (isSystemInDarkTheme()) {
         colors.secondary
-
     } else {
         colors.primary
     }
@@ -33,7 +31,6 @@ fun MaterialTheme.selectedDotColor(): Color =
 fun MaterialTheme.unselectedDotColor(): Color =
     if (isSystemInDarkTheme()) {
         colors.onSurface.copy(alpha = 0.5f)
-
     } else {
         colors.primaryVariant.copy(alpha = 0.5f)
     }

@@ -12,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.santukis.navigation.bottombar.BottomNavigationAnimatedVisibility
-import com.santukis.navigation.graphs.MovieNavHost
 import com.santukis.navigation.destinations.HomeDestination
 import com.santukis.navigation.destinations.ShowsDestination
+import com.santukis.navigation.graphs.MovieNavHost
 import com.santukis.viewmodels.core.events.OnUiEvent
 
 @Composable
@@ -22,7 +22,6 @@ fun MainScreen(
     navController: NavHostController = rememberNavController(),
     onUiEvent: (OnUiEvent) -> Unit
 ) {
-
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background

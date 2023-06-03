@@ -6,9 +6,9 @@ import com.santukis.core.R
 import com.santukis.viewmodels.core.entities.MovieSection
 
 @Composable
-fun MovieSection.getSectionTitle(): String = when(this) {
+fun MovieSection.getSectionTitle(): String = when (this) {
     MovieSection.UpcomingMovies -> stringResource(id = R.string.upcoming)
     MovieSection.PopularMovies -> stringResource(id = R.string.popular)
-    MovieSection.CouldYouLikeMovies ->  stringResource(id = R.string.could_like)
+    MovieSection.CouldYouLikeMovies -> stringResource(id = R.string.could_like)
     else -> ""
 }
