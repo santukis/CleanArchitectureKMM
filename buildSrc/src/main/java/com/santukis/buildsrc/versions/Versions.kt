@@ -71,4 +71,8 @@ object Versions {
         const val exoplayer = "1.0.0-beta03"
         const val youtubePlayer = "11.1.0"
     }
+
+    object Foundation {
+        const val foundation = "0.0.5"
+    }
 }

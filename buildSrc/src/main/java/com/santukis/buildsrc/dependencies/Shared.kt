@@ -46,4 +46,8 @@ object Shared {
     object SQLDelight {
         const val runtime = "com.squareup.sqldelight:runtime:${Versions.SQLDelight.sqlDelight}"
     }
+
+    object Foundation {
+        const val domain = "com.santukis.ca:domain:${Versions.Foundation.foundation}"
+    }
 }
