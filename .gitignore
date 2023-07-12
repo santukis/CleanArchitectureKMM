@@ -13,3 +13,4 @@ xcuserdata
 /iosApp/Podfile.lock
 /iosApp/Pods/
 /shared/datasources/core/movie_database.properties
+/santukis.properties

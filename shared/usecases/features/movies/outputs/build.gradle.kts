@@ -20,6 +20,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(Shared.Kotlin.coroutinesCore)
+                implementation(Shared.Foundation.domain)
                 implementation(project(Modules.entities))
             }
         }

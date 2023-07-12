@@ -19,4 +19,6 @@ dependencies {
     implementation(Android.Androidx.composeZoomable)
     implementation(Android.Coil.coil)
     implementation(Android.Snapper.snapper)
+    implementation(Android.Foundation.navigation)
+    implementation(Android.Foundation.theme)
 }

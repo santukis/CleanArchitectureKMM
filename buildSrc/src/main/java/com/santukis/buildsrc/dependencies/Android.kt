@@ -78,4 +78,9 @@ object Android {
         const val exoplayerUi = "androidx.media3:media3-ui:${Versions.Media.exoplayer}"
         const val youtubePlayer = "com.pierfrancescosoffritti.androidyoutubeplayer:core:${Versions.Media.youtubePlayer}"
     }
+
+    object Foundation {
+        const val navigation = "com.santukis.ca:navigation:${Versions.Foundation.foundation}"
+        const val theme = "com.santukis.ca:theme:${Versions.Foundation.foundation}"
+    }
 }

@@ -1,3 +1,12 @@
+val santukisCredentials = java.util.Properties()
+file("santukis.properties").inputStream().let { stream ->
+    santukisCredentials.load(stream)
+}
+
+val santukisUrl = santukisCredentials.getProperty("URL")
+val santukisUserName = System.getenv("USERNAME") ?: santukisCredentials.getProperty("USERNAME")
+val santukisToken = System.getenv("TOKEN") ?: santukisCredentials.getProperty("TOKEN")
+
 pluginManagement {
     repositories {
         google()
@@ -10,6 +19,13 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri(santukisUrl)
+            credentials {
+                username = santukisUserName
+                password = santukisToken
+            }
+        }
     }
 }
 
