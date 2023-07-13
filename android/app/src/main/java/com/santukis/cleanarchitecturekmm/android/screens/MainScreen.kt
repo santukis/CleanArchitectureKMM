@@ -9,19 +9,19 @@ import androidx.compose.material.Surface
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.santukis.navigation.bottombar.BottomNavigationAnimatedVisibility
-import com.santukis.navigation.destinations.HomeDestination
-import com.santukis.navigation.destinations.ShowsDestination
-import com.santukis.navigation.graphs.MovieNavHost
-import com.santukis.viewmodels.core.events.OnUiEvent
+import androidx.navigation.compose.NavHost
+import com.santukis.cleanarchitecturekmm.android.navigation.arguments.ToHomeScreen
+import com.santukis.cleanarchitecturekmm.android.navigation.arguments.ToTvShowsScreen
+import com.santukis.cleanarchitecturekmm.android.widgets.MoviesBottomNavigation
+import com.santukis.navigation.Router
+import com.santukis.navigation.movies.graph.MoviesAppGraph
 
 @Composable
 fun MainScreen(
-    navController: NavHostController = rememberNavController(),
-    onUiEvent: (OnUiEvent) -> Unit
+    router: Router,
+    moviesAppGraph: MoviesAppGraph
 ) {
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
@@ -30,21 +30,25 @@ fun MainScreen(
             modifier = Modifier.navigationBarsPadding(),
             scaffoldState = rememberScaffoldState(),
             bottomBar = {
-                BottomNavigationAnimatedVisibility(
-                    navController = navController,
-                    bottomNavigationDestinations = listOf(
-                        HomeDestination(),
-                        ShowsDestination()
+                MoviesBottomNavigation(
+                    router = router,
+                    destinationArguments = listOf(
+                        ToHomeScreen,
+                        ToTvShowsScreen
                     )
                 )
             }
         ) { paddingValues ->
-            MovieNavHost(
+            NavHost(
                 modifier = Modifier
                     .padding(paddingValues),
-                navController = navController,
-                onUiEvent = onUiEvent
-            )
+                navController = router.navController,
+                startDestination = moviesAppGraph.getStartDestination()
+            ) {
+                with(moviesAppGraph) {
+                    buildGraph(router)
+                }
+            }
         }
     }
 }

@@ -15,8 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.santukis.navigation.destination.DestinationArguments
-import com.santukis.navigation.destination.arguments.MovieDetailDestinationArguments
+import com.santukis.movies.navigation.arguments.ToMovieDetailDestinationArguments
+import com.santukis.navigation.NavigationArguments
 import com.santukis.viewmodels.core.entities.MovieSection
 import com.santukis.viewmodels.core.events.OnUiEvent
 import com.santukis.viewmodels.movies.entities.MoviesState
@@ -31,7 +31,7 @@ fun MoviesContent(
     section: MovieSection,
     moviesState: MoviesState,
     onUiEvent: (OnUiEvent) -> Unit = {},
-    navigateTo: (DestinationArguments) -> Unit = {},
+    navigateTo: (NavigationArguments) -> Unit = {},
 ) {
     val listState = rememberLazyListState()
 
@@ -53,7 +53,7 @@ fun MoviesContent(
                     .fillParentMaxWidth()
                     .clickable {
                         navigateTo(
-                            MovieDetailDestinationArguments(
+                            ToMovieDetailDestinationArguments(
                                 movieId = movie.id
                             )
                         )

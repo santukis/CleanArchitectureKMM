@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.santukis.entities.movies.Movie
-import com.santukis.navigation.destination.DestinationArguments
+import com.santukis.navigation.NavigationArguments
 import com.santukis.viewmodels.core.entities.MovieSection
 import com.santukis.viewmodels.home.entities.HomeState
 
@@ -15,7 +15,7 @@ import com.santukis.viewmodels.home.entities.HomeState
 fun HomeContent(
     modifier: Modifier,
     homeState: HomeState,
-    navigateTo: (DestinationArguments) -> Unit
+    navigateTo: (NavigationArguments) -> Unit
 ) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -40,7 +40,7 @@ fun HomeContent(
 private fun LazyListScope.addHighlight(
     modifier: Modifier,
     movies: List<Movie>,
-    navigateTo: (DestinationArguments) -> Unit
+    navigateTo: (NavigationArguments) -> Unit
 ) {
     addItem(movies) {
         NowPlayingContent(
@@ -55,7 +55,7 @@ private fun LazyListScope.addSection(
     modifier: Modifier,
     movies: List<Movie>,
     section: MovieSection,
-    navigateTo: (DestinationArguments) -> Unit
+    navigateTo: (NavigationArguments) -> Unit
 ) {
     addItem(movies) {
         MovieSectionContent(

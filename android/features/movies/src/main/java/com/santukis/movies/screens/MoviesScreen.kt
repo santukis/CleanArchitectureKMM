@@ -13,43 +13,42 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
 import com.santukis.core.entities.getSectionTitle
 import com.santukis.movies.widgets.MoviesContent
-import com.santukis.navigation.destination.DestinationArguments
-import com.santukis.navigation.destination.arguments.PopBackStackDestinationArguments
+import com.santukis.navigation.NavigationArguments
+import com.santukis.navigation.PopBackStack
 import com.santukis.theme.statusBarColor
 import com.santukis.viewmodels.core.entities.MovieSection
 import com.santukis.viewmodels.core.events.OnUiEvent
-import com.santukis.viewmodels.core.events.RequestDecorFitsSystemWindowsChange
 import com.santukis.viewmodels.movies.MoviesViewModel
+import com.santukis.widgets.insets.rememberStatusBarState
 
 @Composable
 fun MoviesScreen(
     section: MovieSection,
     moviesViewModel: MoviesViewModel,
-    onUiEvent: (OnUiEvent) -> Unit = {},
-    navigateTo: (DestinationArguments) -> Unit = {}
+    navigateTo: (NavigationArguments) -> Unit = {}
 ) {
 
-    val localOnUiEvent: (OnUiEvent) -> Unit = { uiEvent ->
-        moviesViewModel.onUiEvent(uiEvent)
-        onUiEvent(uiEvent)
+    val onUiEvent: (OnUiEvent) -> Unit = remember {
+        { uiEvent ->
+            moviesViewModel.onUiEvent(uiEvent)
+        }
     }
 
-    val statusBarColor = MaterialTheme.statusBarColor()
+    val statusBarState = rememberStatusBarState()
+
+    statusBarState.changesStatusBarColor(
+        decorFitsSystemWindows = false,
+        statusBarColor = MaterialTheme.statusBarColor().toArgb()
+    )
 
     LaunchedEffect(moviesViewModel) {
         moviesViewModel.loadSectionMovies(section)
-
-        onUiEvent(
-            RequestDecorFitsSystemWindowsChange(
-                decorFitsSystemWindows = true,
-                statusBarColor = statusBarColor.toArgb()
-            )
-        )
     }
 
     Scaffold(
@@ -65,7 +64,7 @@ fun MoviesScreen(
                     Icon(
                         modifier = Modifier
                             .padding(horizontal = 8.dp)
-                            .clickable { navigateTo(PopBackStackDestinationArguments()) },
+                            .clickable { navigateTo(PopBackStack) },
                         imageVector = Icons.Filled.ArrowBack,
                         contentDescription = ""
                     )
@@ -79,7 +78,7 @@ fun MoviesScreen(
                 .padding(paddingValues),
             section = section,
             moviesState = moviesViewModel.moviesState.collectAsState().value,
-            onUiEvent = localOnUiEvent,
+            onUiEvent = onUiEvent,
             navigateTo = navigateTo
         )
     }

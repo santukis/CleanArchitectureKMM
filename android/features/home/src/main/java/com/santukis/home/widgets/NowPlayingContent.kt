@@ -18,9 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.santukis.entities.movies.Movie
+import com.santukis.home.navigation.arguments.ToMovieDetailDestinationArguments
 import com.santukis.home.stateholders.rememberNowPlayingContentState
-import com.santukis.navigation.destination.DestinationArguments
-import com.santukis.navigation.destination.arguments.MovieDetailDestinationArguments
+import com.santukis.navigation.NavigationArguments
 import com.santukis.widgets.movies.MovieHeader
 import com.santukis.widgets.movies.MoviePoster
 
@@ -29,7 +29,7 @@ import com.santukis.widgets.movies.MoviePoster
 fun NowPlayingContent(
     modifier: Modifier,
     nowPlayingMovies: List<Movie>,
-    navigateTo: (DestinationArguments) -> Unit
+    navigateTo: (NavigationArguments) -> Unit
 ) {
     val nowPlayingContentHolder = rememberNowPlayingContentState(listSize = nowPlayingMovies.size)
 
@@ -55,7 +55,7 @@ fun NowPlayingContent(
                         .fillParentMaxWidth()
                         .clickable {
                             navigateTo(
-                                MovieDetailDestinationArguments(
+                                ToMovieDetailDestinationArguments(
                                     movieId = movie.id
                                 )
                             )

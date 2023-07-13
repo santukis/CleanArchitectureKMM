@@ -33,9 +33,7 @@ rootProject.name = "CleanArchitectureKMM"
 
 include(":android:app")
 include(":android:theme")
-include(":android:navigation:core")
-include(":android:navigation:destinations")
-include(":android:navigation:graphs")
+include(":android:navigation")
 include(":android:widgets:core")
 include(":android:widgets:movies")
 include(":android:widgets:video")

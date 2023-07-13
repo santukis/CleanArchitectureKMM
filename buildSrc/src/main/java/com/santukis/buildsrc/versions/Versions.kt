@@ -73,6 +73,6 @@ object Versions {
     }
 
     object Foundation {
-        const val foundation = "0.0.5"
+        const val foundation = "0.1.0"
     }
 }
