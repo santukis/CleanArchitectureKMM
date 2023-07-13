@@ -16,33 +16,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.santukis.moviedetail.stateholders.rememberMovieDetailScreenState
 import com.santukis.moviedetail.widgets.MovieDetailContent
-import com.santukis.navigation.destination.DestinationArguments
-import com.santukis.navigation.destination.arguments.PopBackStackDestinationArguments
-import com.santukis.viewmodels.core.events.OnUiEvent
-import com.santukis.viewmodels.core.events.RequestDecorFitsSystemWindowsChange
+import com.santukis.navigation.NavigationArguments
+import com.santukis.navigation.PopBackStack
 import com.santukis.viewmodels.moviedetail.MovieDetailViewModel
+import com.santukis.widgets.insets.rememberStatusBarState
 
 @Composable
 fun MovieDetailScreen(
     movieId: String,
     movieDetailViewModel: MovieDetailViewModel,
-    onUiEvent: (OnUiEvent) -> Unit = {},
-    navigateTo: (DestinationArguments) -> Unit = {}
+    navigateTo: (NavigationArguments) -> Unit = {}
 ) {
 
     val movieDetailStateHolder = rememberMovieDetailScreenState(
         movieDetailState = movieDetailViewModel.movieDetailState.collectAsState()
     )
 
+    val statusBarState = rememberStatusBarState()
+
+    statusBarState.changesStatusBarColor(
+        decorFitsSystemWindows = false,
+        statusBarColor = movieDetailStateHolder.statusBarColorAsInt()
+    )
+
     LaunchedEffect(true) {
         movieDetailViewModel.loadMovie(movieId)
-
-        onUiEvent(
-            RequestDecorFitsSystemWindowsChange(
-                decorFitsSystemWindows = true,
-                statusBarColor = movieDetailStateHolder.statusBarColorAsInt()
-            )
-        )
     }
 
     Scaffold(
@@ -58,7 +56,7 @@ fun MovieDetailScreen(
                     Icon(
                         modifier = Modifier
                             .padding(horizontal = 8.dp)
-                            .clickable { navigateTo(PopBackStackDestinationArguments()) },
+                            .clickable { navigateTo(PopBackStack) },
                         imageVector = Icons.Filled.ArrowBack,
                         contentDescription = ""
                     )

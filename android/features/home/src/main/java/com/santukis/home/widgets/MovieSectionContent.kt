@@ -18,9 +18,9 @@ import coil.compose.AsyncImage
 import com.santukis.core.entities.getSectionTitle
 import com.santukis.entities.movies.Movie
 import com.santukis.entities.movies.PosterSize
-import com.santukis.navigation.destination.DestinationArguments
-import com.santukis.navigation.destination.arguments.MovieDetailDestinationArguments
-import com.santukis.navigation.destination.arguments.MoviesDestinationArguments
+import com.santukis.home.navigation.arguments.ToMovieDetailDestinationArguments
+import com.santukis.home.navigation.arguments.ToMoviesDestinationArguments
+import com.santukis.navigation.NavigationArguments
 import com.santukis.viewmodels.core.entities.MovieSection
 import com.santukis.widgets.SectionContent
 
@@ -29,7 +29,7 @@ fun MovieSectionContent(
     modifier: Modifier = Modifier,
     movies: List<Movie>,
     section: MovieSection,
-    navigateTo: (DestinationArguments) -> Unit
+    navigateTo: (NavigationArguments) -> Unit
 ) {
     SectionContent(
         modifier = modifier,
@@ -45,7 +45,7 @@ fun MovieSectionContent(
                 modifier = Modifier
                     .clickable {
                         navigateTo(
-                            MoviesDestinationArguments(section = section)
+                            ToMoviesDestinationArguments(section = section)
                         )
                     },
                 imageVector = Icons.Filled.Add,
@@ -61,7 +61,7 @@ fun MovieSectionContent(
                     .clip(RoundedCornerShape(4.dp))
                     .clickable {
                         navigateTo(
-                            MovieDetailDestinationArguments(
+                            ToMovieDetailDestinationArguments(
                                 movieId = movie.id
                             )
                         )

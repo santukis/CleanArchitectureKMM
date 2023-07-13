@@ -20,7 +20,5 @@ dependencies {
 
     implementation(project(Modules.Android.theme))
     implementation(project(Modules.Android.Navigation.core))
-    implementation(project(Modules.Android.Navigation.graphs))
-    implementation(project(Modules.Android.Navigation.destinations))
     implementation(project(Modules.Android.Widgets.core))
 }

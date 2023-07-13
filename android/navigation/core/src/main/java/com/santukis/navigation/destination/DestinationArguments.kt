@@ -1,3 +1,0 @@
-package com.santukis.navigation.destination
-
-interface DestinationArguments

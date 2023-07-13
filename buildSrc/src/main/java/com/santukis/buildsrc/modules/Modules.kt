@@ -7,9 +7,7 @@ object Modules {
         const val theme = ":android:theme"
 
         object Navigation {
-            const val core = ":android:navigation:core"
-            const val destinations = ":android:navigation:destinations"
-            const val graphs = ":android:navigation:graphs"
+            const val core = ":android:navigation"
         }
 
         object Features {
